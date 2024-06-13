@@ -1,0 +1,480 @@
+{"HVACComponents": {
+    "HVACComponent": [
+        {
+            "@type": "Sub-loop node",
+            "ImageRectangle": {
+                "ObjectIDs": {
+                    "@handle": "164201",
+                    "@buildingHandle": "-1",
+                    "@buildingBlockHandle": "-1",
+                    "@zoneHandle": "-1",
+                    "@surfaceIndex": "-1",
+                    "@openingIndex": "-1"
+                },
+                "ImageTextureIndex": "-1",
+                "MaskTextureIndex": "-1",
+                "SelectedImageTextureIndex": "-1",
+                "InactiveImageTextureIndex": "-1",
+                "Textured": "0",
+                "Masked": "0",
+                "SelectedImage": "0",
+                "InactiveImage": "0",
+                "Color": "0",
+                "Active": "1",
+                "Vertices": {
+                    "Point3D": [
+                        "-1.0000000000000000;      -1.0000000000000000;       0.0000000000000000",
+                        "1.0000000000000000;      -1.0000000000000000;       0.0000000000000000",
+                        "1.0000000000000000;       1.0000000000000000;       0.0000000000000000",
+                        "-1.0000000000000000;       1.0000000000000000;       0.0000000000000000"
+                    ]
+                },
+                "Range": {
+                    "Org": {
+                        "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                    },
+                    "End": {
+                        "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                    }
+                }
+            },
+            "ConnectingPlantLoopHandle": "-1",
+            "ConnectingAirLoopHandle": "-1",
+            "LoopType": "0",
+            "SubLoopType": "0",
+            "PlantLoopType": "-1",
+            "AirLoopDuctType": "-1",
+            "ComponentType": "34",
+            "Location": "-1",
+            "ConnectionOffset": "20.0000",
+            "Editable": "1",
+            "ZoneBranchFlag": "0",
+            "Orientation": "-1",
+            "WaterInConnectionOrientation": "3",
+            "WaterOutConnectionOrientation": "3",
+            "AirInConnectionOrientation": "3",
+            "AirOutConnectionOrientation": "-1",
+            "WaterInConnection": "0",
+            "WaterOutConnection": "0",
+            "AirInConnection": "0",
+            "AirOutConnection": "0",
+            "WaterInConnected": "0",
+            "WaterOutConnected": "0",
+            "AirInConnected": "0",
+            "AirOutConnected": "0",
+            "FanPlacement": "0",
+            "WaterInConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "WaterOutConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "AirInConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "AirOutConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "Attributes": {
+                "Attribute": [
+                    {
+                        "@name": "RT2012Data",
+                        "#text": "UNKNOWN"
+                    },
+                    {
+                        "@name": "LoadedFromTemplate",
+                        "#text": "1"
+                    },
+                    {
+                        "@name": "Title",
+                        "#text": "UNKNOWN"
+                    },
+                    {
+                        "@name": "AvailabilitySchedule",
+                        "#text": "2"
+                    }
+                ]
+            },
+            "ZoneComponentAttributeList": null,
+            "NumberOfFlowConnections": "1",
+            "FlowConnections": {
+                "HVACSubLoopNodeConnection": [
+                    {
+                        "ObjectIDs": {
+                            "@handle": "-1",
+                            "@buildingHandle": "-1",
+                            "@buildingBlockHandle": "-1",
+                            "@zoneHandle": "-1",
+                            "@surfaceIndex": "-1",
+                            "@openingIndex": "-1"
+                        },
+                        "Connected": "1",
+                        "Coordinate": {
+                            "Point3D": "327.9681002799187581;    -527.8520513343923994;       0.0000000000000000"
+                        },
+                        "Attributes": {
+                            "Attribute": {
+                                "@name": "Title",
+                                "#text": "Air Loop Demand Side Inlet 1"
+                            }
+                        }
+                    },
+                    {
+                        "ObjectIDs": {
+                            "@handle": "-1",
+                            "@buildingHandle": "-1",
+                            "@buildingBlockHandle": "-1",
+                            "@zoneHandle": "-1",
+                            "@surfaceIndex": "-1",
+                            "@openingIndex": "-1"
+                        },
+                        "Connected": "0",
+                        "Coordinate": {
+                            "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                        },
+                        "Attributes": {
+                            "Attribute": {
+                                "@name": "Title",
+                                "#text": "UNKNOWN"
+                            }
+                        }
+                    },
+                    {
+                        "ObjectIDs": {
+                            "@handle": "-1",
+                            "@buildingHandle": "-1",
+                            "@buildingBlockHandle": "-1",
+                            "@zoneHandle": "-1",
+                            "@surfaceIndex": "-1",
+                            "@openingIndex": "-1"
+                        },
+                        "Connected": "0",
+                        "Coordinate": {
+                            "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                        },
+                        "Attributes": {
+                            "Attribute": {
+                                "@name": "Title",
+                                "#text": "UNKNOWN"
+                            }
+                        }
+                    }
+                ]
+            },
+            "HVACSubLoopNodeConnection": {
+                "ObjectIDs": {
+                    "@handle": "-1",
+                    "@buildingHandle": "-1",
+                    "@buildingBlockHandle": "-1",
+                    "@zoneHandle": "-1",
+                    "@surfaceIndex": "-1",
+                    "@openingIndex": "-1"
+                },
+                "Connected": "1",
+                "Coordinate": {
+                    "Point3D": "287.9681002799187581;    -527.8520513343923994;       0.0000000000000000"
+                },
+                "Attributes": {
+                    "Attribute": {
+                        "@name": "Title",
+                        "#text": "Air Loop Demand Side Outlet"
+                    }
+                }
+            },
+            "Origin": {
+                "Point3D": "307.9681002799187581;    -503.8520513343923994;       0.0000000000000000"
+            }
+        },
+        {
+            "@type": "Zone mixer",
+            "ImageRectangle": {
+                "ObjectIDs": {
+                    "@handle": "164202",
+                    "@buildingHandle": "-1",
+                    "@buildingBlockHandle": "-1",
+                    "@zoneHandle": "-1",
+                    "@surfaceIndex": "-1",
+                    "@openingIndex": "-1"
+                },
+                "ImageTextureIndex": "-1",
+                "MaskTextureIndex": "-1",
+                "SelectedImageTextureIndex": "-1",
+                "InactiveImageTextureIndex": "-1",
+                "Textured": "0",
+                "Masked": "0",
+                "SelectedImage": "0",
+                "InactiveImage": "0",
+                "Color": "0",
+                "Active": "1",
+                "Vertices": {
+                    "Point3D": [
+                        "-1.0000000000000000;      -1.0000000000000000;       0.0000000000000000",
+                        "1.0000000000000000;      -1.0000000000000000;       0.0000000000000000",
+                        "1.0000000000000000;       1.0000000000000000;       0.0000000000000000",
+                        "-1.0000000000000000;       1.0000000000000000;       0.0000000000000000"
+                    ]
+                },
+                "Range": {
+                    "Org": {
+                        "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                    },
+                    "End": {
+                        "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                    }
+                }
+            },
+            "ConnectingPlantLoopHandle": "-1",
+            "ConnectingAirLoopHandle": "-1",
+            "LoopType": "0",
+            "SubLoopType": "0",
+            "PlantLoopType": "-1",
+            "AirLoopDuctType": "-1",
+            "ComponentType": "33",
+            "Location": "-1",
+            "ConnectionOffset": "20.0000",
+            "Editable": "0",
+            "ZoneBranchFlag": "0",
+            "Orientation": "1",
+            "WaterInConnectionOrientation": "3",
+            "WaterOutConnectionOrientation": "3",
+            "AirInConnectionOrientation": "3",
+            "AirOutConnectionOrientation": "-1",
+            "WaterInConnection": "0",
+            "WaterOutConnection": "0",
+            "AirInConnection": "0",
+            "AirOutConnection": "0",
+            "WaterInConnected": "0",
+            "WaterOutConnected": "0",
+            "AirInConnected": "0",
+            "AirOutConnected": "0",
+            "FanPlacement": "0",
+            "WaterInConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "WaterOutConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "AirInConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "AirOutConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "Attributes": {
+                "Attribute": [
+                    {
+                        "@name": "RT2012Data",
+                        "#text": "UNKNOWN"
+                    },
+                    {
+                        "@name": "LoadedFromTemplate",
+                        "#text": "1"
+                    },
+                    {
+                        "@name": "Title",
+                        "#text": "Air Loop Zone Mixer"
+                    },
+                    {
+                        "@name": "ComponentType",
+                        "#text": "AirLoopHVAC:ZoneMixer"
+                    },
+                    {
+                        "@name": "AvailabilitySchedule",
+                        "#text": "2"
+                    }
+                ]
+            },
+            "ZoneComponentAttributeList": null,
+            "LoopFlowDirection": "-1",
+            "Origin": {
+                "Point3D": "470.2200601447940471;    -859.0271572085624712;       0.0000000000000000"
+            },
+            "HVACConnectorNode": {
+                "ObjectIDs": {
+                    "@handle": "-1",
+                    "@buildingHandle": "-1",
+                    "@buildingBlockHandle": "-1",
+                    "@zoneHandle": "-1",
+                    "@surfaceIndex": "-1",
+                    "@openingIndex": "-1"
+                },
+                "Name": "Air Loop Zone Mixer Outlet Node",
+                "Active": "1"
+            },
+            "BranchConnectionList": {
+                "HVACConnectorNode": [
+                    {
+                        "ObjectIDs": {
+                            "@handle": "-1",
+                            "@buildingHandle": "-1",
+                            "@buildingBlockHandle": "-1",
+                            "@zoneHandle": "-1",
+                            "@surfaceIndex": "-1",
+                            "@openingIndex": "-1"
+                        },
+                        "Name": "Air Loop Zone Mixer  Air Inlet Node 1",
+                        "Active": "1"
+                    },
+                    {
+                        "ObjectIDs": {
+                            "@handle": "-1",
+                            "@buildingHandle": "-1",
+                            "@buildingBlockHandle": "-1",
+                            "@zoneHandle": "-1",
+                            "@surfaceIndex": "-1",
+                            "@openingIndex": "-1"
+                        },
+                        "Name": "UNKNOWN",
+                        "Active": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "Zone splitter",
+            "ImageRectangle": {
+                "ObjectIDs": {
+                    "@handle": "164203",
+                    "@buildingHandle": "-1",
+                    "@buildingBlockHandle": "-1",
+                    "@zoneHandle": "-1",
+                    "@surfaceIndex": "-1",
+                    "@openingIndex": "-1"
+                },
+                "ImageTextureIndex": "-1",
+                "MaskTextureIndex": "-1",
+                "SelectedImageTextureIndex": "-1",
+                "InactiveImageTextureIndex": "-1",
+                "Textured": "0",
+                "Masked": "0",
+                "SelectedImage": "0",
+                "InactiveImage": "0",
+                "Color": "0",
+                "Active": "1",
+                "Vertices": {
+                    "Point3D": [
+                        "-1.0000000000000000;      -1.0000000000000000;       0.0000000000000000",
+                        "1.0000000000000000;      -1.0000000000000000;       0.0000000000000000",
+                        "1.0000000000000000;       1.0000000000000000;       0.0000000000000000",
+                        "-1.0000000000000000;       1.0000000000000000;       0.0000000000000000"
+                    ]
+                },
+                "Range": {
+                    "Org": {
+                        "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                    },
+                    "End": {
+                        "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+                    }
+                }
+            },
+            "ConnectingPlantLoopHandle": "-1",
+            "ConnectingAirLoopHandle": "-1",
+            "LoopType": "0",
+            "SubLoopType": "0",
+            "PlantLoopType": "-1",
+            "AirLoopDuctType": "-1",
+            "ComponentType": "32",
+            "Location": "-1",
+            "ConnectionOffset": "20.0000",
+            "Editable": "0",
+            "ZoneBranchFlag": "0",
+            "Orientation": "1",
+            "WaterInConnectionOrientation": "3",
+            "WaterOutConnectionOrientation": "3",
+            "AirInConnectionOrientation": "3",
+            "AirOutConnectionOrientation": "-1",
+            "WaterInConnection": "0",
+            "WaterOutConnection": "0",
+            "AirInConnection": "0",
+            "AirOutConnection": "0",
+            "WaterInConnected": "0",
+            "WaterOutConnected": "0",
+            "AirInConnected": "0",
+            "AirOutConnected": "0",
+            "FanPlacement": "0",
+            "WaterInConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "WaterOutConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "AirInConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "AirOutConnectionCoordinate": {
+                "Point3D": "0.0000000000000000;       0.0000000000000000;       0.0000000000000000"
+            },
+            "Attributes": {
+                "Attribute": [
+                    {
+                        "@name": "RT2012Data",
+                        "#text": "UNKNOWN"
+                    },
+                    {
+                        "@name": "LoadedFromTemplate",
+                        "#text": "1"
+                    },
+                    {
+                        "@name": "Title",
+                        "#text": "Air Loop Zone Splitter"
+                    },
+                    {
+                        "@name": "ComponentType",
+                        "#text": "AirLoopHVAC:ZoneSplitter"
+                    },
+                    {
+                        "@name": "AvailabilitySchedule",
+                        "#text": "2"
+                    }
+                ]
+            },
+            "ZoneComponentAttributeList": null,
+            "LoopFlowDirection": "-1",
+            "Origin": {
+                "Point3D": "470.2200601447940471;    -615.9177872277890629;       0.0000000000000000"
+            },
+            "HVACConnectorNode": {
+                "ObjectIDs": {
+                    "@handle": "-1",
+                    "@buildingHandle": "-1",
+                    "@buildingBlockHandle": "-1",
+                    "@zoneHandle": "-1",
+                    "@surfaceIndex": "-1",
+                    "@openingIndex": "-1"
+                },
+                "Name": "Air Loop Zone Splitter Inlet Node",
+                "Active": "1"
+            },
+            "BranchConnectionList": {
+                "HVACConnectorNode": [
+                    {
+                        "ObjectIDs": {
+                            "@handle": "-1",
+                            "@buildingHandle": "-1",
+                            "@buildingBlockHandle": "-1",
+                            "@zoneHandle": "-1",
+                            "@surfaceIndex": "-1",
+                            "@openingIndex": "-1"
+                        },
+                        "Name": "Air Loop Zone Splitter  Air Outlet Node 1",
+                        "Active": "1"
+                    },
+                    {
+                        "ObjectIDs": {
+                            "@handle": "-1",
+                            "@buildingHandle": "-1",
+                            "@buildingBlockHandle": "-1",
+                            "@zoneHandle": "-1",
+                            "@surfaceIndex": "-1",
+                            "@openingIndex": "-1"
+                        },
+                        "Name": "UNKNOWN",
+                        "Active": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}
+}
