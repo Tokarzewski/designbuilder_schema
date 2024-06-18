@@ -128,7 +128,7 @@ class Surface(BaseModel):
     ObjectIDs: "ObjectIDs"
     VertexIndices: str
     HoleIndices: Union[str, None]
-    Openings: Union["Openings", None]
+    # Openings: Union["Openings", None]
     # Adjacencies: Union["Adjacencies", None]
     Attributes: Union["Attributes", "Attribute", None]
 
@@ -146,7 +146,7 @@ class Opening(BaseModel):
 
 class Buildings(BaseModel):
     numberOfBuildings: str = Field(alias="@numberOfBuildings")
-    Building: Union["Building", List["Building"]]
+    Building: Union["Building", List["Building"]] #
 
 
 class Building(BaseModel):
@@ -155,14 +155,13 @@ class Building(BaseModel):
     currentPlaneHandle: str = Field(alias="@currentPlaneHandle")
     ObjectIDs: "ObjectIDs"
     BuildingBlocks: Union["BuildingBlocks", None]
-    ComponentBlocks: Union["ComponentBlocks", None]
+    # ComponentBlocks: Union["ComponentBlocks", None]
     # AssemblyInstances: Union["AssemblyInstances", None]
     # ProfileOutlines: Union["ProfileOutlines", None] #OutlineBlocks
     # ConstructionLines: Union["ConstructionLines", None]
     # Planes: Union["Planes", None]
-    HVACNetwork: Optional[
-        "HVACNetwork"
-    ]  # Union["HVACNetwork", "DetailedHVACNetwork"] = None
+    HVACNetwork: Optional["HVACNetwork"]  
+    # Union["HVACNetwork", "DetailedHVACNetwork"] = None
     BookmarkBuildings: "BookmarkBuildings"
     Attributes: "Attributes"
 

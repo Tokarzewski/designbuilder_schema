@@ -39,7 +39,7 @@ class HVACLoop(BaseModel):
     numberOfFlowNodes: str = Field(alias="@numberOfFlowNodes")
     ObjectIDs: "ObjectIDs"
     Origin: "Point3D"
-    PlantOperationSchemes: Union["PlantOperationSchemes", None]
+    # PlantOperationSchemes: Union["PlantOperationSchemes", None]
     DemandSubLoop: "DemandSubLoop"
     SupplySubLoop: "SupplySubLoop"
     Attributes: "Attributes"
