@@ -1,7 +1,7 @@
 import os, json
 from core import DBJSON
 from cli import xml_to_json, change_fileformat
-from designbuilder_schema.vis_small_hvac_network import *
+from vis_small_hvac_network import *
 
 
 def load_dbjson(json_filepath):

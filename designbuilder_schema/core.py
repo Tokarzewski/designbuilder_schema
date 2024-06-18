@@ -146,7 +146,7 @@ class Opening(BaseModel):
 
 class Buildings(BaseModel):
     numberOfBuildings: str = Field(alias="@numberOfBuildings")
-    Building: Union["Building", List["Building"]] #
+    Building: Union["Building", List["Building"]]  #
 
 
 class Building(BaseModel):
@@ -160,7 +160,7 @@ class Building(BaseModel):
     # ProfileOutlines: Union["ProfileOutlines", None] #OutlineBlocks
     # ConstructionLines: Union["ConstructionLines", None]
     # Planes: Union["Planes", None]
-    HVACNetwork: Optional["HVACNetwork"]  
+    HVACNetwork: Optional["HVACNetwork"]
     # Union["HVACNetwork", "DetailedHVACNetwork"] = None
     BookmarkBuildings: "BookmarkBuildings"
     Attributes: "Attributes"
