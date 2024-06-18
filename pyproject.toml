@@ -39,6 +39,7 @@ packages = ["designbuilder_schema"]
 dev = ["pytest", "coverage", "flake8", "black"]
 
 [tool.pytest.ini_options]
+pythonpath = ["C:/GitHub/designbuilder_schema/designbuilder_schema"]
 testpaths = ["tests"]
 
 [tool.coverage.run]

@@ -17,7 +17,7 @@ xml_to_json(xml_filepath)
 json_filepath = change_fileformat(xml_filepath, "json")
 db_json = load_dbjson(json_filepath)
 
-### 
+###
 
 detailed_hvac_network = db_json.Site.Buildings.Building.HVACNetwork
 hvac_loops = detailed_hvac_network.HVACLoops.HVACLoop

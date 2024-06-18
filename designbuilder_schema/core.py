@@ -140,13 +140,13 @@ class Openings(BaseModel):
 class Opening(BaseModel):
     type: str = Field(alias="@type")
     Polygon: "Polygon"
-    Attributes: None
+    Attributes: "Attributes"
     SegmentList: None
 
 
 class Buildings(BaseModel):
     numberOfBuildings: str = Field(alias="@numberOfBuildings")
-    Building: Union["Building", List["Building"]]  #
+    Building: Union["Building", List["Building"]]
 
 
 class Building(BaseModel):
@@ -160,14 +160,9 @@ class Building(BaseModel):
     # ProfileOutlines: Union["ProfileOutlines", None] #OutlineBlocks
     # ConstructionLines: Union["ConstructionLines", None]
     # Planes: Union["Planes", None]
-    HVACNetwork: Optional["HVACNetwork"]
-    # Union["HVACNetwork", "DetailedHVACNetwork"] = None
+    HVACNetwork: Optional["HVACNetwork"]  # DetailedHVACNetwork...
     BookmarkBuildings: "BookmarkBuildings"
     Attributes: "Attributes"
-
-
-class DetailedHVACNetwork(BaseModel):
-    _: None
 
 
 class BuildingBlocks(BaseModel):
