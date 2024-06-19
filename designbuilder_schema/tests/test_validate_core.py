@@ -2,7 +2,6 @@ import os
 import json
 from core import DBJSON
 import pytest
-import xml.etree.ElementTree as ET
 import xmltodict
 
 

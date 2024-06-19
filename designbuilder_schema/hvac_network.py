@@ -308,7 +308,7 @@ class HVACConnection(BaseModel):
     LoopType: str
     PlantLoopType: str
     LoopFlowDirection: str
-    # ElementList: "ElementList"
+    ElementList: "ElementList"
 
 
 class ElementList(BaseModel):

@@ -1,0 +1,44 @@
+{
+    "SHVACComponents": [
+        {
+            "Image": {
+                "Rectangle": {
+                    "Point1": {
+                        "x": 272.8923,
+                        "y": 1239.1731
+                    },
+                    "Point2": {
+                        "x": 320.8923,
+                        "y": 1151.1731
+                    }
+                },
+                "texture": "SupplyDemandLink_image.bmp",
+                "mask": "SupplyDemandLink_mask.bmp"
+            },
+            "name": "supply_demand_link",
+            "type": "supply_demand_link",
+            "attributes": {}
+        },
+        {
+            "Image": {
+                "Rectangle": {
+                    "Point1": {
+                        "x": 942.3026,
+                        "y": 1349.3497
+                    },
+                    "Point2": {
+                        "x": 990.3026,
+                        "y": 1261.3497
+                    }
+                },
+                "texture": "SupplyDemandLink_image.bmp",
+                "mask": "SupplyDemandLink_mask.bmp"
+            },
+            "name": "supply_demand_link",
+            "type": "supply_demand_link",
+            "attributes": {}
+        }
+    ],
+    "Lines": [],
+    "Nodes": []
+}

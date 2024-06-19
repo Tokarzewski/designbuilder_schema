@@ -1,43 +1,42 @@
 from pydantic import BaseModel
 
-
-class SimplifiedHVACNetwork(BaseModel):
-    HVACComponent: list["HVACComponent"]
+class SmallHVACNetwork(BaseModel):
+    SHVACComponents: list["SHVACComponent"]
     Lines: list["Line"]
     Nodes: list["Node"]
 
 
-class HVACComponent(BaseModel):
+class SHVACComponent(BaseModel):
     Image: "Image"
     name: str
     type: str
-    attributes: dict
+    attributes: dict = {}
 
 
 class Image(BaseModel):
     Rectangle: "Rectangle"
-    Texture: str
-    Mask: str
+    texture: str
+    mask: str
 
 
 class Rectangle(BaseModel):
-    point1: "Point2D"
-    point2: "Point2D"
+    Point1: "Point2D"
+    Point2: "Point2D"
 
 
 class Line(BaseModel):
-    point1: "Point2D"
-    point2: "Point2D"
+    Point1: "Point2D"
+    Point2: "Point2D"
     colour: str
     attributes: dict
 
 
 class Point2D(BaseModel):
-    X: float
-    Y: float
+    x: float
+    y: float
 
 
 class Node(BaseModel):
-    point: "Point2D"
+    Point: "Point2D"
     name: str
     attributes: dict
