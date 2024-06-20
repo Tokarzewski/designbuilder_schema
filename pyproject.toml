@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta:"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "designbuilder_schema"
@@ -15,17 +15,6 @@ dependencies = [
 
 readme = "README.md"
 #license = { file = "LICENSE" }
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-]
 
 [project.urls]
 Homepage = "https://github.com/tokarzewski/designbuilder_schema"
@@ -39,7 +28,7 @@ packages = ["designbuilder_schema"]
 dev = ["pytest", "coverage", "flake8", "black"]
 
 [tool.pytest.ini_options]
-pythonpath = ["C:/GitHub/designbuilder_schema/designbuilder_schema"]
+pythonpath = ["C:/GitHub/designbuilder_schema"]
 testpaths = ["tests"]
 
 [tool.coverage.run]
@@ -51,4 +40,4 @@ exclude = [".git", "__pycache__", "docs", "build", "dist"]
 
 [tool.black]
 line-length = 88
-target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
+target-version = ['py312']

@@ -6,7 +6,7 @@ The core module of the designbuilder_schema project
 
 from pydantic import BaseModel, Field
 from typing import Union, List, Optional
-from hvac_network import HVACNetwork
+from designbuilder_schema.hvac_network import HVACNetwork
 
 
 class DBJSON(BaseModel):

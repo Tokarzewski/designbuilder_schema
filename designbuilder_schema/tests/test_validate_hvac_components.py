@@ -1,5 +1,5 @@
 import json
-from hvac_network import HVACComponents
+from designbuilder_schema.hvac_network import HVACComponents
 import pytest
 
 

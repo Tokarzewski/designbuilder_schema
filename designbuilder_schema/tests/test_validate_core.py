@@ -1,6 +1,6 @@
 import os
 import json
-from core import DBJSON
+from designbuilder_schema.core import DBJSON
 import pytest
 import xmltodict
 
