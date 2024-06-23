@@ -157,7 +157,13 @@ class HVACComponents(BaseModel):
                 case "Sub-loop node":
                     mapped_components.append(SubLoopNode(**component))
                 case "Zone mixer":
+                    mapped_components.append(ZoneSplitter(**component))
+                case "Zone splitter":
                     mapped_components.append(ZoneMixer(**component))
+                case "Splitter":
+                    mapped_components.append(Splitter(**component))
+                case "Mixer":
+                    mapped_components.append(Mixer(**component))
                 case "Setpoint manager":
                     mapped_components.append(SetpointManager(**component))
                 case "Air handling unit":
@@ -257,6 +263,7 @@ class SubLoopNode(HVACComponent):
     NumberOfFlowConnections: str
     FlowConnections: "FlowConnections"
     HVACSubLoopNodeConnection: "HVACSubLoopNodeConnection"
+    Origin: "Point3D"
 
 
 class ZoneMixer(HVACComponent):
@@ -270,6 +277,18 @@ class ZoneSplitter(HVACComponent):
     # HVACConnectorNode: "HVACConnectorNode"
     # BranchConnectionList
 
+class Mixer(HVACComponent):
+    LoopFlowDirection: str
+    Origin: "Point3D"
+    # HVACConnectorNode: "HVACConnectorNode"
+    # BranchConnectionList
+
+
+class Splitter(HVACComponent):
+    LoopFlowDirection: str
+    Origin: "Point3D"
+    # HVACConnectorNode: "HVACConnectorNode"
+    # BranchConnectionList
 
 class SetpointManager(HVACComponent):
     ControlPoint: "Point3D"
