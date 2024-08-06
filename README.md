@@ -1,6 +1,5 @@
 # designbuilder_schema
-Python library built on top of pydantic for reading DBXML and DBJSON files from DesignBuilder software.
-It also has a small cli app for converting DBXML to DBJSON and checking version.
+Python library built on top of pydantic for reading DBXML files from DesignBuilder software.
 
 # Requirements
 
@@ -10,6 +9,7 @@ It also has a small cli app for converting DBXML to DBJSON and checking version.
 
 # TODO
 
-1. generate more examples and map more classes
-2. autogenerate docs using https://pypi.org/project/autodoc_pydantic/
-3. add enumerations (enums)
+1. map more classes
+2. generate more examples 
+3. autogenerate docs using https://pypi.org/project/autodoc_pydantic/
+4. add more enumerations (enums)
