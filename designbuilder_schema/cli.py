@@ -5,31 +5,14 @@ The command line interface of the designbuilder_schema project
 """
 
 import os, json, fire, xmltodict
-
-
-def load_file_to_dict(filepath: str):
-    """Load a file and return its content as a dictionary"""
-    with open(filepath, "r") as f:
-        file_content = f.read()
-        if filepath.endswith(".json"):
-            return json.loads(file_content)
-        elif filepath.endswith(".xml"):
-            return xmltodict.parse(xml_input=file_content)
-        else:
-            raise ValueError("Unsupported file format")
+from designbuilder_schema.utils import load_file_to_dict
+from designbuilder_schema.utils import load
 
 
 def get_version(filepath: str):
     """Return the schema version"""
-
-    db_dictionary = load_file_to_dict(filepath)
-
-    if "JSON" in str(db_dictionary.keys()):
-        return db_dictionary["dbJSON"]["@version"]
-    elif "XML" in str(db_dictionary.keys()):
-        return db_dictionary["dbXML"]["@version"]
-    else:
-        print("Unsupported key", str(db_dictionary.keys()))
+    db_json = load(filepath)
+    return db_json.version
 
 
 def change_fileformat(filepath: str, new_file_extension: str):
@@ -61,5 +44,7 @@ def json_to_xml(json_filepath: str):
 
 if __name__ == "__main__":
     fire.Fire(
-        {"version": get_version, "xml2json": xml_to_json, "json2xml": json_to_xml}
+        {"version": get_version, 
+         "xml2json": xml_to_json, 
+         "json2xml": json_to_xml}
     )

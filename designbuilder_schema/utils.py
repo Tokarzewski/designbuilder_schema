@@ -1,0 +1,23 @@
+import json, xmltodict
+from designbuilder_schema.core import DBJSON
+
+
+def load_file_to_dict(filepath: str) -> dict:
+    """Load a file as a dictionary"""
+    with open(filepath, "r") as f:
+        file_content = f.read()
+        if filepath.endswith(".json"):
+            return json.loads(file_content)
+        elif filepath.endswith(".xml"):
+            return xmltodict.parse(xml_input=file_content)
+        else:
+            raise ValueError("Unsupported file format")
+
+
+def load(filepath: str) -> DBJSON:
+    dictionary = load_file_to_dict(filepath)
+    if filepath.endswith(".json"):
+        return DBJSON.model_validate(dictionary["dbJSON"])
+    elif filepath.endswith(".xml"):
+        # dictionary["dbJSON"] = dictionary.pop("dbXML")
+        return DBJSON.model_validate(dictionary["dbXML"])
