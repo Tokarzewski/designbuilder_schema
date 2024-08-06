@@ -1,13 +1,13 @@
 # designbuilder_schema
 Python library built on top of pydantic for reading DBXML files from DesignBuilder software.
 
-# Requirements
+# requirements
 
 - pydantic
 - xmltodict
 - fire
 
-# TODO
+# todo
 
 1. map more classes
 2. generate more examples 

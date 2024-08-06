@@ -1,7 +1,7 @@
 """
 core.py
 ====================================
-The core module of the designbuilder_schema project
+The core schema module of the designbuilder_schema project
 """
 
 from pydantic import BaseModel, Field

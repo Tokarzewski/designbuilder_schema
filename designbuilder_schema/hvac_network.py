@@ -1,7 +1,7 @@
 """
 hvac_network.py
 ====================================
-The hvac network module of the designbuilder_schema project
+The hvac network schema module of the designbuilder_schema project
 """
 
 from pydantic import BaseModel, Field, field_validator
@@ -277,6 +277,7 @@ class ZoneSplitter(HVACComponent):
     # HVACConnectorNode: "HVACConnectorNode"
     # BranchConnectionList
 
+
 class Mixer(HVACComponent):
     LoopFlowDirection: str
     Origin: "Point3D"
@@ -289,6 +290,7 @@ class Splitter(HVACComponent):
     Origin: "Point3D"
     # HVACConnectorNode: "HVACConnectorNode"
     # BranchConnectionList
+
 
 class SetpointManager(HVACComponent):
     ControlPoint: "Point3D"
