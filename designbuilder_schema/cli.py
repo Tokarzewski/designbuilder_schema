@@ -4,7 +4,8 @@ cli.py
 The command line interface of the designbuilder_schema project
 """
 
-import os, json, fire, xmltodict
+import os, json
+from fire import Fire
 from designbuilder_schema.utils import load_file_to_dict
 
 
@@ -36,17 +37,18 @@ def xml_to_json(xml_filepath: str):
 
 def json_to_xml(json_filepath: str):
     """Convert JSON file to XML file"""
+    from xmltodict import unparse
     dictionary = load_file_to_dict(json_filepath)
     dictionary["dbXML"] = dictionary.pop("dbJSON")
 
     output_filepath = change_fileformat(json_filepath, "xml")
 
     with open(output_filepath, "w") as f:
-        xml_data = xmltodict.unparse(dictionary, full_document=True, pretty=True)
+        xml_data = unparse(dictionary, full_document=True, pretty=True)
         f.write(xml_data)
 
 
 if __name__ == "__main__":
-    fire.Fire(
+    Fire(
         {"version": get_version, "xml2json": xml_to_json, "json2xml": json_to_xml}
     )
