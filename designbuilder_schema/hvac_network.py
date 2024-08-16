@@ -1,7 +1,7 @@
 """
 hvac_network.py
 ====================================
-The hvac network schema module of the designbuilder_schema project
+The hvac network schema module of the designbuilder_schema
 """
 
 from pydantic import Field, field_validator
@@ -10,7 +10,7 @@ from designbuilder_schema.base import BaseModel
 
 
 class HVACNetwork(BaseModel):
-    handle: str = Field(alias="ObjectHandle")
+    handle: int = Field(alias="ObjectHandle")
     ObjectIDs: "ObjectIDs"
     HVACLoops: "HVACLoops"
     HVACZoneGroups: "HVACZoneGroups"
@@ -34,10 +34,10 @@ class HVACZoneGroups(BaseModel):
 
 
 class HVACLoop(BaseModel):
-    currentSubLoopIndex: str = Field(alias="@currentSubLoopIndex")
-    loopType: str = Field(alias="@loopType")
-    plantLoopType: str = Field(alias="@plantLoopType")
-    numberOfFlowNodes: str = Field(alias="@numberOfFlowNodes")
+    currentSubLoopIndex: int = Field(alias="@currentSubLoopIndex")
+    loopType: int = Field(alias="@loopType")
+    plantLoopType: int = Field(alias="@plantLoopType")
+    numberOfFlowNodes: int = Field(alias="@numberOfFlowNodes")
     ObjectIDs: "ObjectIDs"
     Origin: "Point3D"
     # PlantOperationSchemes: Union["PlantOperationSchemes", None]
@@ -338,11 +338,11 @@ class ElementList(BaseModel):
 
 
 class HVACConnectionElement(BaseModel):
-    Line: "Line"
+    Line: "Line2D"
     SegmentList: "SegmentList"
 
 
-class Line(BaseModel):
+class Line2D(BaseModel):
     ObjectIDs: "ObjectIDs"
     Begin: "Point3D"
     End: "Point3D"
@@ -353,7 +353,7 @@ class SegmentList(BaseModel):
 
 
 class LineArray(BaseModel):
-    Line: Union["Line", list["Line"]]
+    Line: Union["Line2D", list["Line2D"]]
 
 
 class FlowConnections(BaseModel):

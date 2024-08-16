@@ -5,7 +5,7 @@ The core schema module of the designbuilder_schema
 """
 
 from pydantic import Field
-from typing import Union, List, Optional
+from typing import Union, Optional
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
 
@@ -23,7 +23,7 @@ class DBJSON(BaseModel):
 
 
 class Site(BaseModel):
-    handle: str = Field(alias="@handle")
+    handle: int = Field(alias="@handle")
     count: int = Field(alias="@count")
     Attributes: "SiteAttributes"
     Tables: "Tables"
@@ -63,19 +63,19 @@ class Tables(BaseModel):
 
 class Table(BaseModel):
     name: str = Field(alias="@name")
-    numberOfFields: str = Field(alias="@numberOfFields")
-    Category: Union[str, list] = Field(default=None)
-    FieldName: list
+    numberOfFields: int = Field(alias="@numberOfFields")
+    Category: Union[str, list, None] = Field(default=None)
+    FieldName: list[str]
 
 
 class AssemblyLibrary(BaseModel):
-    assemblyHandle: str = Field(alias="@assemblyHandle")
-    Assembly: list["Assembly"]
+    assemblyHandle: int = Field(alias="@assemblyHandle")
+    Assembly: Union["Assembly", list["Assembly"]]
 
 
 class Assembly(BaseModel):
-    assemblyHandle: str = Field(alias="@assemblyHandle")
-    componentBlockHandle: str = Field(alias="@componentBlockHandle")
+    assemblyHandle: int = Field(alias="@assemblyHandle")
+    componentBlockHandle: int = Field(alias="@componentBlockHandle")
     reference: str = Field(alias="@reference")
     HandlePoint: "Point3D"
     ComponentBlocks: "ComponentBlocks"
@@ -100,22 +100,22 @@ class ComponentBlock(BaseModel):
 
 
 class Body(BaseModel):
-    volume: str = Field(alias="@volume")
-    extrusionHeight: str = Field(alias="@extrusionHeight")
+    volume: float = Field(alias="@volume")
+    extrusionHeight: float = Field(alias="@extrusionHeight")
     ObjectIDs: "ObjectIDs"
     Vertices: "Vertices"
     Surfaces: "Surfaces"
-    # VoidPerimeterList: "VoidPerimeterList"
+    # VoidPerimeterList: Union["VoidPerimeterList", None]
     Attributes: Union["Attributes", "Attribute", None]
 
 
 class ObjectIDs(BaseModel):
-    handle: str = Field(alias="@handle")
-    buildingHandle: str = Field(alias="@buildingHandle")
-    buildingBlockHandle: str = Field(alias="@buildingBlockHandle")
-    zoneHandle: str = Field(alias="@zoneHandle")
-    surfaceIndex: str = Field(alias="@surfaceIndex")
-    openingIndex: str = Field(alias="@openingIndex")
+    handle: int = Field(alias="@handle")
+    buildingHandle: int = Field(alias="@buildingHandle")
+    buildingBlockHandle: int = Field(alias="@buildingBlockHandle")
+    zoneHandle: int = Field(alias="@zoneHandle")
+    surfaceIndex: int = Field(alias="@surfaceIndex")
+    openingIndex: int = Field(alias="@openingIndex")
 
 
 class Surfaces(BaseModel):
@@ -124,47 +124,62 @@ class Surfaces(BaseModel):
 
 class Surface(BaseModel):
     type: str = Field(alias="@type")
-    area: str = Field(alias="@area")
-    alpha: str = Field(alias="@alpha")
-    phi: str = Field(alias="@phi")
+    area: float = Field(alias="@area")
+    alpha: float = Field(alias="@alpha")
+    phi: float = Field(alias="@phi")
     defaultOpenings: str = Field(alias="@defaultOpenings")
-    adjacentPartitionHandle: str = Field(alias="@adjacentPartitionHandle")
-    thickness: str = Field(alias="@thickness")
+    adjacentPartitionHandle: int = Field(alias="@adjacentPartitionHandle")
+    thickness: float = Field(alias="@thickness")
     ObjectIDs: "ObjectIDs"
     VertexIndices: str
     HoleIndices: Union[str, None]
-    # Openings: Union["Openings", None]
-    # Adjacencies: Union["Adjacencies", None]
+    Openings: Union["Openings", None]
+    Adjacencies: Union["Adjacencies", None]
     Attributes: Union["Attributes", "Attribute", None]
 
 
 class Openings(BaseModel):
-    Opening: Union["Opening", list["Opening"]]
+    Opening: Union["Opening", list["Opening"], None]
 
 
 class Opening(BaseModel):
     type: str = Field(alias="@type")
     Polygon: "Polygon"
-    Attributes: "Attributes"
+    Attributes: Union["Attributes", None]
     SegmentList: None
 
 
+class Adjacencies(BaseModel):
+    Adjacency: Union["Adjacency", list["Adjacency"]]
+
+
+class Adjacency(BaseModel):
+    type: str = Field(alias="@type")
+    adjacencyDistance: float = Field(alias="@adjacencyDistance")
+    ObjectIDs: "ObjectIDs"
+    AdjacencyPolygonList: "AdjacencyPolygonList"
+
+
+class AdjacencyPolygonList(BaseModel):
+    Polygon: Union["Polygon"]
+
+
 class Buildings(BaseModel):
-    numberOfBuildings: str = Field(alias="@numberOfBuildings")
-    Building: Union["Building", List["Building"]]
+    numberOfBuildings: int = Field(alias="@numberOfBuildings")
+    Building: Union["Building", list["Building"]]
 
 
 class Building(BaseModel):
-    currentComponentBlockHandle: str = Field(alias="@currentComponentBlockHandle")
-    currentAssemblyInstanceHandle: str = Field(alias="@currentAssemblyInstanceHandle")
-    currentPlaneHandle: str = Field(alias="@currentPlaneHandle")
+    currentComponentBlockHandle: int = Field(alias="@currentComponentBlockHandle")
+    currentAssemblyInstanceHandle: int = Field(alias="@currentAssemblyInstanceHandle")
+    currentPlaneHandle: int = Field(alias="@currentPlaneHandle")
     ObjectIDs: "ObjectIDs"
     BuildingBlocks: Union["BuildingBlocks", None]
-    # ComponentBlocks: Union["ComponentBlocks", None]
-    # AssemblyInstances: Union["AssemblyInstances", None]
-    # ProfileOutlines: Union["ProfileOutlines", None] #OutlineBlocks
-    # ConstructionLines: Union["ConstructionLines", None]
-    # Planes: Union["Planes", None]
+    ComponentBlocks: Union["ComponentBlocks", None]
+    AssemblyInstances: Union["AssemblyInstances", None]
+    ProfileOutlines: Union["ProfileOutlines", None]  # OutlineBlocks
+    ConstructionLines: Union["ConstructionLines", None]
+    Planes: Union["Planes", None]
     HVACNetwork: Optional["HVACNetwork"]  # DetailedHVACNetwork...
     BookmarkBuildings: "BookmarkBuildings"
     Attributes: "Attributes"
@@ -176,17 +191,17 @@ class BuildingBlocks(BaseModel):
 
 class BuildingBlock(BaseModel):
     type: str = Field(alias="@type")
-    height: str = Field(alias="@height")
-    roofSlope: str = Field(alias="@roofSlope")
-    roofOverlap: str = Field(alias="@roofOverlap")
+    height: float = Field(alias="@height")
+    roofSlope: float = Field(alias="@roofSlope")
+    roofOverlap: float = Field(alias="@roofOverlap")
     roofType: str = Field(alias="@roofType")
-    wallSlope: str = Field(alias="@wallSlope")
+    wallSlope: float = Field(alias="@wallSlope")
     ObjectIDs: "ObjectIDs"
     ComponentBlocks: Union["ComponentBlocks", None]
     # CFDFans: Union["CFDFans", None]
-    # AssemblyInstances: Union["AssemblyInstances", None]
-    # ProfileOutlines: Union["ProfileOutlines", None]
-    # InternalPartitions: Union["InternalPartitions", None]
+    AssemblyInstances: Union["AssemblyInstances", None]
+    ProfileOutlines: Union["ProfileOutlines", None]
+    InternalPartitions: Union["InternalPartitions", None]
     # VoidBodies: Union["VoidBodies", None]
     Zones: "Zones"
     ProfileBody: "ProfileBody"
@@ -195,8 +210,22 @@ class BuildingBlock(BaseModel):
     Attributes: "Attributes"
 
 
+class InternalPartitions(BaseModel):
+    InternalPartition: Union["InternalPartition", list["InternalPartition"]]
+
+
+class InternalPartition(BaseModel):
+    type: str = Field(alias="@type")
+    height: float = Field(alias="@height")
+    area: float = Field(alias="@area")
+    floatingPartition: bool = Field(alias="@floatingPartition")
+    ObjectIDs: "ObjectIDs"
+    StartPoint: "Point3D"
+    EndPoint: "Point3D"
+
+
 class Zones(BaseModel):
-    Zone: "Zone"
+    Zone: Union["Zone", list["Zone"]]
 
 
 class Zone(BaseModel):
@@ -233,7 +262,7 @@ class Polygon(BaseModel):
     # PolygonHoles: Union["PolygonHoles", None]
 
 
-# class PolygonHoles(BaseConfigModel):
+# class PolygonHoles(BaseModel):
 #    X
 
 
@@ -252,4 +281,62 @@ class InnerSurfaceBody(BaseModel):
 
 
 class BookmarkBuildings(BaseModel):
-    numberOfBuildings: str = Field(alias="@numberOfBuildings")
+    numberOfBuildings: int = Field(alias="@numberOfBuildings")
+
+
+class ConstructionLines(BaseModel):
+    ConstructionLine: Union["ConstructionLine", list["ConstructionLine"], None]
+
+
+class ConstructionLine(BaseModel):
+    Line: "Line3D"
+    Planes: "CPlanes"
+
+
+class Line3D(BaseModel):
+    ObjectIDs: "ObjectIDs"
+    Begin: "Point3D"
+    End: "Point3D"
+
+
+class CPlanes(BaseModel):
+    Polygon: Union["Polygon", list["Polygon"]]
+
+
+class Planes(BaseModel):
+    Plane: Union["Plane", list["Plane"]]
+
+
+class Plane(BaseModel):
+    type: int = Field(alias="@type")
+    Polygon: "Polygon"
+    Attributes: "Attributes"
+
+
+class AssemblyInstances(BaseModel):
+    AssemblyInstance: Union["AssemblyInstance", list["AssemblyInstance"], None]
+
+
+class AssemblyInstance(BaseModel):
+    assemblyHandle: int = Field(alias="@assemblyHandle")
+    reflected: int = Field(alias="@reflected")
+    active: int = Field(alias="@active")
+    ObjectIDs: "ObjectIDs"
+    AssemblyInstanceTransformationMatrix: "AssemblyInstanceTransformationMatrix"
+    Attributes: Union["Attributes", None]
+
+
+class AssemblyInstanceTransformationMatrix(BaseModel):
+    Matrix: "Matrix"
+
+
+class Matrix(BaseModel):
+    MatrixRow: list[str]
+
+
+class ProfileOutlines(BaseModel):
+    ProfileOutline: Union["ProfileOutline", list["ProfileOutline"], None]
+
+
+class ProfileOutline(BaseModel):
+    Body: "Body"
