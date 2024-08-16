@@ -1,12 +1,17 @@
 """
 core.py
 ====================================
-The core schema module of the designbuilder_schema project
+The core schema module of the designbuilder_schema
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StringConstraints
 from typing import Union, List, Optional
 from designbuilder_schema.hvac_network import HVACNetwork
+from typing_extensions import Annotated
+
+
+class DesignBuilderSchema(BaseModel):
+    dbJSON: "DBJSON"
 
 
 class DBJSON(BaseModel):
@@ -14,7 +19,7 @@ class DBJSON(BaseModel):
     date: str = Field(alias="@date")
     version: str = Field(alias="@version")
     objects: str = Field(alias="@objects")
-    Site: "Site"
+    Site: Union[None, "Site"]
 
 
 class Site(BaseModel):
@@ -95,8 +100,8 @@ class ComponentBlock(BaseModel):
 
 
 class Body(BaseModel):
-    volume: str = Field(alias="@volume")
-    extrusionHeight: str = Field(alias="@extrusionHeight")
+    volume: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@volume")
+    extrusionHeight: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@extrusionHeight")
     ObjectIDs: "ObjectIDs"
     Vertices: "Vertices"
     Surfaces: "Surfaces"
@@ -119,7 +124,7 @@ class Surfaces(BaseModel):
 
 class Surface(BaseModel):
     type: str = Field(alias="@type")
-    area: str = Field(alias="@area")
+    area: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@area")
     alpha: str = Field(alias="@alpha")
     phi: str = Field(alias="@phi")
     defaultOpenings: str = Field(alias="@defaultOpenings")
