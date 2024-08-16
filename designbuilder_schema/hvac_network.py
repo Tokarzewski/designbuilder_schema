@@ -4,8 +4,9 @@ hvac_network.py
 The hvac network schema module of the designbuilder_schema project
 """
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import Field, field_validator
 from typing import Union, List, Optional
+from designbuilder_schema.base import BaseModel
 
 
 class HVACNetwork(BaseModel):

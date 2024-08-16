@@ -4,10 +4,10 @@ core.py
 The core schema module of the designbuilder_schema
 """
 
-from pydantic import BaseModel, Field, StringConstraints
+from pydantic import Field
 from typing import Union, List, Optional
 from designbuilder_schema.hvac_network import HVACNetwork
-from typing_extensions import Annotated
+from designbuilder_schema.base import BaseModel
 
 
 class DesignBuilderSchema(BaseModel):
@@ -100,8 +100,8 @@ class ComponentBlock(BaseModel):
 
 
 class Body(BaseModel):
-    volume: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@volume")
-    extrusionHeight: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@extrusionHeight")
+    volume: str = Field(alias="@volume")
+    extrusionHeight: str = Field(alias="@extrusionHeight")
     ObjectIDs: "ObjectIDs"
     Vertices: "Vertices"
     Surfaces: "Surfaces"
@@ -124,12 +124,12 @@ class Surfaces(BaseModel):
 
 class Surface(BaseModel):
     type: str = Field(alias="@type")
-    area: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@area")
+    area: str = Field(alias="@area")
     alpha: str = Field(alias="@alpha")
     phi: str = Field(alias="@phi")
     defaultOpenings: str = Field(alias="@defaultOpenings")
     adjacentPartitionHandle: str = Field(alias="@adjacentPartitionHandle")
-    thickness: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@thickness")
+    thickness: str = Field(alias="@thickness")
     ObjectIDs: "ObjectIDs"
     VertexIndices: str
     HoleIndices: Union[str, None]
@@ -176,11 +176,11 @@ class BuildingBlocks(BaseModel):
 
 class BuildingBlock(BaseModel):
     type: str = Field(alias="@type")
-    height: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@height")
-    roofSlope: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@roofSlope")
-    roofOverlap: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@roofOverlap")
+    height: str = Field(alias="@height")
+    roofSlope: str = Field(alias="@roofSlope")
+    roofOverlap: str = Field(alias="@roofOverlap")
     roofType: str = Field(alias="@roofType")
-    wallSlope: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@wallSlope")
+    wallSlope: str = Field(alias="@wallSlope")
     ObjectIDs: "ObjectIDs"
     ComponentBlocks: Union["ComponentBlocks", None]
     # CFDFans: Union["CFDFans", None]
@@ -233,7 +233,7 @@ class Polygon(BaseModel):
     # PolygonHoles: Union["PolygonHoles", None]
 
 
-# class PolygonHoles(BaseModel):
+# class PolygonHoles(BaseConfigModel):
 #    X
 
 
