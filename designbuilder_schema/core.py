@@ -129,7 +129,7 @@ class Surface(BaseModel):
     phi: str = Field(alias="@phi")
     defaultOpenings: str = Field(alias="@defaultOpenings")
     adjacentPartitionHandle: str = Field(alias="@adjacentPartitionHandle")
-    thickness: str = Field(alias="@thickness")
+    thickness: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@thickness")
     ObjectIDs: "ObjectIDs"
     VertexIndices: str
     HoleIndices: Union[str, None]
@@ -176,11 +176,11 @@ class BuildingBlocks(BaseModel):
 
 class BuildingBlock(BaseModel):
     type: str = Field(alias="@type")
-    height: str = Field(alias="@height")
-    roofSlope: str = Field(alias="@roofSlope")
-    roofOverlap: str = Field(alias="@roofOverlap")
+    height: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@height")
+    roofSlope: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@roofSlope")
+    roofOverlap: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@roofOverlap")
     roofType: str = Field(alias="@roofType")
-    wallSlope: str = Field(alias="@wallSlope")
+    wallSlope: Annotated[str, StringConstraints(strip_whitespace=True)] = Field(alias="@wallSlope")
     ObjectIDs: "ObjectIDs"
     ComponentBlocks: Union["ComponentBlocks", None]
     # CFDFans: Union["CFDFans", None]
