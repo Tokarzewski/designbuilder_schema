@@ -8,7 +8,7 @@ version = "0.1"
 description = "A Python package for reading and processing DBXML fileformat"
 authors = [{ name = "Bartlomiej Tokarzewski", email = "bartlomiej.tokarzewski@gmail.com"}]
 dependencies = [
-    "pydantic >= 2",
+    "pydantic >= 2.7",
     "xmltodict >= 0.13",
     "fire >= 0.5"
 ]

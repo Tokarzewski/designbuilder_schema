@@ -19,5 +19,10 @@ def load(filepath: str) -> DBJSON:
     if filepath.endswith(".json"):
         return DBJSON.model_validate(dictionary["dbJSON"])
     elif filepath.endswith(".xml"):
-        # dictionary["dbJSON"] = dictionary.pop("dbXML")
         return DBJSON.model_validate(dictionary["dbXML"])
+
+
+def save_data_to_file(data, filename):
+    with open(filename, "w") as f:
+        f.write(data)
+    print(f"Text saved to {filename}")
