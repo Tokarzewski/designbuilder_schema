@@ -1,15 +1,15 @@
 """
 cli.py
 ====================================
-The command line interface of the designbuilder_schema project
+The command line interface of the designbuilder_schema
 """
 
 import os, json
 from fire import Fire
-from designbuilder_schema.utils import load_file_to_dict
+from designbuilder_schema.utils import load_file_to_dict, load_and_validate
 
 
-def get_version(filepath: str):
+def get_version(filepath: str) -> str:
     """Return the schema version"""
     db_dictionary = load_file_to_dict(filepath)
     if "JSON" in str(db_dictionary.keys()):
@@ -38,6 +38,7 @@ def xml_to_json(xml_filepath: str):
 def json_to_xml(json_filepath: str):
     """Convert JSON file to XML file"""
     from xmltodict import unparse
+
     dictionary = load_file_to_dict(json_filepath)
     dictionary["dbXML"] = dictionary.pop("dbJSON")
 
@@ -48,7 +49,18 @@ def json_to_xml(json_filepath: str):
         f.write(xml_data)
 
 
+def validate_model(filepath: str) -> bool:
+    """Check if DBJSON or DBXML file follow the schema"""
+    DBJSON = load_and_validate(filepath)
+    return f"Validation successful, file saved in version {DBJSON.version}."
+
+
 if __name__ == "__main__":
     Fire(
-        {"version": get_version, "xml2json": xml_to_json, "json2xml": json_to_xml}
+        {
+            "version": get_version,
+            "validate": validate_model,
+            "xml2json": xml_to_json,
+            "json2xml": json_to_xml,
+        }
     )

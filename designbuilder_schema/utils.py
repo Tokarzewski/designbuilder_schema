@@ -14,7 +14,7 @@ def load_file_to_dict(filepath: str) -> dict:
             raise ValueError("Unsupported file format")
 
 
-def load(filepath: str) -> DBJSON:
+def load_and_validate(filepath: str) -> DBJSON:
     dictionary = load_file_to_dict(filepath)
     if filepath.endswith(".json"):
         return DBJSON.model_validate(dictionary["dbJSON"])

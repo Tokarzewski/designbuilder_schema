@@ -1,8 +1,8 @@
-from designbuilder_schema.utils import load
+from designbuilder_schema.utils import load_and_validate
 
 
 dbjson_filepath = r"C:\GitHub\designbuilder_schema\samples\models\DetailedHVAC.json"
-db_json = load(dbjson_filepath)
+db_json = load_and_validate(dbjson_filepath)
 
 site = db_json.Site
 building = site.Buildings.Building
