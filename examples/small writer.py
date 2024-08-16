@@ -4,12 +4,12 @@ from designbuilder_schema.utils import save_data_to_file
 from designbuilder_schema.cli import json_to_xml
 
 db_json = DBJSON(
-        name = "MadeByPydantic",
-        date = datetime.date.today().isoformat(),
-        version = "8.0.0.042",
-        objects = "all",
-        Site = None,
-        )
+    name="MadeByPydantic",
+    date=datetime.date.today().isoformat(),
+    version="8.0.0.042",
+    objects="all",
+    Site=None,
+)
 
 db_schema = DesignBuilderSchema(dbJSON=db_json)
 db_schema_json = db_schema.model_dump(by_alias=True)
