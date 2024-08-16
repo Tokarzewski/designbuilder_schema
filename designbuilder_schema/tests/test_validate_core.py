@@ -1,8 +1,7 @@
 import os
-import json
 from designbuilder_schema.core import DBJSON
+from designbuilder_schema.utils import load_file_to_dict
 import pytest
-import xmltodict
 
 
 def get_filepaths(directory, extension=".json"):
@@ -17,18 +16,6 @@ def get_filepaths(directory, extension=".json"):
 # Get model filepaths from models folder
 models_folder = r"C:\GitHub\designbuilder_schema\samples\models"
 json_filepaths = get_filepaths(models_folder, extension=".json")
-
-
-def load_file_to_dict(file_path: str):
-    """Load a file and return its content as a dictionary"""
-    with open(file_path, "r") as f:
-        file_content = f.read()
-        if file_path.endswith(".json"):
-            return json.loads(file_content)
-        elif file_path.endswith(".xml"):
-            return xmltodict.parse(xml_input=file_content)
-        else:
-            raise ValueError("Unsupported file format")
 
 
 @pytest.mark.parametrize("filepath", json_filepaths)
