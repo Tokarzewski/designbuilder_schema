@@ -1,12 +1,14 @@
 """
 hvac_network.py
 ====================================
-The hvac network schema module of the designbuilder_schema
+The hvac network module of the designbuilder_schema
 """
 
 from pydantic import Field, field_validator
 from typing import Union, List, Optional
 from designbuilder_schema.base import BaseModel
+from designbuilder_schema.geometry import *
+from designbuilder_schema.id import ObjectIDs
 
 
 class HVACNetwork(BaseModel):
@@ -14,15 +16,6 @@ class HVACNetwork(BaseModel):
     ObjectIDs: "ObjectIDs"
     HVACLoops: "HVACLoops"
     HVACZoneGroups: "HVACZoneGroups"
-
-
-class ObjectIDs(BaseModel):
-    handle: str = Field(alias="@handle")
-    buildingHandle: str = Field(alias="@buildingHandle")
-    buildingBlockHandle: str = Field(alias="@buildingBlockHandle")
-    zoneHandle: str = Field(alias="@zoneHandle")
-    surfaceIndex: str = Field(alias="@surfaceIndex")
-    openingIndex: str = Field(alias="@openingIndex")
 
 
 class HVACLoops(BaseModel):
@@ -69,19 +62,6 @@ class ImageRectangle(BaseModel):
     Active: str
     Vertices: "Vertices"
     Range: "Range"
-
-
-class Vertices(BaseModel):
-    Point3D: list[str]
-
-
-class Range(BaseModel):
-    Org: "Point3D"
-    End: "Point3D"
-
-
-class Point3D(BaseModel):
-    Point3D: str
 
 
 class ZoneComponentAttributeList(BaseModel):
@@ -338,14 +318,8 @@ class ElementList(BaseModel):
 
 
 class HVACConnectionElement(BaseModel):
-    Line: "Line2D"
+    Line: "Line"
     SegmentList: "SegmentList"
-
-
-class Line2D(BaseModel):
-    ObjectIDs: "ObjectIDs"
-    Begin: "Point3D"
-    End: "Point3D"
 
 
 class SegmentList(BaseModel):
@@ -353,7 +327,7 @@ class SegmentList(BaseModel):
 
 
 class LineArray(BaseModel):
-    Line: Union["Line2D", list["Line2D"]]
+    Line: Union["Line", list["Line"]]
 
 
 class FlowConnections(BaseModel):

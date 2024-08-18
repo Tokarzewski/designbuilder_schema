@@ -14,7 +14,7 @@ def get_filepaths(directory, extension=".json"):
 
 
 # Get model filepaths from models folder
-models_folder = r"C:\GitHub\designbuilder_schema\samples\models"
+models_folder = r".\samples\models"
 json_filepaths = get_filepaths(models_folder, extension=".json")
 
 
@@ -32,6 +32,7 @@ def test_validate_dbjson(filepath):
 
 
 # collision in schema HVACNetwork vs DetailedHVACNetwork
+
 """
 xml_filepaths = get_filepaths(models_folder, extension=".xml")
 @pytest.mark.parametrize("filepath", xml_filepaths)

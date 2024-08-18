@@ -9,7 +9,12 @@ Python library built on top of pydantic for reading DBXML files from DesignBuild
 
 # todo
 
-1. map more classes
-2. generate more examples 
+1. map more HVAC classes
+2. generate more examples
 3. autogenerate docs using https://pypi.org/project/autodoc_pydantic/
 4. add more enumerations (enums)
+5. Add example on - How to find all objects of class Point3D?
+
+# DesignBuilder bugs
+
+1. dbXML schema has incorrect class names HVACNetwork and DetailedHVACNetwork 

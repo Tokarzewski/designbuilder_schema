@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "designbuilder_schema"
 version = "0.1"
-description = "A Python package for reading and processing DBXML fileformat"
+description = "Python package for processing DesignBuilder's DBXML files"
 authors = [{ name = "Bartlomiej Tokarzewski", email = "bartlomiej.tokarzewski@gmail.com"}]
 dependencies = [
     "pydantic >= 2.7",
@@ -25,7 +25,7 @@ packages = ["designbuilder_schema"]
 
 
 [project.optional-dependencies]
-dev = ["pytest", "coverage", "flake8", "black"]
+dev = ["pytest", "black"]
 
 [tool.pytest.ini_options]
 pythonpath = ["C:/GitHub/designbuilder_schema"]

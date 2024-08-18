@@ -1,13 +1,14 @@
 """
 core.py
 ====================================
-The core schema module of the designbuilder_schema
+The core module of the designbuilder_schema
 """
 
 from pydantic import Field
 from typing import Union, Optional
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
+from designbuilder_schema.geometry import *
 
 
 class DesignBuilderSchema(BaseModel):
@@ -19,7 +20,7 @@ class DBJSON(BaseModel):
     date: str = Field(alias="@date")
     version: str = Field(alias="@version")
     objects: str = Field(alias="@objects")
-    Site: Union[None, "Site"]
+    Site: Union["Site", None]
 
 
 class Site(BaseModel):
@@ -28,7 +29,7 @@ class Site(BaseModel):
     Attributes: "SiteAttributes"
     Tables: "Tables"
     AssemblyLibrary: "AssemblyLibrary"
-    Buildings: Union[None, "Buildings"]
+    Buildings: Union["Buildings", None]
 
 
 class SiteAttributes(BaseModel):
@@ -82,16 +83,8 @@ class Assembly(BaseModel):
     Attributes: "Attributes"
 
 
-class Point3D(BaseModel):
-    Point3D: str
-
-
-class Vertices(BaseModel):
-    Point3D: list[str]
-
-
 class ComponentBlocks(BaseModel):
-    ComponentBlock: Union[list["ComponentBlock"], "ComponentBlock"]
+    ComponentBlock: Union["ComponentBlock", list["ComponentBlock"]]
 
 
 class ComponentBlock(BaseModel):
@@ -105,17 +98,8 @@ class Body(BaseModel):
     ObjectIDs: "ObjectIDs"
     Vertices: "Vertices"
     Surfaces: "Surfaces"
-    # VoidPerimeterList: Union["VoidPerimeterList", None]
+    VoidPerimeterList: Union["VoidPerimeterList", None]
     Attributes: Union["Attributes", "Attribute", None]
-
-
-class ObjectIDs(BaseModel):
-    handle: int = Field(alias="@handle")
-    buildingHandle: int = Field(alias="@buildingHandle")
-    buildingBlockHandle: int = Field(alias="@buildingBlockHandle")
-    zoneHandle: int = Field(alias="@zoneHandle")
-    surfaceIndex: int = Field(alias="@surfaceIndex")
-    openingIndex: int = Field(alias="@openingIndex")
 
 
 class Surfaces(BaseModel):
@@ -186,7 +170,7 @@ class Building(BaseModel):
 
 
 class BuildingBlocks(BaseModel):
-    BuildingBlock: "BuildingBlock"
+    BuildingBlock: Union["BuildingBlock", list["BuildingBlock"]]
 
 
 class BuildingBlock(BaseModel):
@@ -198,11 +182,11 @@ class BuildingBlock(BaseModel):
     wallSlope: float = Field(alias="@wallSlope")
     ObjectIDs: "ObjectIDs"
     ComponentBlocks: Union["ComponentBlocks", None]
-    # CFDFans: Union["CFDFans", None]
+    CFDFans: Union["CFDFans", None]
     AssemblyInstances: Union["AssemblyInstances", None]
     ProfileOutlines: Union["ProfileOutlines", None]
     InternalPartitions: Union["InternalPartitions", None]
-    # VoidBodies: Union["VoidBodies", None]
+    VoidBodies: Union["VoidBodies", None]
     Zones: "Zones"
     ProfileBody: "ProfileBody"
     Perimeter: "Perimeter"
@@ -242,8 +226,8 @@ class Zone(BaseModel):
 
 
 class ProfileBody(BaseModel):
-    elementSlope: str = Field(alias="@elementSlope")
-    roofOverlap: str = Field(alias="@roofOverlap")
+    elementSlope: float = Field(alias="@elementSlope")
+    roofOverlap: float = Field(alias="@roofOverlap")
     Body: "Body"
 
 
@@ -259,11 +243,16 @@ class Polygon(BaseModel):
     auxiliaryType: str = Field(alias="@auxiliaryType")
     ObjectIDs: "ObjectIDs"
     Vertices: Union["Vertices", None]
-    # PolygonHoles: Union["PolygonHoles", None]
+    PolygonHoles: Union["PolygonHoles", None]
 
 
-# class PolygonHoles(BaseModel):
-#    X
+class PolygonHoles(BaseModel):
+    PolygonHole: Union["PolygonHole", list["PolygonHole"]]
+
+
+class PolygonHole(BaseModel):
+    ObjectIDs: "ObjectIDs"
+    Vertices: "Vertices"
 
 
 class LightSensorOne(BaseModel):
@@ -289,14 +278,8 @@ class ConstructionLines(BaseModel):
 
 
 class ConstructionLine(BaseModel):
-    Line: "Line3D"
+    Line: "Line"
     Planes: "CPlanes"
-
-
-class Line3D(BaseModel):
-    ObjectIDs: "ObjectIDs"
-    Begin: "Point3D"
-    End: "Point3D"
 
 
 class CPlanes(BaseModel):
@@ -340,3 +323,23 @@ class ProfileOutlines(BaseModel):
 
 class ProfileOutline(BaseModel):
     Body: "Body"
+
+
+class VoidBodies(BaseModel):
+    VoidBody: Union["VoidBody", list["VoidBody"]]
+
+
+class VoidBody(BaseModel):
+    ProfileBody: "ProfileBody"
+
+
+class VoidPerimeterList(BaseModel):
+    Polygon: Union["Polygon", list["Polygon"]]
+
+
+class CFDFans(BaseModel):
+    CFDFan: Union["CFDFan", list["CFDFan"]]
+
+
+class CFDFan(BaseModel):
+    ComponentBlock: "ComponentBlock"
