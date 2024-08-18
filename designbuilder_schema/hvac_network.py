@@ -99,9 +99,9 @@ class PlantOperationRange(BaseModel):
 
 
 class DemandSubLoop(BaseModel):
-    LoopType: str
-    PlantLoopType: str
-    SubLoopType: str
+    LoopType: int
+    PlantLoopType: int
+    SubLoopType: int
     ObjectIDs: "ObjectIDs"
     HVACComponents: "HVACComponents"
     HVACConnections: "HVACConnections"
@@ -109,9 +109,9 @@ class DemandSubLoop(BaseModel):
 
 
 class SupplySubLoop(BaseModel):
-    LoopType: str
-    PlantLoopType: str
-    SubLoopType: str
+    LoopType: int
+    PlantLoopType: int
+    SubLoopType: int
     ObjectIDs: "ObjectIDs"
     HVACComponents: "HVACComponents"
     HVACConnections: "HVACConnections"
@@ -157,31 +157,31 @@ class HVACComponents(BaseModel):
 class HVACComponent(BaseModel):
     type: str = Field(alias="@type")
     ImageRectangle: "ImageRectangle"
-    ConnectingPlantLoopHandle: str
-    ConnectingAirLoopHandle: str
-    LoopType: str
-    SubLoopType: str
-    PlantLoopType: str
-    AirLoopDuctType: str
-    ComponentType: str
-    Location: str
-    ConnectionOffset: str
-    Editable: str
-    ZoneBranchFlag: str
-    Orientation: str
-    WaterInConnectionOrientation: str
-    WaterOutConnectionOrientation: str
-    AirInConnectionOrientation: str
-    AirOutConnectionOrientation: str
-    WaterInConnection: str
-    WaterOutConnection: str
-    AirInConnection: str
-    AirOutConnection: str
-    WaterInConnected: str
-    WaterOutConnected: str
-    AirInConnected: str
-    AirOutConnected: str
-    FanPlacement: str
+    ConnectingPlantLoopHandle: int
+    ConnectingAirLoopHandle: int
+    LoopType: int
+    SubLoopType: int
+    PlantLoopType: int
+    AirLoopDuctType: int
+    ComponentType: int
+    Location: int
+    ConnectionOffset: float
+    Editable: int
+    ZoneBranchFlag: int
+    Orientation: int
+    WaterInConnectionOrientation: int
+    WaterOutConnectionOrientation: int
+    AirInConnectionOrientation: int
+    AirOutConnectionOrientation: int
+    WaterInConnection: int
+    WaterOutConnection: int
+    AirInConnection: int
+    AirOutConnection: int
+    WaterInConnected: int
+    WaterOutConnected: int
+    AirInConnected: int
+    AirOutConnected: int
+    FanPlacement: int
     WaterInConnectionCoordinate: "Point3D"
     WaterOutConnectionCoordinate: "Point3D"
     AirInConnectionCoordinate: "Point3D"
@@ -193,8 +193,8 @@ class HVACComponent(BaseModel):
 
 
 class HVACZoneComponent(HVACComponent):
-    Width: str
-    Height: str
+    Width: float
+    Height: float
     # ExtractGrille: "ExtractGrille"
 
 
@@ -232,8 +232,8 @@ class HVACZoneGroup(BaseModel):
     Attributes: "Attributes"
     ZoneComponentAttributeList: Union[None, "ZoneComponentAttributeList"]
     ValidZoneGroup: str
-    Width: str
-    Height: str
+    Width: float
+    Height: float
     Origin: "Point3D"
     BuildingZoneHandleList: "BuildingZoneHandle"
     ZoneElementList: "ZoneElementList"
@@ -281,11 +281,11 @@ class SetpointManager(HVACComponent):
 
 
 class AirHandlingUnit(HVACComponent):
-    Width: str
-    Height: str
-    FanType: str
-    DOASAirInConnected: str
-    DOASAirOutConnected: str
+    Width: float
+    Height: float
+    FanType: int
+    DOASAirInConnected: int
+    DOASAirOutConnected: int
     """
     OutdoorAirSystem: "OutdoorAirSystem"
     IntakeDamper: "IntakeDamper"
@@ -305,11 +305,11 @@ class HVACConnections(BaseModel):
 
 class HVACConnection(BaseModel):
     ObjectIDs: "ObjectIDs"
-    LoopHandle: str
-    SubLoopType: str
-    LoopType: str
-    PlantLoopType: str
-    LoopFlowDirection: str
+    LoopHandle: int
+    SubLoopType: int
+    LoopType: int
+    PlantLoopType: int
+    LoopFlowDirection: int
     ElementList: "ElementList"
 
 
