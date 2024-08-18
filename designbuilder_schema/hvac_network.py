@@ -5,7 +5,7 @@ The hvac network module of the designbuilder_schema
 """
 
 from pydantic import Field, field_validator
-from typing import Union, List, Optional
+from typing import Union
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import *
 from designbuilder_schema.id import ObjectIDs
@@ -33,7 +33,7 @@ class HVACLoop(BaseModel):
     numberOfFlowNodes: int = Field(alias="@numberOfFlowNodes")
     ObjectIDs: "ObjectIDs"
     Origin: "Point3D"
-    # PlantOperationSchemes: Union["PlantOperationSchemes", None]
+    PlantOperationSchemes: Union["PlantOperationSchemes", None]
     DemandSubLoop: "DemandSubLoop"
     SupplySubLoop: "SupplySubLoop"
     Attributes: "Attributes"
@@ -82,11 +82,11 @@ class HVACAttributeList(BaseModel):
 
 
 class PlantOperationSchemes(BaseModel):
-    PlantOperationScheme: "PlantOperationScheme"
+    PlantOperationScheme: Union["PlantOperationScheme", list["PlantOperationScheme"]]
 
 
 class PlantOperationScheme(BaseModel):
-    PlantOperationRanges: "PlantOperationRanges"
+    PlantOperationRanges: Union["PlantOperationRanges", list["PlantOperationRanges"]]
     Attributes: "Attributes"
 
 
@@ -118,17 +118,8 @@ class SupplySubLoop(BaseModel):
     Attributes: "Attributes"
 
 
-HVACComponentEnum = Union[
-    "HVACComponent",
-    "SubLoopNode",
-    "ZoneMixer",
-    "SetpointManager",
-    "AirHandlingUnit",
-]
-
-
 class HVACComponents(BaseModel):
-    HVACComponent: List[HVACComponentEnum]
+    HVACComponent: list
 
     @field_validator("HVACComponent", mode="before")
     def map_to_specific_class(cls, components):
@@ -149,6 +140,14 @@ class HVACComponents(BaseModel):
                     mapped_components.append(SetpointManager(**component))
                 case "Air handling unit":
                     mapped_components.append(AirHandlingUnit(**component))
+                case "Pump":
+                    mapped_components.append(Pump(**component))
+                case "Boiler":
+                    mapped_components.append(Boiler(**component))
+                case "Cooling tower":
+                    mapped_components.append(CoolingTower(**component))
+                case "Chiller":
+                    mapped_components.append(Chiller(**component))
                 case _:
                     mapped_components.append(HVACComponent(**component))
         return mapped_components
@@ -188,7 +187,7 @@ class HVACComponent(BaseModel):
     AirOutConnectionCoordinate: "Point3D"
     Attributes: "Attributes"
     ZoneComponentAttributeList: Union[None, "ZoneComponentAttributeList"]
-    NumberOfFlowConnections: Optional[str] = None
+    # NumberOfFlowConnections: Optional[str] = None
     # Origin: "Point3D"
 
 
@@ -241,7 +240,7 @@ class HVACZoneGroup(BaseModel):
 
 
 class SubLoopNode(HVACComponent):
-    NumberOfFlowConnections: str
+    NumberOfFlowConnections: int
     FlowConnections: "FlowConnections"
     HVACSubLoopNodeConnection: "HVACSubLoopNodeConnection"
     Origin: "Point3D"
@@ -249,31 +248,34 @@ class SubLoopNode(HVACComponent):
 
 class ZoneMixer(HVACComponent):
     LoopFlowDirection: str
-    # HVACConnectorNode: "HVACConnectorNode"
-    # BranchConnectionList
+    Origin: "Point3D"
+    HVACConnectorNode: "HVACConnectorNode"
+    BranchConnectionList: "BranchConnectionList"
 
 
 class ZoneSplitter(HVACComponent):
     LoopFlowDirection: str
-    # HVACConnectorNode: "HVACConnectorNode"
-    # BranchConnectionList
+    Origin: "Point3D"
+    HVACConnectorNode: "HVACConnectorNode"
+    BranchConnectionList: "BranchConnectionList"
 
 
 class Mixer(HVACComponent):
     LoopFlowDirection: str
     Origin: "Point3D"
-    # HVACConnectorNode: "HVACConnectorNode"
-    # BranchConnectionList
+    HVACConnectorNode: "HVACConnectorNode"
+    BranchConnectionList: "BranchConnectionList"
 
 
 class Splitter(HVACComponent):
     LoopFlowDirection: str
     Origin: "Point3D"
-    # HVACConnectorNode: "HVACConnectorNode"
-    # BranchConnectionList
+    HVACConnectorNode: "HVACConnectorNode"
+    BranchConnectionList: "BranchConnectionList"
 
 
 class SetpointManager(HVACComponent):
+    Origin: "Point3D"
     ControlPoint: "Point3D"
     UpStreamNode: "Point3D"
     DownStreamNode: "Point3D"
@@ -286,7 +288,7 @@ class AirHandlingUnit(HVACComponent):
     FanType: int
     DOASAirInConnected: int
     DOASAirOutConnected: int
-    """
+    Origin: "Point3D"
     OutdoorAirSystem: "OutdoorAirSystem"
     IntakeDamper: "IntakeDamper"
     ExhaustDamper: "ExhaustDamper"
@@ -295,8 +297,45 @@ class AirHandlingUnit(HVACComponent):
     MixingDamper: "MixingDamper"
     ExhaustUnitComponentList: "ExhaustUnitComponentList"
     IntakeUnitComponentList: "IntakeUnitComponentList"
-    """
     LineArray: "LineArray"
+
+
+class Pump(HVACComponent): 
+    pass
+    
+class Boiler(HVACComponent):
+    pass
+
+class CoolingTower(HVACComponent):
+    pass    
+    
+
+class Chiller(HVACComponent):
+    WaterCooledCondenser: "WaterCooledCondenser"
+    ChillerHRHeatExchanger: "ChillerHRHeatExchanger"
+    AbsorptionChillerUnit: "AbsorptionChillerUnit"
+
+class WaterCooledCondenser(BaseModel):
+    ImageRectangle: "ImageRectangle"
+    ComponentType: int
+    ConnectingPlantLoopHandle: int
+    WaterInConnectionOrientation: int
+    WaterOutConnectionOrientation: int
+    WaterInConnectionCoordinate: "Point3D"
+    WaterOutConnectionCoordinate: "Point3D"
+
+class ChillerHRHeatExchanger(BaseModel):
+    ImageRectangle: "ImageRectangle"
+    ComponentType: int
+    WaterInConnectionOrientation: int
+    WaterOutConnectionOrientation: int
+    WaterInConnectionCoordinate: "Point3D"
+    WaterOutConnectionCoordinate: "Point3D"
+
+class AbsorptionChillerUnit(BaseModel):
+    ImageRectangle: "ImageRectangle"
+    ComponentType: int
+    #AbsorptionChillerGeneratorHeatExchanger: "AbsorptionChillerGeneratorHeatExchanger"
 
 
 class HVACConnections(BaseModel):
@@ -338,6 +377,97 @@ class FlowConnections(BaseModel):
 
 class HVACSubLoopNodeConnection(BaseModel):
     ObjectIDs: "ObjectIDs"
-    Connected: str
+    Connected: int
     Coordinate: "Point3D"
     Attributes: "Attributes"
+
+
+class OutdoorAirSystem(BaseModel):
+    HeatRecovery: int
+    Recirculation: int
+    ImageRectangle: "ImageRectangle"
+    Attributes: "Attributes"
+    HeatRecoveryDevice: "HeatRecoveryDevice"
+    # OutdoorAirSystemComponentList:
+
+
+class IntakeDamper(BaseModel):
+    ImageRectangle: "ImageRectangle"
+
+
+class ExhaustDamper(BaseModel):
+    ImageRectangle: "ImageRectangle"
+
+
+class DOASIntakeDamper(BaseModel):
+    ImageRectangle: "ImageRectangle"
+
+
+class DOASExhaustDamper(BaseModel):
+    ImageRectangle: "ImageRectangle"
+
+
+class MixingDamper(BaseModel):
+    ImageRectangle: "ImageRectangle"
+
+
+class ExhaustUnitComponentList(BaseModel):
+    AirHandlingUnitHVACComponent: Union[
+        "AirHandlingUnitHVACComponent", list["AirHandlingUnitHVACComponent"]
+    ]
+
+
+class IntakeUnitComponentList(BaseModel):
+    AirHandlingUnitHVACComponent: Union[
+        "AirHandlingUnitHVACComponent", list["AirHandlingUnitHVACComponent"]
+    ]
+
+
+class HeatRecoveryDevice(BaseModel):
+    ImageRectangle: "ImageRectangle"
+
+
+class AirHandlingUnitHVACComponent(BaseModel):
+    type: str = Field(alias="@type")
+    ImageRectangle: "ImageRectangle"
+    ConnectingPlantLoopHandle: int
+    ConnectingAirLoopHandle: int
+    LoopType: int
+    SubLoopType: int
+    PlantLoopType: int
+    AirLoopDuctType: int
+    ComponentType: int
+    Location: int
+    ConnectionOffset: float
+    Editable: int
+    ZoneBranchFlag: int
+    Orientation: int
+    WaterInConnectionOrientation: int
+    WaterOutConnectionOrientation: int
+    AirInConnectionOrientation: int
+    AirOutConnectionOrientation: int
+    WaterInConnection: int
+    WaterOutConnection: int
+    AirInConnection: int
+    AirOutConnection: int
+    WaterInConnected: int
+    WaterOutConnected: int
+    AirInConnected: int
+    AirOutConnected: int
+    FanPlacement: int
+    WaterInConnectionCoordinate: "Point3D"
+    WaterOutConnectionCoordinate: "Point3D"
+    AirInConnectionCoordinate: "Point3D"
+    AirOutConnectionCoordinate: "Point3D"
+    Attributes: "Attributes"
+    ZoneComponentAttributeList: Union[None, "ZoneComponentAttributeList"]
+
+
+class HVACConnectorNode(BaseModel):
+    ObjectIDs: "ObjectIDs"
+    Name: str
+    Active: int
+
+
+class BranchConnectionList(BaseModel):
+    HVACConnectorNode: list["HVACConnectorNode"]
