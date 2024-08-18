@@ -17,6 +17,10 @@ class Vertices(BaseModel):
 
 
 class Range(BaseModel):
+    """Used only in ImageRectangle to represent rectangle.
+    Org - top left corner.
+    End -  bottom right corner."""
+
     Org: "Point3D"
     End: "Point3D"
 

@@ -13,7 +13,7 @@ for loop in hvac_loops:
     for subloop in [loop.SupplySubLoop, loop.DemandSubLoop]:
         for hvac_component in subloop.HVACComponents.HVACComponent:
             print(
-                hvac_component.__class__,
+                hvac_component.__class__.__name__,
                 hvac_component.type,
                 hvac_component.ComponentType,
             )
