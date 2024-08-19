@@ -129,9 +129,9 @@ class HVACComponents(BaseModel):
                 case "Sub-loop node":
                     mapped_components.append(SubLoopNode(**component))
                 case "Zone mixer":
-                    mapped_components.append(ZoneSplitter(**component))
-                case "Zone splitter":
                     mapped_components.append(ZoneMixer(**component))
+                case "Zone splitter":
+                    mapped_components.append(ZoneSplitter(**component))
                 case "Splitter":
                     mapped_components.append(Splitter(**component))
                 case "Mixer":
@@ -187,8 +187,6 @@ class HVACComponent(BaseModel):
     AirOutConnectionCoordinate: "Point3D"
     Attributes: "Attributes"
     ZoneComponentAttributeList: Union[None, "ZoneComponentAttributeList"]
-    # NumberOfFlowConnections: Optional[str] = None
-    # Origin: "Point3D"
 
 
 class HVACZoneComponent(HVACComponent):
@@ -300,20 +298,23 @@ class AirHandlingUnit(HVACComponent):
     LineArray: "LineArray"
 
 
-class Pump(HVACComponent): 
+class Pump(HVACComponent):
     pass
-    
+
+
 class Boiler(HVACComponent):
     pass
 
+
 class CoolingTower(HVACComponent):
-    pass    
-    
+    pass
+
 
 class Chiller(HVACComponent):
     WaterCooledCondenser: "WaterCooledCondenser"
     ChillerHRHeatExchanger: "ChillerHRHeatExchanger"
     AbsorptionChillerUnit: "AbsorptionChillerUnit"
+
 
 class WaterCooledCondenser(BaseModel):
     ImageRectangle: "ImageRectangle"
@@ -324,6 +325,7 @@ class WaterCooledCondenser(BaseModel):
     WaterInConnectionCoordinate: "Point3D"
     WaterOutConnectionCoordinate: "Point3D"
 
+
 class ChillerHRHeatExchanger(BaseModel):
     ImageRectangle: "ImageRectangle"
     ComponentType: int
@@ -332,10 +334,11 @@ class ChillerHRHeatExchanger(BaseModel):
     WaterInConnectionCoordinate: "Point3D"
     WaterOutConnectionCoordinate: "Point3D"
 
+
 class AbsorptionChillerUnit(BaseModel):
     ImageRectangle: "ImageRectangle"
     ComponentType: int
-    #AbsorptionChillerGeneratorHeatExchanger: "AbsorptionChillerGeneratorHeatExchanger"
+    # AbsorptionChillerGeneratorHeatExchanger: "AbsorptionChillerGeneratorHeatExchanger"
 
 
 class HVACConnections(BaseModel):
