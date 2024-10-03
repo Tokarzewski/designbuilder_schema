@@ -232,7 +232,7 @@ class HVACZoneGroup(BaseModel):
     Width: float
     Height: float
     Origin: "Point3D"
-    BuildingZoneHandleList: "BuildingZoneHandle"
+    BuildingZoneHandleList:  Union[None,"BuildingZoneHandle"]
     ZoneElementList: "ZoneElementList"
     ZoneGroupAttributes: "Attribute"
 
