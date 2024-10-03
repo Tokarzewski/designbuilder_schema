@@ -9,6 +9,7 @@ from typing import Union, Optional
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import *
+from designbuilder_schema.tables import Tables
 
 
 class DesignBuilderSchema(BaseModel):
@@ -58,17 +59,6 @@ class Attribute(BaseModel):
     text: str = Field(alias="#text", default=None)
 
 
-class Tables(BaseModel):
-    Table: list["Table"]
-
-
-class Table(BaseModel):
-    name: str = Field(alias="@name")
-    numberOfFields: int = Field(alias="@numberOfFields")
-    Category: Union[str, list, None] = Field(default=None)
-    FieldName: list[str]
-
-
 class AssemblyLibrary(BaseModel):
     assemblyHandle: int = Field(alias="@assemblyHandle")
     Assembly: Union["Assembly", list["Assembly"]]
@@ -115,7 +105,7 @@ class Surface(BaseModel):
     adjacentPartitionHandle: int = Field(alias="@adjacentPartitionHandle")
     thickness: float = Field(alias="@thickness")
     ObjectIDs: "ObjectIDs"
-    VertexIndices: str
+    VertexIndices: str #vertex indexes of parent body
     HoleIndices: Union[str, None]
     Openings: Union["Openings", None]
     Adjacencies: Union["Adjacencies", None]
