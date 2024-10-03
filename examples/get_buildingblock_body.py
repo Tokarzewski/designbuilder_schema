@@ -7,7 +7,7 @@ db_json = load_and_validate(dbjson_filepath)
 site = db_json.Site
 building = site.Buildings.Building
 building_blocks = building.BuildingBlocks
-body = building_blocks.BuildingBlock.ProfileBody.Body
+body = building_blocks.BuildingBlock.Zones.Zone.Body
 
-print(db_json.version)
-print(body)
+#print(db_json.version)
+print(body.volume)
