@@ -14,6 +14,6 @@ db_json = DBJSON(
 db_schema = DesignBuilderSchema(dbJSON=db_json)
 db_schema_json = db_schema.model_dump(by_alias=True)
 
-save_data_to_file(json.dumps(db_schema_json, indent=4), "examples/pydantic.json")
+save_data_to_file(json.dumps(db_schema_json, indent=4), "examples/new_file_using_pydantic.json")
 
-json_to_xml("examples/pydantic.json")
+json_to_xml("examples/new_file_using_pydantic.json")
