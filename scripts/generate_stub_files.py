@@ -23,7 +23,8 @@ def generate_stub(table: Table) -> str:
 with open("designbuilder_schema/tables.pyi", "w") as f1:
     with open("out/designbuilder_schema/tables.pyi") as f2:
         f1.write(f2.read())
-    
+        f1.write("\n")
+        
     for table in tables.Table:
         f1.write(generate_stub(table))
     
