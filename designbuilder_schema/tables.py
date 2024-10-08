@@ -1,26 +1,11 @@
-from pydantic import Field, field_validator, PrivateAttr
-from typing import Union, List
+from pydantic import Field, field_validator
+from typing import Union, Any
 from designbuilder_schema.base import BaseModel
 import pandas as pd
 
+    
 class Tables(BaseModel):
-    Table: list # Union[List["Tables"], List["TableOfTables"]]
-
-    @field_validator("Table")
-    def map_to_specific_class(cls, tables):
-        """XYZ: This is the only method I know for recasting Table
-           TODO: Find a different method for recasting so that the 
-           Table __getattr__ is still accessible"""
-        mapped_tables = []
-        for table in tables:
-            #match table.get("@name"):
-                #case "TableOfTables":
-                #    mapped_tables.append(TableOfTables(**table))
-                #case "EditFormats":
-                #    mapped_tables.append(EditFormats(**table))
-                #case _:
-            mapped_tables.append(Table(**table))
-        return mapped_tables
+    Table: list["Table"]
 
     @staticmethod
     def get_table_by_name(self, name: str) -> "Table":
@@ -28,50 +13,74 @@ class Tables(BaseModel):
         index = table_names[name]
         return self.Table[index]
 
+
+class TableItem(BaseModel):
+    FieldName: list[str]
+    Row: list[Any] = None
+
+    def __getattr__(self, name):
+        if name in self.FieldName:
+            i = self.FieldName.index(name)
+            return self.Row[i]
+        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+    
+    def __setattr__(self, name, value):
+        if name in self.__dict__:
+            super().__setattr__(name, value)
+        elif name in self.FieldName:
+            index = self.FieldName.index(name)
+            self.Row[index] = value
+        else:
+            raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+
 class Table(BaseModel):
     name: str = Field(alias="@name")
     numberOfFields: int = Field(alias="@numberOfFields")
-    Category: Union[str, list, None] = Field(default=None)
+    Category: Union[str, list, None] = None
     FieldName: list[str]
-    Row: list[str] = None
-
-    def __init__(self, **data):
-        super().__init__(**data)
-        for field in self.FieldName:
-            self.__annotations__[field] = List[str]
-
-    @property
-    def __class__(self):
-        # This is a trick to make the IDE recognize dynamic attributes
-        class _DynamicTable(type(self)):
-            pass
-        for field in self.FieldName:
-            setattr(_DynamicTable, field, property(lambda self, f=field: self.__getattr__(f)))
-        return _DynamicTable
+    Row: list[Any] = None
 
     @field_validator('Row', mode="before")
-    def ensure_row_list(cls, v):
-        if isinstance(v, str):
-            return [v]
-        return v
-
-    def to_dataframe(self) -> pd.DataFrame:
+    def parsed_list(cls, value):
         def parse_row(row: str) -> list:
             parts = row.split(' #')
             return [parts[0].lstrip('#')] + parts[1:]
 
-        processed_rows = [parse_row(row) for row in self.Row]
-        return pd.DataFrame(processed_rows, columns=self.FieldName)
+        if isinstance(value, str):
+            return [parse_row(value)]
+        else: 
+            return [parse_row(row) for row in value]
+    
+    def __getitem__(self, index):
+        if index >= len(self.Row):
+            raise IndexError("Table index out of range")
+        return TableItem(FieldName=self.FieldName, Row=self.Row[index])
+
+    def __getattr__(self, name):
+        if name in self.FieldName:
+            field_index = self.FieldName.index(name)
+            return [row[field_index] for row in self.Row]
+        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+    
+    def __setattr__(self, name, value):
+        if name in self.__dict__:
+            super().__setattr__(name, value)
+        elif name in self.FieldName:
+            field_index = self.FieldName.index(name)
+            if isinstance(value, list) and len(value) == len(self.Row):
+                for i, row in enumerate(self.Row):
+                    row[field_index] = value[i]
+            else:
+                raise ValueError(f"Value must be a list with {len(self.Row)} elements")
+        else:
+            raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+
+    def to_dataframe(self) -> pd.DataFrame:
+        return pd.DataFrame(self.Row, columns=self.FieldName)
 
     def read_dataframe(self, dataframe: pd.DataFrame) -> None:
-        """Updates the Table instance from a DataFrame."""
         def compose_row(row) -> str:
             return '#' + str(row[0]) + ' #' + ' #'.join(str(item) for item in row[1:])
         
         composed_row = [compose_row(row[1:]) for row in dataframe.itertuples()]
         self.Row = composed_row
-
-    def __getattr__(self, name):
-        if name in self.FieldName:
-            return self.to_dataframe()[name].tolist()
-        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
