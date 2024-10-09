@@ -10,7 +10,6 @@ vertices = building_blocks.BuildingBlock.Zones.Zone.Body.Vertices
 
 first_point = vertices[0]
 
-print(first_point.coordinates())
-first_point.coordinates = [20,21,22]
-print(first_point.coordinates())
-print(vertices)
+print(first_point)
+first_point.coords = [10,0,0]
+print(first_point)

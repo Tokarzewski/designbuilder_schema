@@ -6,7 +6,7 @@ The geometry module of the designbuilder_schema
 
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.id import ObjectIDs
-from typing import List, Union, Any
+from typing import List, Union
 from pydantic import field_validator
 
 
@@ -56,11 +56,12 @@ class Point3D(BaseModel):
     def z(self) -> float:
         return float(self.Point3D.split(';')[2].strip())
     
-    def coordinates(self) -> List[float]:
+    @property
+    def coords(self) -> List[float]:
         return [float(coord) for coord in self.Point3D.split(';')]
 
     def __setattr__(self, name: str, value: Union[float, List[float]]) -> None:
-        if name == 'coordinates':
+        if name == 'coords':
             if isinstance(value, list) and len(value) == 3:
                 self.Point3D = ';'.join(map(str, value))
             else:
@@ -73,13 +74,6 @@ class Point3D(BaseModel):
         else:
             super().__setattr__(name, value)
     
-    def __getattr__(self, name: str) -> Any:
-        if name in ['x', 'y', 'z']:
-            return getattr(self, name)
-        elif name == 'coordinates':
-            return self.coordinates()
-        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
-
 class Range(BaseModel):
     """Used only in ImageRectangle to represent rectangle.
     Org - top left corner.
