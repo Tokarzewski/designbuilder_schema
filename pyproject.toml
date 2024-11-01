@@ -10,7 +10,8 @@ authors = [{ name = "Bartlomiej Tokarzewski", email = "bartlomiej.tokarzewski@gm
 dependencies = [
     "pydantic >= 2.7",
     "xmltodict >= 0.13",
-    "fire >= 0.5"
+    "fire >= 0.5",
+    "pandas"
 ]
 
 readme = "README.md"
