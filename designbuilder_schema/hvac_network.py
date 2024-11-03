@@ -50,10 +50,10 @@ class Attribute(BaseModel):
 
 class ImageRectangle(BaseModel):
     ObjectIDs: "ObjectIDs"
-    ImageTextureIndex: str
-    MaskTextureIndex: str
-    SelectedImageTextureIndex: str
-    InactiveImageTextureIndex: str
+    ImageTextureIndex: int
+    MaskTextureIndex: int
+    SelectedImageTextureIndex: int
+    InactiveImageTextureIndex: int
     Textured: str
     Masked: str
     SelectedImage: str
@@ -324,6 +324,7 @@ class WaterCooledCondenser(BaseModel):
     WaterOutConnectionOrientation: int
     WaterInConnectionCoordinate: "Point3D"
     WaterOutConnectionCoordinate: "Point3D"
+    Attributes: "Attributes"
 
 
 class ChillerHRHeatExchanger(BaseModel):
