@@ -65,7 +65,7 @@ class ImageRectangle(BaseModel):
 
 
 class ZoneComponentAttributeList(BaseModel):
-    HVACAttributeList: "HVACAttributeList"
+    HVACAttributeList: Union["HVACAttributeList", list["HVACAttributeList"]]
 
 
 class ZoneElementList(BaseModel):
@@ -73,7 +73,7 @@ class ZoneElementList(BaseModel):
 
 
 class BuildingZoneHandle(BaseModel):
-    BuildingZoneHandle: str
+    BuildingZoneHandle: Union[str, list[str]]
 
 
 class HVACAttributeList(BaseModel):

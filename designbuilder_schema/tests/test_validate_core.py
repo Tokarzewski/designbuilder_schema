@@ -31,7 +31,7 @@ def test_validate_dbjson(filepath):
     assert db_json is not None, f"DBJSON validation failed for {filepath}"
 
 
-# collision in schema HVACNetwork vs DetailedHVACNetwork
+# collision in schema - HVACNetwork vs DetailedHVACNetwork
 
 """
 xml_filepaths = get_filepaths(models_folder, extension=".xml")

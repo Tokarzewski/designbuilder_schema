@@ -73,9 +73,10 @@ class Point3D(BaseModel):
             self.Point3D = ';'.join(coords)
         else:
             super().__setattr__(name, value)
-    
+
+
 class Range(BaseModel):
-    """Used only in ImageRectangle to represent rectangle.
+    """Used only in ImageRectangle to represent rectangle relative position.
     Org - top left corner.
     End -  bottom right corner."""
 

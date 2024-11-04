@@ -91,6 +91,35 @@ class Body(BaseModel):
     VoidPerimeterList: Union["VoidPerimeterList", None]
     Attributes: Union["Attributes", "Attribute", None]
 
+    @property
+    def faces(self):
+        vertices = [vertex.coords for vertex in self.Vertices]
+        faces = []
+        for surface in self.Surfaces.Surface:
+            vertex_indices = surface.VertexIndices
+            if vertex_indices[-1] == ";": #fix - if semicolon is last char then remove it
+                vertex_indices = surface.VertexIndices[0:-1]
+            
+            indices = [int(x) for x in vertex_indices.split('; ')]
+            face = [vertices[i] for i in indices]
+            faces.append(face)
+        
+        return faces
+    
+    @property
+    def openings(self):
+        opening_list = []
+        
+        for surface in self.Surfaces.Surface:
+            if surface.Openings: 
+                openings = surface.Openings.Opening
+                if isinstance(openings, list):
+                    opening_list.extend(openings)
+                else:
+                    opening_list.append(openings)
+        
+        return [[vertex.coords for vertex in o.Polygon.Vertices] for o in opening_list]
+
 
 class Surfaces(BaseModel):
     Surface: list["Surface"]
@@ -113,7 +142,7 @@ class Surface(BaseModel):
 
 
 class Openings(BaseModel):
-    Opening: Union["Opening", list["Opening"], None]
+    Opening: Union[list["Opening"], "Opening"]
 
 
 class Opening(BaseModel):
@@ -135,7 +164,7 @@ class Adjacency(BaseModel):
 
 
 class AdjacencyPolygonList(BaseModel):
-    Polygon: Union["Polygon"]
+    Polygon: Union["Polygon", list["Polygon"]]
 
 
 class Buildings(BaseModel):
@@ -158,7 +187,7 @@ class Building(BaseModel):
     BookmarkBuildings: "BookmarkBuildings"
     Attributes: "Attributes"
 
-
+    
 class BuildingBlocks(BaseModel):
     BuildingBlock: Union["BuildingBlock", list["BuildingBlock"]]
 
@@ -213,6 +242,9 @@ class Zone(BaseModel):
     LabelPosition: "Point3D"
     Polygon: "Polygon"
     InnerSurfaceBody: "InnerSurfaceBody"
+
+    def visualise(self):
+        pass
 
 
 class ProfileBody(BaseModel):
