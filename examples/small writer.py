@@ -6,7 +6,7 @@ from designbuilder_schema.cli import json_to_xml
 db_json = DBJSON(
     name="MadeByPydantic",
     date=datetime.date.today().isoformat(),
-    version="8.0.0.042",
+    version="8.0.0.052",
     objects="all",
     Site=None,
 )
