@@ -92,7 +92,8 @@ class Body(BaseModel):
     Attributes: Union["Attributes", "Attribute", None]
 
     @property
-    def faces(self):
+    def faces(self) -> list[list[float]]:
+        """List of faces where, where each face is a list of x,y,z coordiantes."""
         vertices = [vertex.coords for vertex in self.Vertices]
         faces = []
         for surface in self.Surfaces.Surface:
@@ -107,7 +108,8 @@ class Body(BaseModel):
         return faces
     
     @property
-    def openings(self):
+    def openings(self) -> list[list[float]]:
+        """List of openings where, where each opening is a list of x,y,z coordiantes."""
         opening_list = []
         
         for surface in self.Surfaces.Surface:
