@@ -8,7 +8,7 @@ version = "0.2"
 description = "Python package for processing DesignBuilder's DBXML files"
 authors = [{ name = "Bartlomiej Tokarzewski", email = "bartlomiej.tokarzewski@gmail.com"}]
 dependencies = [
-    "pydantic >= 2.7",
+    "pydantic >= 2.9",
     "xmltodict >= 0.13",
     "fire >= 0.5",
     "pandas"
@@ -41,4 +41,3 @@ exclude = [".git", "__pycache__", "docs", "build", "dist"]
 
 [tool.black]
 line-length = 88
-target-version = ['py312']
