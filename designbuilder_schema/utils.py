@@ -23,7 +23,7 @@ def load_model(filepath: str) -> DBJSON:
         return DBJSON.model_validate(dictionary["dbXML"])
 
 
-def save_data_to_file(dictionary: dict, filepath: str) -> None:
+def save_dict_to_file(dictionary: dict, filepath: str) -> None:
     """Save dictionary to either JSON or XML file format."""
     if filepath.endswith('.json'):
         data = json.dumps(dictionary, indent=4)

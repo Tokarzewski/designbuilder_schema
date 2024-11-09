@@ -38,23 +38,23 @@ class Point3D(BaseModel):
     Point3D: str
     
     @field_validator('Point3D')
-    def parse_point3d(cls, v: str) -> str:
-        parts = v.split(';')
-        if len(parts) != 3:
+    def parse_point3d(cls, point: str) -> str:
+        coordinates = point.split(';')
+        if len(coordinates) != 3:
             raise ValueError("Point3D string must have exactly 3 components separated by ';'")
-        return v
+        return point
 
     @property
     def x(self) -> float:
-        return float(self.Point3D.split(';')[0].strip())
+        return float(self.Point3D.split(';')[0])
 
     @property
     def y(self) -> float:
-        return float(self.Point3D.split(';')[1].strip())
+        return float(self.Point3D.split(';')[1])
 
     @property
     def z(self) -> float:
-        return float(self.Point3D.split(';')[2].strip())
+        return float(self.Point3D.split(';')[2])
     
     @property
     def coords(self) -> List[float]:
