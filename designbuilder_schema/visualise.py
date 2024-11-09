@@ -42,9 +42,8 @@ def display_zones(zones):
     x_coords, y_coords, z_coords = [], [], []
     
     # Plot each zone
-    for zone_idx, zone in enumerate(zones):  # Changed from zones to zone_data
-        # Plot faces (walls, floor, ceiling)
-        faces = zone.get('faces', [])  # Now this will work as zone is a dict
+    for zone_idx, zone in enumerate(zones):
+        faces = zone.get('faces', [])  
         openings = zone.get('openings', [])
         
         if faces:

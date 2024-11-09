@@ -58,8 +58,8 @@ class Table(BaseModel):
 
     def __getattr__(self, name):
         if name in self.FieldName:
-            field_index = self.FieldName.index(name)
-            return [row[field_index] for row in self.Row]
+            fieldname_index = self.FieldName.index(name)
+            return [row[fieldname_index] for row in self.Row]
         raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
     
     def __setattr__(self, name, value):
