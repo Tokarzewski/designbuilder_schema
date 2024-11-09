@@ -1,6 +1,6 @@
 import pandas as pd
 from designbuilder_schema.base import BaseModel as BaseModel
-from pydantic import PrivateAttr as PrivateAttr
+from typing import Any
 
 class Tables(BaseModel):
     Table: list['Table']
@@ -9,7 +9,7 @@ class Tables(BaseModel):
 
 class TableItem(BaseModel):
     FieldName: list[str]
-    Row: list
+    Row: list[Any]
     def __getattr__(self, name): ...
     def __setattr__(self, name, value) -> None: ...
 
@@ -18,8 +18,8 @@ class Table(BaseModel):
     numberOfFields: int
     Category: str | list | None
     FieldName: list[str]
-    Row: list
-    def parsed_list(cls, v): ...
+    Row: list[Any]
+    def parsed_list(cls, value): ...
     def __getitem__(self, index): ...
     def __getattr__(self, name): ...
     def __setattr__(self, name, value) -> None: ...

@@ -14,7 +14,8 @@ def load_file_to_dict(filepath: str) -> dict:
             raise ValueError("Unsupported file format")
 
 
-def load_and_validate(filepath: str) -> DBJSON:
+def load_model(filepath: str) -> DBJSON:
+    """Loads DBJSON model from file and validates at the same time."""
     dictionary = load_file_to_dict(filepath)
     if filepath.endswith(".json"):
         return DBJSON.model_validate(dictionary["dbJSON"])
@@ -22,7 +23,15 @@ def load_and_validate(filepath: str) -> DBJSON:
         return DBJSON.model_validate(dictionary["dbXML"])
 
 
-def save_data_to_file(data: str, filename: str):
-    with open(filename, "w") as f:
+def save_data_to_file(dictionary: dict, filepath: str) -> None:
+    """Save dictionary to either JSON or XML file format."""
+    if filepath.endswith('.json'):
+        data = json.dumps(dictionary, indent=4)
+    elif filepath.endswith('.xml'):
+        dictionary = {'dbXML': dictionary.pop('dbJSON')}
+        data = xmltodict.unparse(dictionary, full_document=True, pretty=True)
+    else:
+        raise ValueError(f"Unsupported file format: {filepath}")
+        
+    with open(filepath, 'w') as f:
         f.write(data)
-    print(f"Text saved to {filename}")

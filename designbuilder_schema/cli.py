@@ -4,24 +4,25 @@ cli.py
 The command line interface of the designbuilder_schema
 """
 
-import os, json
+import json
+from pathlib import Path
 from fire import Fire
-from designbuilder_schema.utils import load_file_to_dict, load_and_validate
+from designbuilder_schema.utils import load_file_to_dict, load_model
 
 
 def get_version(filepath: str) -> str:
     """Return the schema version"""
-    db_dictionary = load_file_to_dict(filepath)
-    if "JSON" in str(db_dictionary.keys()):
-        return db_dictionary["dbJSON"]["@version"]
-    elif "XML" in str(db_dictionary.keys()):
-        return db_dictionary["dbXML"]["@version"]
+    dictionary = load_file_to_dict(filepath)
+    if "JSON" in str(dictionary.keys()):
+        return dictionary["dbJSON"]["@version"]
+    elif "XML" in str(dictionary.keys()):
+        return dictionary["dbXML"]["@version"]
     else:
-        print("Unsupported key", str(db_dictionary.keys()))
+        print("Unsupported key", str(dictionary.keys()))
 
 
-def change_fileformat(filepath: str, new_file_extension: str):
-    return os.path.splitext(filepath)[0] + f".{new_file_extension}"
+def change_fileformat(filepath: str, new_ext: str) -> Path:
+    return Path(filepath).with_suffix(new_ext)
 
 
 def xml_to_json(xml_filepath: str):
@@ -29,7 +30,7 @@ def xml_to_json(xml_filepath: str):
     dictionary = load_file_to_dict(xml_filepath)
     dictionary["dbJSON"] = dictionary.pop("dbXML")
 
-    output_filepath = change_fileformat(xml_filepath, "json")
+    output_filepath = change_fileformat(xml_filepath, ".json")
 
     with open(output_filepath, "w") as f:
         json.dump(dictionary, f, indent=4)
@@ -42,7 +43,7 @@ def json_to_xml(json_filepath: str):
     dictionary = load_file_to_dict(json_filepath)
     dictionary["dbXML"] = dictionary.pop("dbJSON")
 
-    output_filepath = change_fileformat(json_filepath, "xml")
+    output_filepath = change_fileformat(json_filepath, ".xml")
 
     with open(output_filepath, "w") as f:
         xml_data = unparse(dictionary, full_document=True, pretty=True)
@@ -51,7 +52,7 @@ def json_to_xml(json_filepath: str):
 
 def validate_model(filepath: str) -> bool:
     """Check if DBJSON or DBXML file follow the schema"""
-    DBJSON = load_and_validate(filepath)
+    DBJSON = load_model(filepath)
     return f"Validation successful, file saved in version {DBJSON.version}."
 
 

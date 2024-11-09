@@ -1,8 +1,8 @@
 {
     "dbJSON": {
         "@name": "MadeByPydantic",
-        "@date": "2024-09-09",
-        "@version": "8.0.0.042",
+        "@date": "2024-11-09",
+        "@version": "8.0.0.052",
         "@objects": "all",
         "Site": null
     }
