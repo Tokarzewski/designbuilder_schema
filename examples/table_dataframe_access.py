@@ -13,6 +13,6 @@ print(glazing_table.Id[0])
 
 dataframe = glazing_table.to_dataframe()
 dataframe.loc[0, "Id"] = "9"
-glazing_table.read_dataframe(dataframe)
+glazing_table.from_dataframe(dataframe)
 
 print(glazing_table[0].Id)
