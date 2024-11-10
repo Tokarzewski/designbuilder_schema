@@ -12,7 +12,7 @@ from designbuilder_schema.geometry import *
 from designbuilder_schema.tables import Tables
 
 
-class DesignBuilderSchema(BaseModel):
+class DesignBuilder(BaseModel):
     dbJSON: "DBJSON"
 
 
@@ -244,9 +244,6 @@ class Zone(BaseModel):
     LabelPosition: "Point3D"
     Polygon: "Polygon"
     InnerSurfaceBody: "InnerSurfaceBody"
-
-    def visualise(self):
-        pass
 
 
 class ProfileBody(BaseModel):

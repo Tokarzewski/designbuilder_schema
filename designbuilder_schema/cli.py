@@ -8,10 +8,11 @@ import json
 from pathlib import Path
 from fire import Fire
 from designbuilder_schema.utils import load_file_to_dict, load_model
+from xmltodict import unparse
 
 
 def get_version(filepath: str) -> str:
-    """Return the schema version"""
+    """Return the schema version."""
     dictionary = load_file_to_dict(filepath)
     if "JSON" in str(dictionary.keys()):
         return dictionary["dbJSON"]["@version"]
@@ -26,7 +27,7 @@ def change_fileformat(filepath: str, new_ext: str) -> Path:
 
 
 def xml_to_json(xml_filepath: str):
-    """Convert XML file to JSON file"""
+    """Convert XML file to JSON file."""
     dictionary = load_file_to_dict(xml_filepath)
     dictionary["dbJSON"] = dictionary.pop("dbXML")
 
@@ -37,9 +38,7 @@ def xml_to_json(xml_filepath: str):
 
 
 def json_to_xml(json_filepath: str):
-    """Convert JSON file to XML file"""
-    from xmltodict import unparse
-
+    """Convert JSON file to XML file."""
     dictionary = load_file_to_dict(json_filepath)
     dictionary["dbXML"] = dictionary.pop("dbJSON")
 
@@ -51,7 +50,7 @@ def json_to_xml(json_filepath: str):
 
 
 def validate_model(filepath: str) -> bool:
-    """Check if DBJSON or DBXML file follow the schema"""
+    """Check if file follows the schema."""
     DBJSON = load_model(filepath)
     return f"Validation successful, file saved in version {DBJSON.version}."
 

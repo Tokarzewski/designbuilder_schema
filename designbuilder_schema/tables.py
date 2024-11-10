@@ -78,7 +78,7 @@ class Table(BaseModel):
     def to_dataframe(self) -> pd.DataFrame:
         return pd.DataFrame(self.Row, columns=self.FieldName)
 
-    def read_dataframe(self, dataframe: pd.DataFrame) -> None:
+    def from_dataframe(self, dataframe: pd.DataFrame) -> None:
         def compose_row(row) -> str:
             return '#' + str(row[0]) + ' #' + ' #'.join(str(item) for item in row[1:])
         
