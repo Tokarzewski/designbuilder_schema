@@ -11,21 +11,18 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 
-def building_data(building: Building):
+def vis_building(building: Building):
     """Show matplotlib plot for all zones in building."""
     building_blocks = building.BuildingBlocks.BuildingBlock
-    
-    zones = []
-    if isinstance(building_blocks, list):
-        for bb in building_blocks:
-            zones.extend(bb.Zones.Zone)
-    else:
-        zones.extend(building_blocks.Zones.Zone)
-    
-    # list of simplified zones for visualizations
-    zones = [zone_vis_data(zone) for zone in zones]
+    _zones = []
 
-    display_zones(zones)
+    building_blocks = building_blocks if isinstance(building_blocks, list) else [building_blocks]
+
+    for block in building_blocks:
+        zones = block.Zones.Zone
+        _zones.extend(zones if isinstance(zones, list) else [zones])
+
+    display_zones([zone_vis_data(zone) for zone in _zones])
 
 
 def display_zones(zones):
@@ -85,7 +82,7 @@ def display_zones(zones):
     plt.show()
 
 
-def building_block_vis(self: BuildingBlock):
+def vis_building_block(self: BuildingBlock):
     #attributes = {a.key: a.text for a in self.Attributes.Attribute}
     #attributes["Title"]
     return self.ProfileBody.Body.faces 
@@ -103,16 +100,16 @@ def zone_vis_data(zone: Zone):
     return dict
 
 
-def zone_vis(zone: Zone):
+def vis_zone(zone: Zone):
     return
 
 
-def hvac_network_vis(self: HVACNetwork):
+def vis_hvac_network(self: HVACNetwork):
     fig = 0
     return fig
 
 
-def hvac_component_vis(self: HVACComponent):
+def vis_hvac_component(self: HVACComponent):
     attributes = {a.name: a.text for a in self.Attributes.Attribute}
     attributes["Title"]
     fig = 0
@@ -121,9 +118,9 @@ def hvac_component_vis(self: HVACComponent):
 
 def add_visualisation_extention():
     """Extend classes with the visualise methods"""
-    Building.visualise = building_data
-    BuildingBlock.visualise = building_block_vis
-    Zone.visualise = zone_vis
+    Building.visualise = vis_building
+    BuildingBlock.visualise = vis_building_block
+    Zone.visualise = vis_zone
     
-    HVACNetwork.visualise = hvac_network_vis
-    HVACComponent.visualise = hvac_component_vis
+    HVACNetwork.visualise = vis_hvac_network
+    HVACComponent.visualise = vis_hvac_component
