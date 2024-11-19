@@ -1,5 +1,5 @@
 import json, xmltodict
-from designbuilder_schema.core import DBJSON
+from designbuilder_schema.core import DesignBuilder, DBJSON 
 
 
 def load_file_to_dict(filepath: str) -> dict:
@@ -23,7 +23,7 @@ def load_model(filepath: str) -> DBJSON:
         return DBJSON.model_validate(dictionary["dbXML"])
 
 
-def save_dict_to_file(dictionary: dict, filepath: str) -> None:
+def save_dict(dictionary: dict, filepath: str) -> None:
     """Save dictionary to either JSON or XML file format."""
     if filepath.endswith(".json"):
         data = json.dumps(dictionary, indent=4)
@@ -35,3 +35,9 @@ def save_dict_to_file(dictionary: dict, filepath: str) -> None:
 
     with open(filepath, "w") as f:
         f.write(data)
+
+
+def save_model(db_json: DBJSON, filepath: str) -> None: 
+    model = DesignBuilder(dbJSON=db_json)
+    dict = model.model_dump(by_alias=True)
+    save_dict(dict, filepath)
