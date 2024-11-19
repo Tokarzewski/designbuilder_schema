@@ -15,7 +15,3 @@ Python library built on top of Pydantic for reading DBXML files from DesignBuild
 4. Add enums
 5. New example - How to find all objects of class (Point3D, Surface...)?
 6. Include variable type, default, min and max values based on .fmt files
-
-# DesignBuilder bugs
-
-1. dbXML schema has incorrect class names HVACNetwork and DetailedHVACNetwork
