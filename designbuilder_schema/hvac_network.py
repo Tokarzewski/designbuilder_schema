@@ -293,8 +293,8 @@ class AirHandlingUnit(HVACComponent):
     DOASIntakeDamper: "DOASIntakeDamper"
     DOASExhaustDamper: "DOASExhaustDamper"
     MixingDamper: "MixingDamper"
-    ExhaustUnitComponentList: "ExhaustUnitComponentList"
-    IntakeUnitComponentList: "IntakeUnitComponentList"
+    #ExhaustUnitComponentList: "ExhaustUnitComponentList"
+    #IntakeUnitComponentList: "IntakeUnitComponentList"
     LineArray: "LineArray"
 
 

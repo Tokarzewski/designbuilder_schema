@@ -28,8 +28,8 @@ class Site(BaseModel):
     handle: int = Field(alias="@handle")
     count: int = Field(alias="@count")
     Attributes: "SiteAttributes"
-    Tables: "Tables"
-    AssemblyLibrary: "AssemblyLibrary"
+    Tables: Union["Tables", None]
+    AssemblyLibrary: Union["AssemblyLibrary", None]
     Buildings: Union["Buildings", None]
 
 
@@ -319,7 +319,7 @@ class Planes(BaseModel):
 class Plane(BaseModel):
     type: int = Field(alias="@type")
     Polygon: "Polygon"
-    Attributes: "Attributes"
+    #Attributes: "Attributes"
 
 
 class AssemblyInstances(BaseModel):

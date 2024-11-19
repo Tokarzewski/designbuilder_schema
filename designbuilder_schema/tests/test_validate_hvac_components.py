@@ -3,9 +3,10 @@ from designbuilder_schema.hvac_network import HVACComponents
 import pytest
 
 filepaths = [
-        r"C:\GitHub\designbuilder_schema\samples\fragments\DemandSubLoop_HVACComponents.json",
-        r"C:\GitHub\designbuilder_schema\samples\fragments\SupplySubLoop_HVACComponents.json",
-        ]
+    r"C:\GitHub\designbuilder_schema\samples\fragments\DemandSubLoop_HVACComponents.json",
+    r"C:\GitHub\designbuilder_schema\samples\fragments\SupplySubLoop_HVACComponents.json",
+]
+
 
 @pytest.fixture(params=filepaths)
 def json_filepath(request):
