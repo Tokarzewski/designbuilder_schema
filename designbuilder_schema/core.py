@@ -98,28 +98,30 @@ class Body(BaseModel):
         faces = []
         for surface in self.Surfaces.Surface:
             vertex_indices = surface.VertexIndices
-            if vertex_indices[-1] == ";": #fix - if semicolon is last char then remove it
+            if (
+                vertex_indices[-1] == ";"
+            ):  # fix - if semicolon is last char then remove it
                 vertex_indices = surface.VertexIndices[0:-1]
-            
-            indices = [int(x) for x in vertex_indices.split('; ')]
+
+            indices = [int(x) for x in vertex_indices.split("; ")]
             face = [vertices[i] for i in indices]
             faces.append(face)
-        
+
         return faces
-    
+
     @property
     def openings(self) -> list[list[float]]:
         """List of openings where, where each opening is a list of x,y,z coordiantes."""
         opening_list = []
-        
+
         for surface in self.Surfaces.Surface:
-            if surface.Openings: 
+            if surface.Openings:
                 openings = surface.Openings.Opening
                 if isinstance(openings, list):
                     opening_list.extend(openings)
                 else:
                     opening_list.append(openings)
-        
+
         return [[vertex.coords for vertex in o.Polygon.Vertices] for o in opening_list]
 
 
@@ -136,7 +138,7 @@ class Surface(BaseModel):
     adjacentPartitionHandle: int = Field(alias="@adjacentPartitionHandle")
     thickness: float = Field(alias="@thickness")
     ObjectIDs: "ObjectIDs"
-    VertexIndices: str #vertex indexes of parent body
+    VertexIndices: str  # vertex indexes of parent body
     HoleIndices: Union[str, None]
     Openings: Union["Openings", None]
     Adjacencies: Union["Adjacencies", None]
@@ -189,7 +191,10 @@ class Building(BaseModel):
     BookmarkBuildings: "BookmarkBuildings"
     Attributes: "Attributes"
 
-    
+    def visualise():
+        pass
+
+
 class BuildingBlocks(BaseModel):
     BuildingBlock: Union["BuildingBlock", list["BuildingBlock"]]
 

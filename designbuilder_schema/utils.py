@@ -25,13 +25,13 @@ def load_model(filepath: str) -> DBJSON:
 
 def save_dict_to_file(dictionary: dict, filepath: str) -> None:
     """Save dictionary to either JSON or XML file format."""
-    if filepath.endswith('.json'):
+    if filepath.endswith(".json"):
         data = json.dumps(dictionary, indent=4)
-    elif filepath.endswith('.xml'):
-        dictionary = {'dbXML': dictionary.pop('dbJSON')}
+    elif filepath.endswith(".xml"):
+        dictionary = {"dbXML": dictionary.pop("dbJSON")}
         data = xmltodict.unparse(dictionary, full_document=True, pretty=True)
     else:
         raise ValueError(f"Unsupported file format: {filepath}")
-        
-    with open(filepath, 'w') as f:
+
+    with open(filepath, "w") as f:
         f.write(data)
