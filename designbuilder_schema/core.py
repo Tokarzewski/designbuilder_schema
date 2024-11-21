@@ -5,7 +5,7 @@ The core module of the designbuilder_schema
 """
 
 from pydantic import Field
-from typing import Union, Optional, List
+from typing import Union, Optional, List, Literal
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import *
@@ -17,16 +17,16 @@ class DesignBuilder(BaseModel):
 
 
 class DBJSON(BaseModel):
-    name: str = Field(alias="@name")
-    date: str = Field(alias="@date")
-    version: str = Field(alias="@version")
-    objects: str = Field(alias="@objects")
+    name: str
+    date: str
+    version: str
+    objects: str
     Site: Optional["Site"]
 
 
 class Site(BaseModel):
-    handle: int = Field(alias="@handle")
-    count: int = Field(alias="@count")
+    handle: int
+    count: int
     Attributes: "SiteAttributes"
     Tables: Optional["Tables"]
     AssemblyLibrary: Optional["AssemblyLibrary"]
@@ -48,26 +48,26 @@ class Attributes(BaseModel):
 class SiteAttribute(BaseModel):
     """Site Attibute Only"""
 
-    name: str = Field(alias="@name", default=None)
+    name: str = None
     text: str = Field(alias="#text", default=None)
 
 
 class Attribute(BaseModel):
     """Non-Site Attibute"""
 
-    key: str = Field(alias="@key", default=None)
+    key: str = None
     text: str = Field(alias="#text", default=None)
 
 
 class AssemblyLibrary(BaseModel):
-    assemblyHandle: int = Field(alias="@assemblyHandle")
+    assemblyHandle: int 
     Assembly: Union["Assembly", List["Assembly"]]
 
 
 class Assembly(BaseModel):
-    assemblyHandle: int = Field(alias="@assemblyHandle")
-    componentBlockHandle: int = Field(alias="@componentBlockHandle")
-    reference: str = Field(alias="@reference")
+    assemblyHandle: int 
+    componentBlockHandle: int
+    reference: str
     HandlePoint: "Point3D"
     ComponentBlocks: "ComponentBlocks"
     Attributes: "Attributes"
@@ -78,17 +78,17 @@ class ComponentBlocks(BaseModel):
 
 
 class ComponentBlock(BaseModel):
-    type: str = Field(alias="@type")
+    type: str
     Body: "Body"
 
 
 class Body(BaseModel):
-    volume: float = Field(alias="@volume")
-    extrusionHeight: float = Field(alias="@extrusionHeight")
+    volume: float 
+    extrusionHeight: float
     ObjectIDs: "ObjectIDs"
     Vertices: "Vertices"
     Surfaces: "Surfaces"
-    VoidPerimeterList: Union["VoidPerimeterList", None]
+    VoidPerimeterList: Optional["VoidPerimeterList"]
     Attributes: Union["Attributes", "Attribute", None]
 
     @property
@@ -130,13 +130,13 @@ class Surfaces(BaseModel):
 
 
 class Surface(BaseModel):
-    type: str = Field(alias="@type")
-    area: float = Field(alias="@area")
-    alpha: float = Field(alias="@alpha")
-    phi: float = Field(alias="@phi")
-    defaultOpenings: str = Field(alias="@defaultOpenings")
-    adjacentPartitionHandle: int = Field(alias="@adjacentPartitionHandle")
-    thickness: float = Field(alias="@thickness")
+    type: str
+    area: float
+    alpha: float
+    phi: float
+    defaultOpenings: str
+    adjacentPartitionHandle: int
+    thickness: float
     ObjectIDs: "ObjectIDs"
     VertexIndices: str  # vertex indexes of parent body
     HoleIndices: Optional[str]
@@ -150,7 +150,7 @@ class Openings(BaseModel):
 
 
 class Opening(BaseModel):
-    type: str = Field(alias="@type")
+    type: str
     Polygon: "Polygon"
     Attributes: Optional["Attributes"]
     SegmentList: None
@@ -161,8 +161,8 @@ class Adjacencies(BaseModel):
 
 
 class Adjacency(BaseModel):
-    type: str = Field(alias="@type")
-    adjacencyDistance: float = Field(alias="@adjacencyDistance")
+    type: str
+    adjacencyDistance: float
     ObjectIDs: "ObjectIDs"
     AdjacencyPolygonList: "AdjacencyPolygonList"
 
@@ -172,14 +172,14 @@ class AdjacencyPolygonList(BaseModel):
 
 
 class Buildings(BaseModel):
-    numberOfBuildings: int = Field(alias="@numberOfBuildings")
+    numberOfBuildings: int
     Building: Union["Building", List["Building"]]
 
 
 class Building(BaseModel):
-    currentComponentBlockHandle: int = Field(alias="@currentComponentBlockHandle")
-    currentAssemblyInstanceHandle: int = Field(alias="@currentAssemblyInstanceHandle")
-    currentPlaneHandle: int = Field(alias="@currentPlaneHandle")
+    currentComponentBlockHandle: int
+    currentAssemblyInstanceHandle: int
+    currentPlaneHandle: int
     ObjectIDs: "ObjectIDs"
     BuildingBlocks: Optional["BuildingBlocks"]
     ComponentBlocks: Optional["ComponentBlocks"]
@@ -200,12 +200,12 @@ class BuildingBlocks(BaseModel):
 
 
 class BuildingBlock(BaseModel):
-    type: str = Field(alias="@type")
-    height: float = Field(alias="@height")
-    roofSlope: float = Field(alias="@roofSlope")
-    roofOverlap: float = Field(alias="@roofOverlap")
-    roofType: str = Field(alias="@roofType")
-    wallSlope: float = Field(alias="@wallSlope")
+    type: str
+    height: float 
+    roofSlope: float 
+    roofOverlap: float 
+    roofType: str 
+    wallSlope: float 
     ObjectIDs: "ObjectIDs"
     ComponentBlocks: Optional["ComponentBlocks"]
     CFDFans: Optional["CFDFans"]
@@ -225,10 +225,10 @@ class InternalPartitions(BaseModel):
 
 
 class InternalPartition(BaseModel):
-    type: str = Field(alias="@type")
-    height: float = Field(alias="@height")
-    area: float = Field(alias="@area")
-    floatingPartition: bool = Field(alias="@floatingPartition")
+    type: str
+    height: float
+    area: float
+    floatingPartition: bool
     ObjectIDs: "ObjectIDs"
     StartPoint: "Point3D"
     EndPoint: "Point3D"
@@ -239,10 +239,10 @@ class Zones(BaseModel):
 
 
 class Zone(BaseModel):
-    parentZoneHandle: str = Field(alias="@parentZoneHandle")
-    inheritedZoneHandle: str = Field(alias="@inheritedZoneHandle")
-    planExtrusion: str = Field(alias="@planExtrusion")
-    innerSurfaceMode: str = Field(alias="@innerSurfaceMode")
+    parentZoneHandle: str 
+    inheritedZoneHandle: str 
+    planExtrusion: str 
+    innerSurfaceMode: str
     Body: "Body"
     LightSensorOne: "LightSensorOne"
     LightSensorTwo: "LightSensorTwo"
@@ -252,8 +252,8 @@ class Zone(BaseModel):
 
 
 class ProfileBody(BaseModel):
-    elementSlope: float = Field(alias="@elementSlope")
-    roofOverlap: float = Field(alias="@roofOverlap")
+    elementSlope: float 
+    roofOverlap: float
     Body: "Body"
 
 
@@ -266,7 +266,7 @@ class BaseProfileBody(BaseModel):
 
 
 class Polygon(BaseModel):
-    auxiliaryType: str = Field(alias="@auxiliaryType")
+    auxiliaryType: str 
     ObjectIDs: "ObjectIDs"
     Vertices: Optional["Vertices"]
     PolygonHoles: Optional["PolygonHoles"]
@@ -282,12 +282,12 @@ class PolygonHole(BaseModel):
 
 
 class LightSensorOne(BaseModel):
-    index: str = Field(alias="@index")
+    index: str
     Point3D: str
 
 
 class LightSensorTwo(BaseModel):
-    index: str = Field(alias="@index")
+    index: str
     Point3D: str
 
 
@@ -296,7 +296,7 @@ class InnerSurfaceBody(BaseModel):
 
 
 class BookmarkBuildings(BaseModel):
-    numberOfBuildings: int = Field(alias="@numberOfBuildings")
+    numberOfBuildings: int
 
 
 class ConstructionLines(BaseModel):
@@ -317,7 +317,7 @@ class Planes(BaseModel):
 
 
 class Plane(BaseModel):
-    type: int = Field(alias="@type")
+    type: int
     Polygon: "Polygon"
     #Attributes: "Attributes"
 
@@ -327,9 +327,9 @@ class AssemblyInstances(BaseModel):
 
 
 class AssemblyInstance(BaseModel):
-    assemblyHandle: int = Field(alias="@assemblyHandle")
-    reflected: int = Field(alias="@reflected")
-    active: int = Field(alias="@active")
+    assemblyHandle: int
+    reflected: int
+    active: int 
     ObjectIDs: "ObjectIDs"
     AssemblyInstanceTransformationMatrix: "AssemblyInstanceTransformationMatrix"
     Attributes: Optional["Attributes"]

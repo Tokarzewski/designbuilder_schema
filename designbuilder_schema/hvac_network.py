@@ -12,7 +12,7 @@ from designbuilder_schema.id import ObjectIDs
 
 
 class HVACNetwork(BaseModel):
-    handle: int = Field(alias="ObjectHandle")
+    ObjectHandle: int
     ObjectIDs: "ObjectIDs"
     HVACLoops: "HVACLoops"
     HVACZoneGroups: "HVACZoneGroups"
@@ -27,10 +27,10 @@ class HVACZoneGroups(BaseModel):
 
 
 class HVACLoop(BaseModel):
-    currentSubLoopIndex: int = Field(alias="@currentSubLoopIndex")
-    loopType: int = Field(alias="@loopType")
-    plantLoopType: int = Field(alias="@plantLoopType")
-    numberOfFlowNodes: int = Field(alias="@numberOfFlowNodes")
+    currentSubLoopIndex: int 
+    loopType: int
+    plantLoopType: int
+    numberOfFlowNodes: int
     ObjectIDs: "ObjectIDs"
     Origin: "Point3D"
     PlantOperationSchemes: Optional["PlantOperationSchemes"]
@@ -44,7 +44,7 @@ class Attributes(BaseModel):
 
 
 class Attribute(BaseModel):
-    name: str = Field(alias="@name", default=None)
+    name: str = None
     text: str = Field(alias="#text", default=None)
 
 
@@ -77,7 +77,7 @@ class BuildingZoneHandle(BaseModel):
 
 
 class HVACAttributeList(BaseModel):
-    buildingZoneHandle: str = Field(alias="@buildingZoneHandle")
+    buildingZoneHandle: str
     Attributes: "Attributes"
 
 
@@ -154,7 +154,7 @@ class HVACComponents(BaseModel):
 
 
 class HVACComponent(BaseModel):
-    type: str = Field(alias="@type")
+    type: str
     ImageRectangle: "ImageRectangle"
     ConnectingPlantLoopHandle: int
     ConnectingAirLoopHandle: int
@@ -432,7 +432,7 @@ class HeatRecoveryDevice(BaseModel):
 
 
 class AirHandlingUnitHVACComponent(BaseModel):
-    type: str = Field(alias="@type")
+    type: str
     ImageRectangle: "ImageRectangle"
     ConnectingPlantLoopHandle: int
     ConnectingAirLoopHandle: int
