@@ -5,7 +5,7 @@ The hvac network module of the designbuilder_schema
 """
 
 from pydantic import Field, field_validator
-from typing import Union
+from typing import Union, Optional
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import *
 from designbuilder_schema.id import ObjectIDs
@@ -33,7 +33,7 @@ class HVACLoop(BaseModel):
     numberOfFlowNodes: int = Field(alias="@numberOfFlowNodes")
     ObjectIDs: "ObjectIDs"
     Origin: "Point3D"
-    PlantOperationSchemes: Union["PlantOperationSchemes", None]
+    PlantOperationSchemes: Optional["PlantOperationSchemes"]
     DemandSubLoop: "DemandSubLoop"
     SupplySubLoop: "SupplySubLoop"
     Attributes: "Attributes"
@@ -186,7 +186,7 @@ class HVACComponent(BaseModel):
     AirInConnectionCoordinate: "Point3D"
     AirOutConnectionCoordinate: "Point3D"
     Attributes: "Attributes"
-    ZoneComponentAttributeList: Union[None, "ZoneComponentAttributeList"]
+    ZoneComponentAttributeList: Optional["ZoneComponentAttributeList"]
 
 
 class HVACZoneComponent(HVACComponent):
@@ -227,12 +227,12 @@ class HVACZoneGroup(BaseModel):
     AirInConnectionCoordinate: "Point3D"
     AirOutConnectionCoordinate: "Point3D"
     Attributes: "Attributes"
-    ZoneComponentAttributeList: Union[None, "ZoneComponentAttributeList"]
+    ZoneComponentAttributeList: Optional["ZoneComponentAttributeList"]
     ValidZoneGroup: str
     Width: float
     Height: float
     Origin: "Point3D"
-    BuildingZoneHandleList: Union[None, "BuildingZoneHandle"]
+    BuildingZoneHandleList: Optional["BuildingZoneHandle"]
     ZoneElementList: "ZoneElementList"
     ZoneGroupAttributes: "Attribute"
 
@@ -464,7 +464,7 @@ class AirHandlingUnitHVACComponent(BaseModel):
     AirInConnectionCoordinate: "Point3D"
     AirOutConnectionCoordinate: "Point3D"
     Attributes: "Attributes"
-    ZoneComponentAttributeList: Union[None, "ZoneComponentAttributeList"]
+    ZoneComponentAttributeList: Optional["ZoneComponentAttributeList"]
 
 
 class HVACConnectorNode(BaseModel):
