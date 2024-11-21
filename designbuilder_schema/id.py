@@ -5,7 +5,7 @@ from pydantic import Field
 class ObjectIDs(BaseModel):
     handle: int
     buildingHandle: int
-    buildingBlockHandle: int 
+    buildingBlockHandle: int
     zoneHandle: int
     surfaceIndex: int
-    openingIndex: int 
+    openingIndex: int

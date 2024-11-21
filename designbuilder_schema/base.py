@@ -14,6 +14,6 @@ class BaseModel(BaseModel):
     model_config = ConfigDict(
         alias_generator=custom_alias_generator,
         populate_by_name=True,
-        validate_assignment=True, 
-        str_strip_whitespace=True
+        validate_assignment=True,
+        str_strip_whitespace=True,
     )

@@ -60,12 +60,12 @@ class Attribute(BaseModel):
 
 
 class AssemblyLibrary(BaseModel):
-    assemblyHandle: int 
+    assemblyHandle: int
     Assembly: Union["Assembly", List["Assembly"]]
 
 
 class Assembly(BaseModel):
-    assemblyHandle: int 
+    assemblyHandle: int
     componentBlockHandle: int
     reference: str
     HandlePoint: "Point3D"
@@ -83,7 +83,7 @@ class ComponentBlock(BaseModel):
 
 
 class Body(BaseModel):
-    volume: float 
+    volume: float
     extrusionHeight: float
     ObjectIDs: "ObjectIDs"
     Vertices: "Vertices"
@@ -201,11 +201,11 @@ class BuildingBlocks(BaseModel):
 
 class BuildingBlock(BaseModel):
     type: str
-    height: float 
-    roofSlope: float 
-    roofOverlap: float 
-    roofType: str 
-    wallSlope: float 
+    height: float
+    roofSlope: float
+    roofOverlap: float
+    roofType: str
+    wallSlope: float
     ObjectIDs: "ObjectIDs"
     ComponentBlocks: Optional["ComponentBlocks"]
     CFDFans: Optional["CFDFans"]
@@ -239,9 +239,9 @@ class Zones(BaseModel):
 
 
 class Zone(BaseModel):
-    parentZoneHandle: str 
-    inheritedZoneHandle: str 
-    planExtrusion: str 
+    parentZoneHandle: str
+    inheritedZoneHandle: str
+    planExtrusion: str
     innerSurfaceMode: str
     Body: "Body"
     LightSensorOne: "LightSensorOne"
@@ -252,7 +252,7 @@ class Zone(BaseModel):
 
 
 class ProfileBody(BaseModel):
-    elementSlope: float 
+    elementSlope: float
     roofOverlap: float
     Body: "Body"
 
@@ -266,7 +266,7 @@ class BaseProfileBody(BaseModel):
 
 
 class Polygon(BaseModel):
-    auxiliaryType: str 
+    auxiliaryType: str
     ObjectIDs: "ObjectIDs"
     Vertices: Optional["Vertices"]
     PolygonHoles: Optional["PolygonHoles"]
@@ -319,7 +319,7 @@ class Planes(BaseModel):
 class Plane(BaseModel):
     type: int
     Polygon: "Polygon"
-    #Attributes: "Attributes"
+    # Attributes: "Attributes"
 
 
 class AssemblyInstances(BaseModel):
@@ -329,7 +329,7 @@ class AssemblyInstances(BaseModel):
 class AssemblyInstance(BaseModel):
     assemblyHandle: int
     reflected: int
-    active: int 
+    active: int
     ObjectIDs: "ObjectIDs"
     AssemblyInstanceTransformationMatrix: "AssemblyInstanceTransformationMatrix"
     Attributes: Optional["Attributes"]

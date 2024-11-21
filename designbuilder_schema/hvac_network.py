@@ -27,7 +27,7 @@ class HVACZoneGroups(BaseModel):
 
 
 class HVACLoop(BaseModel):
-    currentSubLoopIndex: int 
+    currentSubLoopIndex: int
     loopType: int
     plantLoopType: int
     numberOfFlowNodes: int
@@ -293,8 +293,8 @@ class AirHandlingUnit(HVACComponent):
     DOASIntakeDamper: "DOASIntakeDamper"
     DOASExhaustDamper: "DOASExhaustDamper"
     MixingDamper: "MixingDamper"
-    #ExhaustUnitComponentList: "ExhaustUnitComponentList"
-    #IntakeUnitComponentList: "IntakeUnitComponentList"
+    # ExhaustUnitComponentList: "ExhaustUnitComponentList"
+    # IntakeUnitComponentList: "IntakeUnitComponentList"
     LineArray: "LineArray"
 
 
