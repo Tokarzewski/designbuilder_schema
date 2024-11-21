@@ -1,0 +1,23 @@
+{
+    "dbJSON": {
+        "@name": "MadeByPydantic",
+        "@date": "2024-11-22",
+        "@version": "8.0.0.054",
+        "@objects": "all",
+        "Site": {
+            "@handle": 1,
+            "@count": 1,
+            "Attributes": {
+                "Attribute": [
+                    {
+                        "@name": "Version",
+                        "#text": "8.0.0.054"
+                    }
+                ]
+            },
+            "Tables": null,
+            "AssemblyLibrary": null,
+            "Buildings": null
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import json, xmltodict
-from designbuilder_schema.core import DesignBuilder, DBJSON 
+from designbuilder_schema.core import DBJSON
 
 
 def load_file_to_dict(filepath: str) -> dict:
@@ -28,7 +28,7 @@ def save_dict(dictionary: dict, filepath: str) -> None:
     if filepath.endswith(".json"):
         data = json.dumps(dictionary, indent=4)
     elif filepath.endswith(".xml"):
-        dictionary = {"dbXML": dictionary.pop("dbJSON")}
+        dictionary = {"dbXML": dictionary["dbJSON"]}
         data = xmltodict.unparse(dictionary, full_document=True, pretty=True)
     else:
         raise ValueError(f"Unsupported file format: {filepath}")
@@ -37,7 +37,6 @@ def save_dict(dictionary: dict, filepath: str) -> None:
         f.write(data)
 
 
-def save_model(db_json: DBJSON, filepath: str) -> None: 
-    model = DesignBuilder(dbJSON=db_json)
-    dict = model.model_dump(by_alias=True)
-    save_dict(dict, filepath)
+def save_model(db_json: DBJSON, filepath: str) -> None:
+    db_json = db_json.model_dump(mode="json", by_alias=True)
+    save_dict({"dbJSON": db_json}, filepath)
