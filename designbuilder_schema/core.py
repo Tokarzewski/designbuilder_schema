@@ -12,10 +12,6 @@ from designbuilder_schema.geometry import *
 from designbuilder_schema.tables import Tables
 
 
-class DesignBuilder(BaseModel):
-    dbJSON: "DBJSON"
-
-
 class DBJSON(BaseModel):
     name: str
     date: str

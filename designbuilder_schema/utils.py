@@ -9,7 +9,7 @@ def load_file_to_dict(filepath: str) -> dict:
         if filepath.endswith(".json"):
             return json.loads(file_content)
         elif filepath.endswith(".xml"):
-            return xmltodict.parse(xml_input=file_content)
+            return xmltodict.parse(file_content)
         else:
             raise ValueError("Unsupported file format")
 

@@ -34,4 +34,6 @@ with open("designbuilder_schema/tables.pyi", "w") as f1:
                  
     for table in tables.Table:
         f1.write(generate_stub(table))
-    
+
+
+# TODO remove out folder with all contents
