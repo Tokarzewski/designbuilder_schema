@@ -5,16 +5,16 @@ The core module of the designbuilder_schema
 """
 
 from pydantic import Field
-from typing import Union, Optional, List, Literal
+from typing import Union, Optional, List
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import *
 from designbuilder_schema.tables import Tables
-
+import datetime
 
 class DBJSON(BaseModel):
     name: str
-    date: str
+    date: datetime.date
     version: str
     objects: str
     Site: Optional["Site"]
