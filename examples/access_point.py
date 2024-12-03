@@ -1,6 +1,6 @@
 from designbuilder_schema.utils import load_model
 
-dbjson_filepath = r"C:\GitHub\designbuilder_schema\samples\models\DetailedHVAC.json"
+dbjson_filepath = r"C:\GitHub\designbuilder_schema\samples\models\DetailedHVAC.xml"
 db_json = load_model(dbjson_filepath)
 
 site = db_json.Site

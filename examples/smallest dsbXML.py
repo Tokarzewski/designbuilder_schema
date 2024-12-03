@@ -1,8 +1,8 @@
-from designbuilder_schema.core import DBJSON, Site, SiteAttributes, SiteAttribute
+from designbuilder_schema.core import DSBJSON, Site, SiteAttributes, SiteAttribute
 from designbuilder_schema.utils import save_model
 import datetime
 
-version = "8.0.0.054"
+version = "8.0.0.057"
 
 version_site_attribute = SiteAttribute(name="Version", text=version)
 
@@ -17,12 +17,13 @@ site = Site(
     Buildings=None,
 )
 
-db_json = DBJSON(
+db_json = DSBJSON(
     name="MadeByPydantic",
     date=datetime.date.today().isoformat(),
-    version="8.0.0.054",
+    version=version,
     objects="all",
     Site=site,
 )
 
 save_model(db_json, "examples/MadeByPydantic.xml")
+save_model(db_json, "examples/MadeByPydantic.json")
