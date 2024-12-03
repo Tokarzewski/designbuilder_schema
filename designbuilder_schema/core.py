@@ -124,7 +124,7 @@ class Body(BaseModel):
 
 
 class Surfaces(BaseModel):
-    Surface: List["Surface"] 
+    Surface: List["Surface"]
 
 
 class Surface(BaseModel):
@@ -138,7 +138,7 @@ class Surface(BaseModel):
     ObjectIDs: "ObjectIDs"
     VertexIndices: str  # vertex indexes of parent body
     HoleIndices: Optional[str]
-    Openings: Optional["Openings"] 
+    Openings: Optional["Openings"]
     Adjacencies: Optional["Adjacencies"]
     Attributes: Union["Attributes", "Attribute", None]
 
@@ -246,7 +246,7 @@ class Zone(BaseModel):
     LightSensorTwo: "LightSensorTwo"
     LabelPosition: "Point3D"
     Polygon: Union["Polygon", None]
-    InnerSurfaceBody: Union["InnerSurfaceBody", None] 
+    InnerSurfaceBody: Union["InnerSurfaceBody", None]
 
 
 class ProfileBody(BaseModel):

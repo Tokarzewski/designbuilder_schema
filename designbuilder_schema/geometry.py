@@ -25,20 +25,20 @@ class Vertices(BaseModel):
             else:
                 raise ValueError(f"Unexpected type for Point3D: {type(vertex)}")
         return result
-    
-    @field_serializer('Point3D')
+
+    @field_serializer("Point3D")
     def serialize_vertices(self, vertices: List["Point3D"]) -> List[str]:
         return [vertex.Point3D for vertex in vertices]
 
     def __getitem__(self, index: int) -> "Point3D":
         return self.Point3D[index]
-    
+
     def __setitem__(self, index: int, value: str) -> None:
         try:
             self.Point3D[index] = value
         except IndexError as e:
             raise ValueError(f"Invalid index {index} for Vertices.Point3D") from e
-    
+
     def __iter__(self):
         return iter(self.Point3D)
 
@@ -76,8 +76,8 @@ class Point3D(BaseModel):
             else:
                 raise ValueError("Coordinates must be a list of 3 numbers")
         elif name in ["x", "y", "z"]:
-            coords = self.Point3D.split(";")
             index = {"x": 0, "y": 1, "z": 2}[name]
+            coords = self.Point3D.split(";")
             coords[index] = str(value)
             self.Point3D = ";".join(coords)
         else:

@@ -41,7 +41,7 @@ def display_zones(zones):
 
     # Plot each zone
     for zone_idx, zone in enumerate(zones):
-        
+
         faces = zone["faces"]
         if faces:
             face_collection = Poly3DCollection(faces, alpha=0.3)
