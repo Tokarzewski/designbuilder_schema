@@ -4,15 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "designbuilder_schema"
-version = "0.2"
+version = "0.3"
 description = "Python package for processing DesignBuilder's DBXML files"
-authors = [{ name = "Bartlomiej Tokarzewski", email = "bartlomiej.tokarzewski@gmail.com"}]
-dependencies = [
-    "pydantic >= 2.9",
-    "xmltodict >= 0.13",
-    "fire >= 0.5",
-    "pandas"
+authors = [
+    { name = "Bartlomiej Tokarzewski", email = "bartlomiej.tokarzewski@gmail.com" },
 ]
+dependencies = ["pydantic", "xmltodict", "fire", "pandas"]
 
 readme = "README.md"
 #license = { file = "LICENSE" }
@@ -23,7 +20,6 @@ Homepage = "https://github.com/tokarzewski/designbuilder_schema"
 
 [tool.setuptools]
 packages = ["designbuilder_schema"]
-
 
 [project.optional-dependencies]
 dev = ["pytest", "black", "mypy"]
