@@ -5,7 +5,6 @@ Extension module that adds visualization capabilities
 """
 
 from designbuilder_schema.core import Building, BuildingBlock, Zone
-from designbuilder_schema.hvac_network import HVACNetwork, HVACComponent
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -42,9 +41,8 @@ def display_zones(zones):
 
     # Plot each zone
     for zone_idx, zone in enumerate(zones):
-        faces = zone.get("faces", [])
-        openings = zone.get("openings", [])
-
+        
+        faces = zone["faces"]
         if faces:
             face_collection = Poly3DCollection(faces, alpha=0.3)
             face_collection.set_facecolor(colors[zone_idx])
@@ -53,12 +51,12 @@ def display_zones(zones):
 
             # Collect coordinates for bounds
             for face in faces:
-                x_coords.extend([v[0] for v in face])
-                y_coords.extend([v[1] for v in face])
-                z_coords.extend([v[2] for v in face])
+                x, y, z = zip(*face)
+                x_coords.extend(x)
+                y_coords.extend(y)
+                z_coords.extend(z)
 
-        # Plot openings (windows, doors) if they exist
-        openings = zone.get("openings", [])
+        openings = zone["openings"]
         if openings:
             opening_collection = Poly3DCollection(openings, alpha=0.5)
             opening_collection.set_facecolor("lightblue")
@@ -99,27 +97,7 @@ def zone_vis_data(zone: Zone):
     return dict
 
 
-def vis_zone(zone: Zone):
-    return
-
-
-def vis_hvac_network(self: HVACNetwork):
-    fig = 0
-    return fig
-
-
-def vis_hvac_component(self: HVACComponent):
-    attributes = {a.name: a.text for a in self.Attributes.Attribute}
-    attributes["Title"]
-    fig = 0
-    return fig
-
-
 def add_visualisation_extention():
     """Extend classes with the visualise methods"""
     Building.visualise = vis_building
     BuildingBlock.visualise = vis_building_block
-    Zone.visualise = vis_zone
-
-    HVACNetwork.visualise = vis_hvac_network
-    HVACComponent.visualise = vis_hvac_component
