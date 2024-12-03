@@ -1,5 +1,5 @@
 import json, xmltodict
-from designbuilder_schema.core import DBJSON
+from designbuilder_schema.core import DSBJSON
 
 
 def load_file_to_dict(filepath: str) -> dict:
@@ -14,13 +14,13 @@ def load_file_to_dict(filepath: str) -> dict:
             raise ValueError("Unsupported file format")
 
 
-def load_model(filepath: str) -> DBJSON:
+def load_model(filepath: str) -> DSBJSON:
     """Loads DBJSON model from file and validates at the same time."""
     dictionary = load_file_to_dict(filepath)
     if filepath.endswith(".json"):
-        return DBJSON.model_validate(dictionary["dbJSON"])
+        return DSBJSON.model_validate(dictionary["dsbJSON"])
     elif filepath.endswith(".xml"):
-        return DBJSON.model_validate(dictionary["dbXML"])
+        return DSBJSON.model_validate(dictionary["dsbXML"])
 
 
 def save_dict(dictionary: dict, filepath: str) -> None:
@@ -28,7 +28,7 @@ def save_dict(dictionary: dict, filepath: str) -> None:
     if filepath.endswith(".json"):
         data = json.dumps(dictionary, indent=4)
     elif filepath.endswith(".xml"):
-        dictionary = {"dbXML": dictionary["dbJSON"]}
+        dictionary = {"dsbXML": dictionary["dsbJSON"]}
         data = xmltodict.unparse(dictionary, full_document=True, pretty=True)
     else:
         raise ValueError(f"Unsupported file format: {filepath}")
@@ -37,6 +37,6 @@ def save_dict(dictionary: dict, filepath: str) -> None:
         f.write(data)
 
 
-def save_model(db_json: DBJSON, filepath: str) -> None:
-    db_json = db_json.model_dump(mode="json", by_alias=True)
-    save_dict({"dbJSON": db_json}, filepath)
+def save_model(dsb_json: DSBJSON, filepath: str) -> None:
+    dsb_json = dsb_json.model_dump(mode="json", by_alias=True)
+    save_dict({"dsbJSON": dsb_json}, filepath)

@@ -13,7 +13,7 @@ from designbuilder_schema.tables import Tables
 import datetime
 
 
-class DBJSON(BaseModel):
+class DSBJSON(BaseModel):
     name: str
     date: datetime.date
     version: str
@@ -91,7 +91,8 @@ class Body(BaseModel):
     @property
     def faces(self) -> List[List[float]]:
         """List of faces where, where each face is a list of x,y,z coordiantes."""
-        vertices = [vertex.coords for vertex in self.Vertices]
+
+        vertices = [v.coords for v in self.Vertices]
         faces = []
         for surface in self.Surfaces.Surface:
             vertex_indices = surface.VertexIndices
@@ -100,7 +101,7 @@ class Body(BaseModel):
             ):  # fix - if semicolon is last char then remove it
                 vertex_indices = surface.VertexIndices[0:-1]
 
-            indices = [int(x) for x in vertex_indices.split("; ")]
+            indices = [int(x) for x in vertex_indices.split(";")]
             face = [vertices[i] for i in indices]
             faces.append(face)
 
@@ -119,11 +120,11 @@ class Body(BaseModel):
                 else:
                     opening_List.append(openings)
 
-        return [[vertex.coords for vertex in o.Polygon.Vertices] for o in opening_List]
+        return [[v.coords for v in o.Polygon.Vertices] for o in opening_List]
 
 
 class Surfaces(BaseModel):
-    Surface: List["Surface"]
+    Surface: List["Surface"] 
 
 
 class Surface(BaseModel):
@@ -137,7 +138,7 @@ class Surface(BaseModel):
     ObjectIDs: "ObjectIDs"
     VertexIndices: str  # vertex indexes of parent body
     HoleIndices: Optional[str]
-    Openings: Optional["Openings"]
+    Openings: Optional["Openings"] 
     Adjacencies: Optional["Adjacencies"]
     Attributes: Union["Attributes", "Attribute", None]
 
@@ -185,7 +186,7 @@ class Building(BaseModel):
     ConstructionLines: Optional["ConstructionLines"]
     Planes: Optional["Planes"]
     HVACNetwork: Optional["HVACNetwork"]
-    BookmarkBuildings: "BookmarkBuildings"
+    BookmarkBuildings: Optional["BookmarkBuildings"]
     Attributes: "Attributes"
 
     def visualise():
@@ -211,9 +212,9 @@ class BuildingBlock(BaseModel):
     InternalPartitions: Optional["InternalPartitions"]
     VoidBodies: Optional["VoidBodies"]
     Zones: "Zones"
-    ProfileBody: "ProfileBody"
-    Perimeter: "Perimeter"
-    BaseProfileBody: "BaseProfileBody"
+    ProfileBody: Optional["ProfileBody"]
+    Perimeter: Optional["Perimeter"]
+    BaseProfileBody: Optional["BaseProfileBody"]
     Attributes: "Attributes"
 
 
@@ -244,8 +245,8 @@ class Zone(BaseModel):
     LightSensorOne: "LightSensorOne"
     LightSensorTwo: "LightSensorTwo"
     LabelPosition: "Point3D"
-    Polygon: "Polygon"
-    InnerSurfaceBody: "InnerSurfaceBody"
+    Polygon: Union["Polygon", None]
+    InnerSurfaceBody: Union["InnerSurfaceBody", None] 
 
 
 class ProfileBody(BaseModel):
@@ -279,12 +280,12 @@ class PolygonHole(BaseModel):
 
 
 class LightSensorOne(BaseModel):
-    index: str
+    index: int
     Point3D: str
 
 
 class LightSensorTwo(BaseModel):
-    index: str
+    index: int
     Point3D: str
 
 
