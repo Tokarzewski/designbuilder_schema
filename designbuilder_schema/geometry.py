@@ -7,29 +7,38 @@ The geometry module of the designbuilder_schema
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.id import ObjectIDs
 from typing import List, Union
-from pydantic import field_validator
+from pydantic import field_validator, field_serializer
 
 
 class Vertices(BaseModel):
     Point3D: List["Point3D"]
 
     @field_validator("Point3D", mode="before")
-    def parse(cls, v: List[str]) -> List["Point3D"]:
-        if not isinstance(v, list):
+    def parse_vertices(cls, vertices: List[str]) -> List["Point3D"]:
+        if not isinstance(vertices, list):
             raise ValueError("Expected a list of Point3D values")
 
         result = []
-        for item in v:
-            if isinstance(item, str):
-                result.append(Point3D(Point3D=item))
+        for vertex in vertices:
+            if isinstance(vertex, str):
+                result.append(Point3D(Point3D=vertex))
             else:
-                raise ValueError(f"Unexpected type for Point3D: {type(item)}")
-
+                raise ValueError(f"Unexpected type for Point3D: {type(vertex)}")
         return result
+    
+    @field_serializer('Point3D')
+    def serialize_vertices(self, vertices: List["Point3D"]) -> List[str]:
+        return [vertex.Point3D for vertex in vertices]
 
-    def __getitem__(self, index: int) -> "Point3D":
+    def __getitem__(self, index: int) -> "str":
         return self.Point3D[index]
-
+    
+    def __setitem__(self, index: int, value: str) -> None:
+        try:
+            self.Point3D[index] = value
+        except IndexError as e:
+            raise ValueError(f"Invalid index {index} for Vertices.Point3D") from e
+    
     def __iter__(self):
         return iter(self.Point3D)
 
@@ -41,9 +50,7 @@ class Point3D(BaseModel):
     def parse_point3d(cls, point: str) -> str:
         coordinates = point.split(";")
         if len(coordinates) != 3:
-            raise ValueError(
-                "Point3D string must have exactly 3 components separated by ';'"
-            )
+            raise ValueError("Point3D str must have 3 floats separated by ;")
         return point
 
     @property
