@@ -30,7 +30,7 @@ class Vertices(BaseModel):
     def serialize_vertices(self, vertices: List["Point3D"]) -> List[str]:
         return [vertex.Point3D for vertex in vertices]
 
-    def __getitem__(self, index: int) -> "str":
+    def __getitem__(self, index: int) -> "Point3D":
         return self.Point3D[index]
     
     def __setitem__(self, index: int, value: str) -> None:

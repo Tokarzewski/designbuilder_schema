@@ -9,5 +9,4 @@ building = site.Buildings.Building
 building_blocks = building.BuildingBlocks
 body = building_blocks.BuildingBlock.Zones.Zone.Body
 
-#print(db_json.version)
 print(body.volume)

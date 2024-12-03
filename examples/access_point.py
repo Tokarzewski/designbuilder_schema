@@ -13,3 +13,6 @@ print(first_point)
 
 first_point.coords = [10,0,0]
 print(first_point)
+
+first_point.z = 20
+print(first_point)
