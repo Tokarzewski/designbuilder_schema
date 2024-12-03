@@ -24,15 +24,15 @@ xml_filepaths = get_filepaths(debug_folder, extension=".xml")
 
 @pytest.mark.parametrize("filepath", json_filepaths)
 def test_validate_dbjson(filepath):
-    db_json = load_model(filepath)
+    dsb_json = load_model(filepath)
 
     # Check if the validation result is not None
-    assert db_json is not None, f"dbJSON validation failed for {filepath}"
+    assert dsb_json is not None, f"dsbJSON validation failed for {filepath}"
 
 
 @pytest.mark.parametrize("filepath", xml_filepaths)
 def test_validate_dbxml(filepath):
-    db_xml = load_model(filepath)
+    dsb_xml = load_model(filepath)
 
     # Check if the validation result is not None
-    assert db_xml is not None, f"dbXML validation failed for {filepath}"
+    assert dsb_xml is not None, f"dsbXML validation failed for {filepath}"
