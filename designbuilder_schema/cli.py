@@ -14,12 +14,12 @@ from xmltodict import unparse
 def get_version(filepath: str) -> str:
     """Return the schema version."""
     dictionary = load_file_to_dict(filepath)
-    if "dbJSON" in str(dictionary.keys()):
-        return dictionary["dbJSON"]["@version"]
-    elif "dbXML" in str(dictionary.keys()):
-        return dictionary["dbXML"]["@version"]
+    if "dsbJSON" in str(dictionary.keys()):
+        return dictionary["dsbJSON"]["@version"]
+    elif "dsbXML" in str(dictionary.keys()):
+        return dictionary["dsbXML"]["@version"]
     else:
-        print("Can't find dbJSON or dbXML in: ", dictionary.keys())
+        print("Can't find dsbJSON or dsbXML in: ", dictionary.keys())
 
 
 def change_fileformat(filepath: str, new_ext: str) -> Path:
@@ -29,7 +29,7 @@ def change_fileformat(filepath: str, new_ext: str) -> Path:
 def xml_to_json(xml_filepath: str):
     """Convert XML file to JSON file."""
     dictionary = load_file_to_dict(xml_filepath)
-    dictionary["dbJSON"] = dictionary.pop("dbXML")
+    dictionary["dsbJSON"] = dictionary.pop("dsbXML")
     json_filepath = change_fileformat(xml_filepath, ".json")
 
     with open(json_filepath, "w") as f:
@@ -39,7 +39,7 @@ def xml_to_json(xml_filepath: str):
 def json_to_xml(json_filepath: str):
     """Convert JSON file to XML file."""
     dictionary = load_file_to_dict(json_filepath)
-    dictionary["dbXML"] = dictionary.pop("dbJSON")
+    dictionary["dsbXML"] = dictionary.pop("dsbJSON")
     xml_filepath = change_fileformat(json_filepath, ".xml")
 
     with open(xml_filepath, "w") as f:
