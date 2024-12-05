@@ -88,40 +88,6 @@ class Body(BaseModel):
     VoidPerimeterList: Optional["VoidPerimeterList"]
     Attributes: Union["Attributes", "Attribute", None]
 
-    @property
-    def faces(self) -> List[List[float]]:
-        """List of faces where, where each face is a list of x,y,z coordiantes."""
-
-        vertices = [v.coords for v in self.Vertices]
-        faces = []
-        for surface in self.Surfaces.Surface:
-            vertex_indices = surface.VertexIndices
-            if (
-                vertex_indices[-1] == ";"
-            ):  # fix - if semicolon is last char then remove it
-                vertex_indices = surface.VertexIndices[0:-1]
-
-            indices = [int(x) for x in vertex_indices.split(";")]
-            face = [vertices[i] for i in indices]
-            faces.append(face)
-
-        return faces
-
-    @property
-    def openings(self) -> List[List[float]]:
-        """List of openings where, where each opening is a list of x,y,z coordiantes."""
-        opening_List = []
-
-        for surface in self.Surfaces.Surface:
-            if surface.Openings:
-                openings = surface.Openings.Opening
-                if isinstance(openings, List):
-                    opening_List.extend(openings)
-                else:
-                    opening_List.append(openings)
-
-        return [[v.coords for v in o.Polygon.Vertices] for o in opening_List]
-
 
 class Surfaces(BaseModel):
     Surface: List["Surface"]
