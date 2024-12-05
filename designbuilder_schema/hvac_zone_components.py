@@ -1,12 +1,10 @@
-from pydantic import Field, field_validator
-from typing import Union, Optional
+from typing import Optional
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import *
-from designbuilder_schema.attributes import NameAttributes, ZoneComponentAttributeList
+from designbuilder_schema.attributes import NameAttribute, ZoneComponentAttributeList
 
 
-class HVACZoneComponent(BaseModel):
-    type: str
+class NoTypeHVACZoneComponent(BaseModel):
     ImageRectangle: "ImageRectangle"
     ConnectingPlantLoopHandle: int
     ConnectingAirLoopHandle: int
@@ -37,20 +35,36 @@ class HVACZoneComponent(BaseModel):
     WaterOutConnectionCoordinate: "Point3D"
     AirInConnectionCoordinate: "Point3D"
     AirOutConnectionCoordinate: "Point3D"
-    Attributes: "NameAttributes"
-    ZoneComponentAttributeList: "ZoneComponentAttributeList"
-    # Width: float
-    # Height: float
-    # ExtractGrille: "ExtractGrille"
-    # Origin: "Origin"
-    # MixingBoxWidth: float
-    # SupplyDiffuser: "SupplyDiffuser"
-    # UnitElementList: "UnitElementList"
-    # OutdoorAirSupply: int
-    # IntakeLouvre: "IntakeLouvre"
-    # MixingBox: "MixingBox"
-    # RefrigerantConnected: int
+    Attributes: Optional["NameAttribute"]
+    ZoneComponentAttributeList: Optional["ZoneComponentAttributeList"]
 
 
-class ZoneExtract(BaseModel):
+class HVACZoneComponent(NoTypeHVACZoneComponent):
+    type: str
+
+
+class ZoneExtract(HVACZoneComponent):
+    Width: float
+    Height: float
+    Origin: "Point3D"
+    ExtractGrille: "ExtractGrille"
+
+
+class ExtractGrille(NoTypeHVACZoneComponent):
+    pass
+
+
+class ZoneADUSingleDuctCAVNoReheat(HVACZoneComponent):
+    Width: float
+    Height: float
+    MixingBoxWidth: float
+    SupplyDiffuser: "SupplyDiffuser"
+    # UnitElementList
+
+
+class SupplyDiffuser(NoTypeHVACZoneComponent):
+    pass
+
+
+class ZoneConvectiveElectricBaseboard(HVACZoneComponent):
     pass

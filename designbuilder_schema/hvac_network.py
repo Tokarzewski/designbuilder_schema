@@ -46,21 +46,19 @@ class ZoneElementList(BaseModel):
     HVACZoneComponent: list
 
     @field_validator("HVACZoneComponent", mode="before")
-    def map_to_specific_class(cls, components):
-        mapped_components = []
+    def recast_components(cls, components):
+        recasted = []
         for component in components:
             match component.get("@type"):
                 case "Zone extract":
-                    mapped_components.append(ZoneExtract(**component))
-                # case "Zone mixer":
-                #    mapped_components.append(ZoneMixer(**component))
+                    recasted.append(ZoneExtract(**component))
+                case "Zone convective electric baseboard":
+                    recasted.append(ZoneConvectiveElectricBaseboard(**component))
+                case "Zone ADU single duct CAV no reheat":
+                    recasted.append(ZoneADUSingleDuctCAVNoReheat(**component))
                 case _:
-                    mapped_components.append(HVACZoneComponent(**component))
-        return mapped_components
-
-
-class BuildingZoneHandle(BaseModel):
-    BuildingZoneHandle: Union[str, list[str]]
+                    recasted.append(HVACZoneComponent(**component))
+        return recasted
 
 
 class PlantOperationSchemes(BaseModel):
@@ -104,35 +102,35 @@ class HVACComponents(BaseModel):
     HVACComponent: list
 
     @field_validator("HVACComponent", mode="before")
-    def map_to_specific_class(cls, components):
-        mapped_components = []
+    def recast_components(cls, components):
+        recasted = []
         for component in components:
             match component.get("@type"):
                 case "Sub-loop node":
-                    mapped_components.append(SubLoopNode(**component))
+                    recasted.append(SubLoopNode(**component))
                 case "Zone mixer":
-                    mapped_components.append(ZoneMixer(**component))
+                    recasted.append(ZoneMixer(**component))
                 case "Zone splitter":
-                    mapped_components.append(ZoneSplitter(**component))
+                    recasted.append(ZoneSplitter(**component))
                 case "Splitter":
-                    mapped_components.append(Splitter(**component))
+                    recasted.append(Splitter(**component))
                 case "Mixer":
-                    mapped_components.append(Mixer(**component))
+                    recasted.append(Mixer(**component))
                 case "Setpoint manager":
-                    mapped_components.append(SetpointManager(**component))
+                    recasted.append(SetpointManager(**component))
                 case "Air handling unit":
-                    mapped_components.append(AirHandlingUnit(**component))
+                    recasted.append(AirHandlingUnit(**component))
                 case "Pump":
-                    mapped_components.append(Pump(**component))
+                    recasted.append(Pump(**component))
                 case "Boiler":
-                    mapped_components.append(Boiler(**component))
+                    recasted.append(Boiler(**component))
                 case "Cooling tower":
-                    mapped_components.append(CoolingTower(**component))
+                    recasted.append(CoolingTower(**component))
                 case "Chiller":
-                    mapped_components.append(Chiller(**component))
+                    recasted.append(Chiller(**component))
                 case _:
-                    mapped_components.append(HVACComponent(**component))
-        return mapped_components
+                    recasted.append(HVACComponent(**component))
+        return recasted
 
 
 class HVACZoneGroup(BaseModel):
@@ -175,6 +173,10 @@ class HVACZoneGroup(BaseModel):
     BuildingZoneHandleList: Optional["BuildingZoneHandle"]
     ZoneElementList: "ZoneElementList"
     ZoneGroupAttributes: "NameAttribute"
+
+
+class BuildingZoneHandle(BaseModel):
+    BuildingZoneHandle: Union[str, list[str]]
 
 
 class HVACConnections(BaseModel):
