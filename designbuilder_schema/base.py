@@ -5,7 +5,7 @@ def custom_alias_generator(attr: str) -> str:
     """Generate alias based on field name and content type:
     - If field starts with lowercase -> add @ prefix
     - If field starts with uppercase -> use as is
-    - Exceptions should be handled with Field(alias=#XYZ)
+    - Exceptions should be handled with Field(alias=...)
     """
     return f"@{attr}" if attr[0].islower() else attr
 

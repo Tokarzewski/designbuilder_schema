@@ -1,7 +1,3 @@
-[build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "designbuilder_schema"
 version = "0.3"
@@ -22,7 +18,7 @@ Homepage = "https://github.com/tokarzewski/designbuilder_schema"
 packages = ["designbuilder_schema"]
 
 [project.optional-dependencies]
-dev = ["pytest", "black", "mypy"]
+dev = ["pytest", "black", "mypy", "xmlschema"]
 
 [tool.pytest.ini_options]
 pythonpath = ["C:/GitHub/designbuilder_schema"]

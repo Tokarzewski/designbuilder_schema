@@ -247,5 +247,4 @@ if __name__ == "__main__":
 # define proper handles to building, buildingblock, zone, surface. 
 # all handles should be unique
 # <Zone parentZoneHandle="10" inheritedZoneHandle="10" planExtrusion="True" innerSurfaceMode="Deflation">
-# changed area, volume, slop floats to be different than 0
-# ProfileBody is the BuildingBlock shape, make sure to use different handles  
+# BaseProfileBody, ProfileBody are the BuildingBlock shapes, make sure to use different handles  
