@@ -1530,3 +1530,8 @@ class OutdoorAirSystemHVACComponent(BaseModel):
     AirOutConnectionCoordinate: "AirOutConnectionCoordinate"
     Attributes: "Attributes"
     ZoneComponentAttributeList: str
+
+
+class PolygonHole(BaseModel):
+    ObjectIDs: "ObjectIDs"
+    Vertices: "Vertices"
