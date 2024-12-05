@@ -4,26 +4,47 @@ visualise.py
 Extension module that adds visualization capabilities
 """
 
-from designbuilder_schema.core import Building, BuildingBlock, Zone
-
+from designbuilder_schema.core import Building, BuildingBlock, Zone, Body
+from typing import List
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 
-def vis_building(building: Building):
-    """Show matplotlib plot for all zones in building."""
-    building_blocks = building.BuildingBlocks.BuildingBlock
-    _zones = []
+def faces(body: Body) -> List[List[float]]:
+    """List of faces where, where each face is a list of x,y,z coordiantes."""
 
-    building_blocks = (
-        building_blocks if isinstance(building_blocks, list) else [building_blocks]
-    )
+    vertices = [v.coords for v in body.Vertices]
+    faces = []
+    for surface in body.Surfaces.Surface:
+        vertex_indices = surface.VertexIndices
+        if (vertex_indices[-1] == ";"):  # remove semicolon if last
+            vertex_indices = surface.VertexIndices[0:-1]
 
-    for block in building_blocks:
-        zones = block.Zones.Zone
-        _zones.extend(zones if isinstance(zones, list) else [zones])
+        indices = [int(x) for x in vertex_indices.split(";")]
+        face = [vertices[i] for i in indices]
+        faces.append(face)
 
-    display_zones([zone_vis_data(zone) for zone in _zones])
+    return faces
+
+
+def openings(body: Body) -> List[List[float]]:
+    """List of openings where, where each opening is a list of x,y,z coordiantes."""
+    opening_List = []
+    for surface in body.Surfaces.Surface:
+        if surface.Openings:
+            openings = surface.Openings.Opening
+            if isinstance(openings, List):
+                opening_List.extend(openings)
+            else:
+                opening_List.append(openings)
+
+    return [[v.coords for v in o.Polygon.Vertices] for o in opening_List]
+
+
+def zone_vis_data(zone: Zone):
+    # attributes = {a.key: a.text for a in self.Attributes.Attribute}
+    # attributes["Title"]
+    return {"faces": faces(zone.Body), "openings": openings(zone.Body)}
 
 
 def display_zones(zones):
@@ -82,22 +103,29 @@ def display_zones(zones):
     plt.show()
 
 
+def vis_building(building: Building):
+    """Show matplotlib plot for all zones in building."""
+    building_blocks = building.BuildingBlocks.BuildingBlock
+    _zones = []
+
+    building_blocks = (
+        building_blocks if isinstance(building_blocks, list) else [building_blocks]
+    )
+
+    for block in building_blocks:
+        zones = block.Zones.Zone
+        _zones.extend(zones if isinstance(zones, list) else [zones])
+
+    display_zones([zone_vis_data(zone) for zone in _zones])
+
+
 def vis_building_block(self: BuildingBlock):
     # attributes = {a.key: a.text for a in self.Attributes.Attribute}
     # attributes["Title"]
     return self.ProfileBody.Body.faces
 
 
-def zone_vis_data(zone: Zone):
-    # attributes = {a.key: a.text for a in self.Attributes.Attribute}
-    # attributes["Title"]
-    faces = zone.Body.faces
-    openings = zone.Body.openings
-    dict = {"faces": faces, "openings": openings}
-    return dict
-
-
 def add_visualisation_extention():
     """Extend classes with the visualise methods"""
     Building.visualise = vis_building
-    BuildingBlock.visualise = vis_building_block
+    #BuildingBlock.visualise = vis_building_block
