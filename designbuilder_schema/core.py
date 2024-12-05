@@ -4,10 +4,11 @@ core.py
 The core module of the designbuilder_schema
 """
 
-from typing import Union, Optional, List, Any
+from typing import Union, Optional, List
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
-from designbuilder_schema.geometry import *
+from designbuilder_schema.id import ObjectIDs
+from designbuilder_schema.geometry import Point3D, Vertices, Line
 from designbuilder_schema.tables import Tables
 from designbuilder_schema.attributes import NameAttributes, KeyAttributes, KeyAttribute
 import datetime

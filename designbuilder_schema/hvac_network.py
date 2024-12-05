@@ -7,11 +7,11 @@ The hvac network module of the designbuilder_schema
 from pydantic import field_validator
 from typing import Union, Optional
 from designbuilder_schema.base import BaseModel
-from designbuilder_schema.geometry import Line
+from designbuilder_schema.geometry import Line, SegmentList
 from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.hvac_components import *
 from designbuilder_schema.hvac_zone_components import *
-from designbuilder_schema.attributes import *
+from designbuilder_schema.attributes import NameAttribute, NameAttributes
 
 
 class HVACNetwork(BaseModel):
