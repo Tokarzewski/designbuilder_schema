@@ -97,3 +97,27 @@ class Line(BaseModel):
     ObjectIDs: "ObjectIDs"
     Begin: "Point3D"
     End: "Point3D"
+
+
+class ImageRectangle(BaseModel):
+    ObjectIDs: "ObjectIDs"
+    ImageTextureIndex: int
+    MaskTextureIndex: int
+    SelectedImageTextureIndex: int
+    InactiveImageTextureIndex: int
+    Textured: str
+    Masked: str
+    SelectedImage: str
+    InactiveImage: str
+    Color: str
+    Active: str
+    Vertices: "Vertices"
+    Range: "Range"
+
+
+class SegmentList(BaseModel):
+    LineArray: "LineArray"
+
+
+class LineArray(BaseModel):
+    Line: Union["Line", list["Line"]]

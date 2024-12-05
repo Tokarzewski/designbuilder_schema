@@ -4,12 +4,12 @@ core.py
 The core module of the designbuilder_schema
 """
 
-from pydantic import Field
-from typing import Union, Optional, List
+from typing import Union, Optional, List, Any
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import *
 from designbuilder_schema.tables import Tables
+from designbuilder_schema.attributes import NameAttributes, KeyAttributes, KeyAttribute
 import datetime
 
 
@@ -24,36 +24,10 @@ class DSBJSON(BaseModel):
 class Site(BaseModel):
     handle: int
     count: int
-    Attributes: "SiteAttributes"
+    Attributes: "NameAttributes"
     Tables: Optional["Tables"]
     AssemblyLibrary: Optional["AssemblyLibrary"]
     Buildings: Optional["Buildings"]
-
-
-class SiteAttributes(BaseModel):
-    """Site Attibutes Only"""
-
-    Attribute: List["SiteAttribute"]
-
-
-class Attributes(BaseModel):
-    """Non-Site Attibutes"""
-
-    Attribute: List["Attribute"]
-
-
-class SiteAttribute(BaseModel):
-    """Site Attibute Only"""
-
-    name: str = None
-    text: str = Field(alias="#text", default=None)
-
-
-class Attribute(BaseModel):
-    """Non-Site Attibute"""
-
-    key: str = None
-    text: str = Field(alias="#text", default=None)
 
 
 class AssemblyLibrary(BaseModel):
@@ -67,7 +41,7 @@ class Assembly(BaseModel):
     reference: str
     HandlePoint: "Point3D"
     ComponentBlocks: "ComponentBlocks"
-    Attributes: "Attributes"
+    Attributes: "KeyAttributes"
 
 
 class ComponentBlocks(BaseModel):
@@ -86,7 +60,7 @@ class Body(BaseModel):
     Vertices: "Vertices"
     Surfaces: "Surfaces"
     VoidPerimeterList: Optional["VoidPerimeterList"]
-    Attributes: Union["Attributes", "Attribute", None]
+    Attributes: Union["KeyAttributes", "KeyAttribute", None]
 
 
 class Surfaces(BaseModel):
@@ -106,7 +80,7 @@ class Surface(BaseModel):
     HoleIndices: Optional[str]
     Openings: Optional["Openings"]
     Adjacencies: Optional["Adjacencies"]
-    Attributes: Union["Attributes", "Attribute", None]
+    Attributes: Union["KeyAttributes", "KeyAttribute", None]
 
 
 class Openings(BaseModel):
@@ -116,8 +90,8 @@ class Openings(BaseModel):
 class Opening(BaseModel):
     type: str
     Polygon: "Polygon"
-    Attributes: Optional["Attributes"]
-    SegmentList: None
+    Attributes: Optional["KeyAttributes"]
+    # SegmentList: Any
 
 
 class Adjacencies(BaseModel):
@@ -153,10 +127,7 @@ class Building(BaseModel):
     Planes: Optional["Planes"]
     HVACNetwork: Optional["HVACNetwork"]
     BookmarkBuildings: Optional["BookmarkBuildings"]
-    Attributes: "Attributes"
-
-    def visualise():
-        pass
+    Attributes: "KeyAttributes"
 
 
 class BuildingBlocks(BaseModel):
@@ -181,7 +152,7 @@ class BuildingBlock(BaseModel):
     ProfileBody: Optional["ProfileBody"]
     Perimeter: Optional["Perimeter"]
     BaseProfileBody: Optional["BaseProfileBody"]
-    Attributes: "Attributes"
+    Attributes: "KeyAttributes"
 
 
 class InternalPartitions(BaseModel):
@@ -211,8 +182,8 @@ class Zone(BaseModel):
     LightSensorOne: "LightSensorOne"
     LightSensorTwo: "LightSensorTwo"
     LabelPosition: "Point3D"
-    Polygon: Union["Polygon", None]
-    InnerSurfaceBody: Union["InnerSurfaceBody", None]
+    Polygon: Optional["Polygon"]
+    InnerSurfaceBody: Optional["InnerSurfaceBody"]
 
 
 class ProfileBody(BaseModel):
@@ -283,7 +254,7 @@ class Planes(BaseModel):
 class Plane(BaseModel):
     type: int
     Polygon: "Polygon"
-    # Attributes: "Attributes"
+    # Attributes: "KeyAttributes"
 
 
 class AssemblyInstances(BaseModel):
@@ -296,7 +267,7 @@ class AssemblyInstance(BaseModel):
     active: int
     ObjectIDs: "ObjectIDs"
     AssemblyInstanceTransformationMatrix: "AssemblyInstanceTransformationMatrix"
-    Attributes: Optional["Attributes"]
+    Attributes: Optional["KeyAttributes"]
 
 
 class AssemblyInstanceTransformationMatrix(BaseModel):
