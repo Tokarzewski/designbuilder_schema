@@ -61,7 +61,7 @@ class Body(BaseModel):
     Vertices: "Vertices"
     Surfaces: "Surfaces"
     VoidPerimeterList: Optional["VoidPerimeterList"]
-    Attributes: Union["KeyAttributes", "KeyAttribute", None]
+    Attributes: Optional["KeyAttribute"]
 
 
 class Surfaces(BaseModel):
@@ -81,7 +81,7 @@ class Surface(BaseModel):
     HoleIndices: Optional[str]
     Openings: Optional["Openings"]
     Adjacencies: Optional["Adjacencies"]
-    Attributes: Union["KeyAttributes", "KeyAttribute", None]
+    Attributes: Optional["KeyAttribute"]
 
 
 class Openings(BaseModel):
@@ -92,7 +92,7 @@ class Opening(BaseModel):
     type: str
     Polygon: "Polygon"
     Attributes: Optional["KeyAttributes"]
-    # SegmentList: Any
+    SegmentList: Optional["SegmentList"]
 
 
 class Adjacencies(BaseModel):
@@ -255,7 +255,6 @@ class Planes(BaseModel):
 class Plane(BaseModel):
     type: int
     Polygon: "Polygon"
-    # Attributes: "KeyAttributes"
 
 
 class AssemblyInstances(BaseModel):
@@ -305,3 +304,43 @@ class CFDFans(BaseModel):
 
 class CFDFan(BaseModel):
     ComponentBlock: "ComponentBlock"
+
+
+class CFDBoundary(BaseModel):
+    type: str
+    Polygon: "Polygon"
+    CFDBoundarySettings: "CFDBoundarySettings"
+    MinimumRefinementRegionPoint: "Point3D"
+    MaximumRefinementRegionPoint: "Point3D"
+    CFDBoundaryComponentList: None
+
+
+class SegmentList(BaseModel):
+    CFDBoundary: "CFDBoundary"
+
+
+class CFDBoundarySettings(BaseModel):
+    Temperature: float
+    FlowRate: float
+    XDirectionDischargeAngle: float
+    YDirectionDischargeAngle: float
+    MultiWayDiffuserDischargeAngle: float
+    TwoWayDiffuserDischargeDirection: int
+    MinimumDischargeVelocity: float
+    ActualDischargeVelocity: float
+    HeatFlux: float
+    Pressure: float
+    PressureType: int
+    MoistureSource: float
+    ContaminantSource: float
+    RelativeHumidity: float
+    NonOrthoElementWidth: float
+    NonOrthoElementHeight: float
+    NonOrthoFaceOffset: float
+    NonOrthoElementXSpacing: float
+    NonOrthoElementYSpacing: float
+    NonOrthoElementXEdgeOffset: float
+    NonOrthoElementYEdgeOffset: float
+    DiffuserElementDimension: float
+    RefinementRegionDistance: float
+    RefinementRegionLevel: int
