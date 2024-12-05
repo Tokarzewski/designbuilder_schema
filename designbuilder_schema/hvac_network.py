@@ -7,7 +7,7 @@ The hvac network module of the designbuilder_schema
 from pydantic import field_validator
 from typing import Union, Optional
 from designbuilder_schema.base import BaseModel
-from designbuilder_schema.geometry import *
+from designbuilder_schema.geometry import Line
 from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.hvac_components import *
 from designbuilder_schema.hvac_zone_components import *
@@ -40,25 +40,6 @@ class HVACLoop(BaseModel):
     DemandSubLoop: "DemandSubLoop"
     SupplySubLoop: "SupplySubLoop"
     Attributes: "NameAttributes"
-
-
-class ZoneElementList(BaseModel):
-    HVACZoneComponent: list
-
-    @field_validator("HVACZoneComponent", mode="before")
-    def recast_components(cls, components):
-        recasted = []
-        for component in components:
-            match component.get("@type"):
-                case "Zone extract":
-                    recasted.append(ZoneExtract(**component))
-                case "Zone convective electric baseboard":
-                    recasted.append(ZoneConvectiveElectricBaseboard(**component))
-                case "Zone ADU single duct CAV no reheat":
-                    recasted.append(ZoneADUSingleDuctCAVNoReheat(**component))
-                case _:
-                    recasted.append(HVACZoneComponent(**component))
-        return recasted
 
 
 class PlantOperationSchemes(BaseModel):
@@ -98,6 +79,43 @@ class SupplySubLoop(BaseModel):
     Attributes: "NameAttributes"
 
 
+class HVACZoneGroup(NoTypeHVACComponent):
+    ValidZoneGroup: str
+    Width: float
+    Height: float
+    Origin: "Point3D"
+    BuildingZoneHandleList: Optional["BuildingZoneHandle"]
+    ZoneElementList: "ZoneElementList"
+    ZoneGroupAttributes: "NameAttribute"
+
+
+class BuildingZoneHandle(BaseModel):
+    BuildingZoneHandle: Union[str, list[str]]
+
+
+class HVACConnections(BaseModel):
+    HVACConnection: Union["HVACConnection", list["HVACConnection"]]
+
+
+class HVACConnection(BaseModel):
+    ObjectIDs: "ObjectIDs"
+    LoopHandle: int
+    SubLoopType: int
+    LoopType: int
+    PlantLoopType: int
+    LoopFlowDirection: int
+    ElementList: "ElementList"
+
+
+class ElementList(BaseModel):
+    HVACConnectionElement: Union["HVACConnectionElement", list["HVACConnectionElement"]]
+
+
+class HVACConnectionElement(BaseModel):
+    Line: "Line"
+    SegmentList: "SegmentList"
+
+
 class HVACComponents(BaseModel):
     HVACComponent: list
 
@@ -133,70 +151,20 @@ class HVACComponents(BaseModel):
         return recasted
 
 
-class HVACZoneGroup(BaseModel):
-    ImageRectangle: "ImageRectangle"
-    ConnectingPlantLoopHandle: str
-    ConnectingAirLoopHandle: str
-    LoopType: str
-    SubLoopType: str
-    PlantLoopType: str
-    AirLoopDuctType: str
-    ComponentType: str
-    Location: str
-    ConnectionOffset: str
-    Editable: str
-    ZoneBranchFlag: str
-    Orientation: str
-    WaterInConnectionOrientation: str
-    WaterOutConnectionOrientation: str
-    AirInConnectionOrientation: str
-    AirOutConnectionOrientation: str
-    WaterInConnection: str
-    WaterOutConnection: str
-    AirInConnection: str
-    AirOutConnection: str
-    WaterInConnected: str
-    WaterOutConnected: str
-    AirInConnected: str
-    AirOutConnected: str
-    FanPlacement: str
-    WaterInConnectionCoordinate: "Point3D"
-    WaterOutConnectionCoordinate: "Point3D"
-    AirInConnectionCoordinate: "Point3D"
-    AirOutConnectionCoordinate: "Point3D"
-    Attributes: "NameAttributes"
-    ZoneComponentAttributeList: Optional["ZoneComponentAttributeList"]
-    ValidZoneGroup: str
-    Width: float
-    Height: float
-    Origin: "Point3D"
-    BuildingZoneHandleList: Optional["BuildingZoneHandle"]
-    ZoneElementList: "ZoneElementList"
-    ZoneGroupAttributes: "NameAttribute"
+class ZoneElementList(BaseModel):
+    HVACZoneComponent: list
 
-
-class BuildingZoneHandle(BaseModel):
-    BuildingZoneHandle: Union[str, list[str]]
-
-
-class HVACConnections(BaseModel):
-    HVACConnection: Union["HVACConnection", list["HVACConnection"]]
-
-
-class HVACConnection(BaseModel):
-    ObjectIDs: "ObjectIDs"
-    LoopHandle: int
-    SubLoopType: int
-    LoopType: int
-    PlantLoopType: int
-    LoopFlowDirection: int
-    ElementList: "ElementList"
-
-
-class ElementList(BaseModel):
-    HVACConnectionElement: Union["HVACConnectionElement", list["HVACConnectionElement"]]
-
-
-class HVACConnectionElement(BaseModel):
-    Line: "Line"
-    SegmentList: "SegmentList"
+    @field_validator("HVACZoneComponent", mode="before")
+    def recast_components(cls, components):
+        recasted = []
+        for component in components:
+            match component.get("@type"):
+                case "Zone extract":
+                    recasted.append(ZoneExtract(**component))
+                case "Zone convective electric baseboard":
+                    recasted.append(ZoneConvectiveElectricBaseboard(**component))
+                case "Zone ADU single duct CAV no reheat":
+                    recasted.append(ZoneADUSingleDuctCAVNoReheat(**component))
+                case _:
+                    recasted.append(HVACComponent(**component))
+        return recasted

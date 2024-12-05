@@ -1,7 +1,13 @@
 from typing import Union, Optional
 from designbuilder_schema.base import BaseModel
-from designbuilder_schema.geometry import *
+from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.attributes import NameAttributes, ZoneComponentAttributeList
+from designbuilder_schema.geometry import (
+    Point3D,
+    ImageRectangle,
+    LineArray,
+    SegmentList,
+)
 
 
 class NoTypeHVACComponent(BaseModel):
@@ -35,7 +41,7 @@ class NoTypeHVACComponent(BaseModel):
     WaterOutConnectionCoordinate: "Point3D"
     AirInConnectionCoordinate: "Point3D"
     AirOutConnectionCoordinate: "Point3D"
-    Attributes: "NameAttributes"
+    Attributes: Optional["NameAttributes"]
     ZoneComponentAttributeList: Optional["ZoneComponentAttributeList"]
 
 

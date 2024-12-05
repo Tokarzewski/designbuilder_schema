@@ -29,20 +29,20 @@ def faces(body: Body) -> List[List[float]]:
 
 def openings(body: Body) -> List[List[float]]:
     """List of openings where, where each opening is a list of x,y,z coordiantes."""
-    opening_List = []
+    opening_list = []
     for surface in body.Surfaces.Surface:
         if surface.Openings:
             openings = surface.Openings.Opening
             if isinstance(openings, List):
-                opening_List.extend(openings)
+                opening_list.extend(openings)
             else:
-                opening_List.append(openings)
+                opening_list.append(openings)
 
-    return [[v.coords for v in o.Polygon.Vertices] for o in opening_List]
+    return [[v.coords for v in o.Polygon.Vertices] for o in opening_list]
 
 
 def zone_geometry(zone: Zone):
-    # attributes = {a.key: a.text for a in self.Attributes.Attribute}
+    # attributes = {a.key: a.text for a in zone.Attributes.Attribute}
     # attributes["Title"]
     body = zone.Body
     return {"faces": faces(body), "openings": openings(body)}
