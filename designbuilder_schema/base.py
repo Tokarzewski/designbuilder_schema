@@ -2,10 +2,10 @@ from pydantic import BaseModel, ConfigDict
 
 
 def custom_alias_generator(attr: str) -> str:
-    """Generate alias based on field name and content type:
-    - If field starts with lowercase -> add @ prefix
-    - If field starts with uppercase -> use as is
-    - Exceptions should be handled with Field(alias=...)
+    """Generate alias based on attribute name:
+    1. Adds '@' prefix to lowercase attr (type -> @type)
+    2. Keeps uppercase attr as-is (Name -> Name)
+    X. For exceptions, use Field(alias='...')
     """
     return f"@{attr}" if attr[0].islower() else attr
 
