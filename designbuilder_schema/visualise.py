@@ -17,7 +17,7 @@ def faces(body: Body) -> List[List[float]]:
     faces = []
     for surface in body.Surfaces.Surface:
         vertex_indices = surface.VertexIndices
-        if (vertex_indices[-1] == ";"):  # remove semicolon if last
+        if vertex_indices[-1] == ";":  # remove semicolon if last
             vertex_indices = surface.VertexIndices[0:-1]
 
         indices = [int(x) for x in vertex_indices.split(";")]
@@ -41,10 +41,18 @@ def openings(body: Body) -> List[List[float]]:
     return [[v.coords for v in o.Polygon.Vertices] for o in opening_List]
 
 
-def zone_vis_data(zone: Zone):
+def zone_geometry(zone: Zone):
     # attributes = {a.key: a.text for a in self.Attributes.Attribute}
     # attributes["Title"]
-    return {"faces": faces(zone.Body), "openings": openings(zone.Body)}
+    body = zone.Body
+    return {"faces": faces(body), "openings": openings(body)}
+
+
+def building_block_geometry(building_block: BuildingBlock):
+    # attributes = {a.key: a.text for a in self.Attributes.Attribute}
+    # attributes["Title"]
+    body = building_block.BaseProfileBody.ProfileBody.Body
+    return {"faces": faces(body), "openings": openings(body)}
 
 
 def display_zones(zones):
@@ -116,16 +124,12 @@ def vis_building(building: Building):
         zones = block.Zones.Zone
         _zones.extend(zones if isinstance(zones, list) else [zones])
 
-    display_zones([zone_vis_data(zone) for zone in _zones])
-
-
-def vis_building_block(self: BuildingBlock):
-    # attributes = {a.key: a.text for a in self.Attributes.Attribute}
-    # attributes["Title"]
-    return self.ProfileBody.Body.faces
+    display_zones([zone_geometry(zone) for zone in _zones])
 
 
 def add_visualisation_extention():
     """Extend classes with the visualise methods"""
     Building.visualise = vis_building
-    #BuildingBlock.visualise = vis_building_block
+    # BuildingBlock.visualise = vis_building_block
+    # Zone.visualise = vis_zone
+    # ...
