@@ -209,3 +209,7 @@ class HeatRecoveryDevice(NoTypeHVACComponent):
 
 class AirHandlingUnitHVACComponent(HVACComponent):
     pass
+
+
+class GenericHeatingCoil(HVACComponent):
+    pass

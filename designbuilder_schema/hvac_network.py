@@ -117,7 +117,7 @@ class HVACConnectionElement(BaseModel):
 
 
 class HVACComponents(BaseModel):
-    HVACComponent: list
+    HVACComponent: List
 
     @field_validator("HVACComponent", mode="before")
     def recast_components(cls, components):
@@ -146,13 +146,15 @@ class HVACComponents(BaseModel):
                     recasted.append(CoolingTower(**component))
                 case "Chiller":
                     recasted.append(Chiller(**component))
+                case "Generic heating coil":
+                    recasted.append(GenericHeatingCoil(**component))
                 case _:
                     recasted.append(HVACComponent(**component))
         return recasted
 
 
 class ZoneElementList(BaseModel):
-    HVACZoneComponent: list
+    HVACZoneComponent: List
 
     @field_validator("HVACZoneComponent", mode="before")
     def recast_components(cls, components):
@@ -165,6 +167,8 @@ class ZoneElementList(BaseModel):
                     recasted.append(ZoneConvectiveElectricBaseboard(**component))
                 case "Zone ADU single duct CAV no reheat":
                     recasted.append(ZoneADUSingleDuctCAVNoReheat(**component))
+                case "Zone ADU single duct VAV reheat":
+                    recasted.append(ZoneADUSingleDuctVAVReheat(**component))
                 case _:
                     recasted.append(HVACComponent(**component))
         return recasted
