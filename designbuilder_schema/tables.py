@@ -1,4 +1,4 @@
-from pydantic import Field, field_validator
+from pydantic import field_validator
 from typing import Union, Any
 from designbuilder_schema.base import BaseModel
 import pandas as pd
@@ -39,8 +39,8 @@ class TableItem(BaseModel):
 
 
 class Table(BaseModel):
-    name: str = Field(alias="@name")
-    numberOfFields: int = Field(alias="@numberOfFields")
+    name: str
+    numberOfFields: int
     Category: Union[str, list, None] = None
     FieldName: list[str]
     Row: list[Any] = None
