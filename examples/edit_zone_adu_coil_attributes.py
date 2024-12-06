@@ -12,7 +12,7 @@ adu = hvac_zone_components[1]
 heating_coil = adu.UnitElementList.HVACComponent[1] # type: GenericHeatingCoil
 hvac_attribute_list = heating_coil.ZoneComponentAttributeList.HVACAttributeList
 
-#print(len(hvac_attribute_list)) #1280
+#print(len(hvac_attribute_list)) #1280 why 1280 and not 801?
 # update all 1280 items
 for list in hvac_attribute_list:
     #print(len(first_hvac_attribute_list)) #101
