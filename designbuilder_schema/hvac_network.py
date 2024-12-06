@@ -5,7 +5,7 @@ The hvac network module of the designbuilder_schema
 """
 
 from pydantic import field_validator
-from typing import Union, Optional
+from typing import Union, Optional, List
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import Line, SegmentList
 from designbuilder_schema.id import ObjectIDs
@@ -22,11 +22,11 @@ class HVACNetwork(BaseModel):
 
 
 class HVACLoops(BaseModel):
-    HVACLoop: Union["HVACLoop", list["HVACLoop"]]
+    HVACLoop: Union["HVACLoop", List["HVACLoop"]]
 
 
 class HVACZoneGroups(BaseModel):
-    HVACZoneGroup: Union["HVACZoneGroup", list["HVACZoneGroup"]]
+    HVACZoneGroup: Union["HVACZoneGroup", List["HVACZoneGroup"]]
 
 
 class HVACLoop(BaseModel):
