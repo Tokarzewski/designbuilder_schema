@@ -8,9 +8,10 @@ import datetime
 
 from designbuilder_schema.core import (
     DSBJSON, Site, Building, Buildings, BuildingBlock, Body, ProfileBody, BaseProfileBody,
-    Zones, Zone, Surface, Opening, Attributes, Attribute, LightSensorOne, LightSensorTwo,
-    SiteAttribute, SiteAttributes, Polygon
+    Zones, Zone, Surface, Opening, LightSensorOne, LightSensorTwo,
+    Polygon
 )
+from designbuilder_schema.attributes import NameAttribute, NameAttributes, KeyAttributes, KeyAttribute
 from designbuilder_schema.geometry import Point3D as DBPoint3D, Vertices
 from designbuilder_schema.utils import save_model
 from designbuilder_schema.id import ObjectIDs
@@ -57,9 +58,9 @@ def convert_door_to_opening(door: Door) -> Opening:
         type="Door",
         area=door.geometry.area if hasattr(door.geometry, 'area') else 0,
         Polygon={"Vertices": {"Point3D": vertices}},
-        Attributes=Attributes(
+        Attributes=KeyAttributes(
             Attribute=[
-                Attribute(key="Name", text=door.identifier)
+                KeyAttribute(key="Name", text=door.identifier)
             ]
         )
     )
@@ -131,9 +132,9 @@ def convert_room_to_building_block(room: Room) -> BuildingBlock:
             Vertices=Vertices(Point3D=vertices),
             Surfaces={"Surface": surfaces},
             VoidPerimeterList=None,
-            Attributes=Attributes(
+            Attributes=KeyAttributes(
                 Attribute=[
-                    Attribute(key="Title", text="Zone 1")
+                    KeyAttribute(key="Title", text="Zone 1")
                 ]
             )
         )
@@ -171,9 +172,9 @@ def convert_room_to_building_block(room: Room) -> BuildingBlock:
         ProfileBody = profile_body,
         Perimeter = None,
         BaseProfileBody = BaseProfileBody(ProfileBody=profile_body),
-        Attributes=Attributes(
+        Attributes=KeyAttributes(
             Attribute=[
-                Attribute(key="Title", text="Block 1")
+                KeyAttribute(key="Title", text="Block 1")
             ]
         )
     )
@@ -202,16 +203,16 @@ def hb_to_dsb(hb_model: Model) -> DSBJSON:
         Planes = None, 
         HVACNetwork = None,
         BookmarkBuildings = None,
-        Attributes=Attributes(
+        Attributes=KeyAttributes(
             Attribute=[
-                Attribute(key="Title", text=hb_model.display_name),
-                Attribute(key="GeometryDataLevel", text="3")
+                KeyAttribute(key="Title", text=hb_model.display_name),
+                KeyAttribute(key="GeometryDataLevel", text="3")
             ]
         )
     )
     version = "8.0.0.057"
-    version_site_attribute = SiteAttribute(name="Version", text=version)
-    site_attributes = SiteAttributes(Attribute=[version_site_attribute])
+    version_site_attribute = NameAttribute(name="Version", text=version)
+    site_attributes = NameAttributes(Attribute=[version_site_attribute])
 
     # Create site with building
     site = Site(
