@@ -1,11 +1,11 @@
 from pydantic import field_validator
-from typing import Union, Any
+from typing import Union, Any, List
 from designbuilder_schema.base import BaseModel
 import pandas as pd
 
 
 class Tables(BaseModel):
-    Table: list["Table"]
+    Table: List["Table"]
 
     @staticmethod
     def get_table_by_name(self, name: str) -> "Table":
@@ -15,8 +15,8 @@ class Tables(BaseModel):
 
 
 class TableItem(BaseModel):
-    FieldName: list[str]
-    Row: list[Any] = None
+    FieldName: List[str]
+    Row: List[Any]
 
     def __getattr__(self, name):
         if name in self.FieldName:
@@ -41,9 +41,9 @@ class TableItem(BaseModel):
 class Table(BaseModel):
     name: str
     numberOfFields: int
-    Category: Union[str, list, None] = None
-    FieldName: list[str]
-    Row: list[Any] = None
+    Category: Union[str, List, None] = None
+    FieldName: List[str]
+    Row: List[Any] = None
 
     @field_validator("Row", mode="before")
     def parsed_list(cls, value):
