@@ -51,7 +51,9 @@ class Table(BaseModel):
             parts = row.split(" #")
             return [parts[0].lstrip("#")] + parts[1:]
 
-        if isinstance(value, str):
+        if value is None:
+            return [None]
+        elif isinstance(value, str):
             return [parse_row(value)]
         else:
             return [parse_row(row) for row in value]
