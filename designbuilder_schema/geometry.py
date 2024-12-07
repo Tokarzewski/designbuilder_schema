@@ -10,39 +10,6 @@ from typing import List, Union
 from pydantic import field_validator, field_serializer
 
 
-class Vertices(BaseModel):
-    Point3D: List["Point3D"]
-
-    @field_validator("Point3D", mode="before")
-    def parse_vertices(cls, vertices: List[str]) -> List["Point3D"]:
-        if not isinstance(vertices, list):
-            raise ValueError("Expected a list of Point3D values")
-
-        result = []
-        for vertex in vertices:
-            if isinstance(vertex, str):
-                result.append(Point3D(Point3D=vertex))
-            else:
-                raise ValueError(f"Unexpected type for Point3D: {type(vertex)}")
-        return result
-
-    @field_serializer("Point3D")
-    def serialize_vertices(self, vertices: List["Point3D"]) -> List[str]:
-        return [vertex.Point3D for vertex in vertices]
-
-    def __getitem__(self, index: int) -> "Point3D":
-        return self.Point3D[index]
-
-    def __setitem__(self, index: int, value: str) -> None:
-        try:
-            self.Point3D[index] = value
-        except IndexError as e:
-            raise ValueError(f"Invalid index {index} for Vertices.Point3D") from e
-
-    def __iter__(self):
-        return iter(self.Point3D)
-
-
 class Point3D(BaseModel):
     Point3D: str
 
@@ -82,6 +49,27 @@ class Point3D(BaseModel):
             self.Point3D = ";".join(coords)
         else:
             super().__setattr__(name, value)
+
+
+class Vertices(BaseModel):
+    Point3D: List["str"]
+
+    def __getitem__(self, index: int) -> "Point3D":
+        return Point3D(Point3D=self.Point3D[index])
+
+    def __setitem__(self, index: int, value: Union[str, "Point3D"]) -> None:
+        try:
+            if isinstance(value, Point3D):
+                self.Point3D[index] = value.Point3D
+            elif isinstance(value, str):
+                self.Point3D[index] = value
+            self.Point3D[index] = value
+        except IndexError as e:
+            raise ValueError(f"Invalid index {index} for Vertices.Point3D") from e
+
+    def __iter__(self):
+        return iter(self.Point3D)
+
 
 
 class Range(BaseModel):
