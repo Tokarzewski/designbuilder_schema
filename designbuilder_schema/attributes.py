@@ -1,6 +1,20 @@
 from designbuilder_schema.base import BaseModel
+
 from typing import List, Union
 from pydantic import Field
+
+
+
+"""
+from pydantic import AliasChoices
+class Attributes(BaseModel):
+    Attribute: Union["Attribute", List["Attribute"]]
+
+
+class Attribute(BaseModel):
+    name: str = Field(default=None, validation_alias=AliasChoices('key', 'name'))
+    text: str = Field(alias="#text", default=None)
+"""
 
 
 class NameAttributes(BaseModel):

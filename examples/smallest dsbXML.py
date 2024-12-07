@@ -1,12 +1,13 @@
-from designbuilder_schema.core import DSBJSON, Site, SiteAttributes, SiteAttribute
+from designbuilder_schema.core import DSBJSON, Site
+from designbuilder_schema.attributes import NameAttributes, NameAttribute
 from designbuilder_schema.utils import save_model
 import datetime
 
 version = "8.0.0.057"
 
-version_site_attribute = SiteAttribute(name="Version", text=version)
+version_site_attribute = NameAttribute(name="Version", text=version)
 
-site_attributes = SiteAttributes(Attribute=[version_site_attribute])
+site_attributes = NameAttributes(Attribute=[version_site_attribute])
 
 site = Site(
     handle=1,
