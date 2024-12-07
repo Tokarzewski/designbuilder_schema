@@ -12,7 +12,7 @@ class NameAttributes(BaseModel):
 class KeyAttributes(BaseModel):
     """Non-Site and Non-HVAC Attibute"""
 
-    Attribute: List["KeyAttribute"]
+    Attribute: Union["KeyAttribute", List["KeyAttribute"]]
 
 
 class NameAttribute(BaseModel):

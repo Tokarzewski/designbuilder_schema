@@ -11,7 +11,7 @@ from designbuilder_schema.geometry import Line, SegmentList
 from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.hvac_components import *
 from designbuilder_schema.hvac_zone_components import *
-from designbuilder_schema.attributes import NameAttribute, NameAttributes
+from designbuilder_schema.attributes import NameAttributes
 
 
 class HVACNetwork(BaseModel):
@@ -86,7 +86,7 @@ class HVACZoneGroup(NoTypeHVACComponent):
     Origin: "Point3D"
     BuildingZoneHandleList: Optional["BuildingZoneHandle"]
     ZoneElementList: "ZoneElementList"
-    ZoneGroupAttributes: "NameAttribute"
+    ZoneGroupAttributes: "NameAttributes"
 
 
 class BuildingZoneHandle(BaseModel):

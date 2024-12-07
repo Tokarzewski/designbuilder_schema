@@ -10,7 +10,7 @@ from designbuilder_schema.base import BaseModel
 from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.geometry import Point3D, Vertices, Line
 from designbuilder_schema.tables import Tables
-from designbuilder_schema.attributes import NameAttributes, KeyAttributes, KeyAttribute
+from designbuilder_schema.attributes import NameAttributes, KeyAttributes
 import datetime
 
 
@@ -61,7 +61,7 @@ class Body(BaseModel):
     Vertices: "Vertices"
     Surfaces: "Surfaces"
     VoidPerimeterList: Optional["VoidPerimeterList"]
-    Attributes: Optional["KeyAttribute"]
+    Attributes: Optional["KeyAttributes"]
 
 
 class Surfaces(BaseModel):
@@ -81,7 +81,7 @@ class Surface(BaseModel):
     HoleIndices: Optional[str]
     Openings: Optional["Openings"]
     Adjacencies: Optional["Adjacencies"]
-    Attributes: Optional["KeyAttribute"]
+    Attributes: Optional["KeyAttributes"]
 
 
 class Openings(BaseModel):
