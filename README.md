@@ -3,9 +3,10 @@ Python library built on top of Pydantic for reading DBXML files from DesignBuild
 
 # requirements
 
+- pandas
 - pydantic
-- xmltodict
 - fire
+- xmltodict
 
 # todo
 
