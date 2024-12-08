@@ -5,6 +5,7 @@ Extension module that adds visualization capabilities
 """
 
 from designbuilder_schema.core import Building, BuildingBlock, Zone, Body
+from designbuilder_schema.geometry import Point3D
 from typing import List
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -13,7 +14,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 def faces(body: Body) -> List[List[float]]:
     """List of faces where, where each face is a list of x,y,z coordiantes."""
 
-    vertices = [v.coords for v in body.Vertices]
+    vertices = [Point3D(Point3D=v).coords for v in body.Vertices]
     faces = []
     for surface in body.Surfaces.Surface:
         vertex_indices = surface.VertexIndices
@@ -38,7 +39,7 @@ def openings(body: Body) -> List[List[float]]:
             else:
                 opening_list.append(openings)
 
-    return [[v.coords for v in o.Polygon.Vertices] for o in opening_list]
+    return [[Point3D(Point3D=v).coords for v in o.Polygon.Vertices] for o in opening_list]
 
 
 def zone_geometry(zone: Zone):
