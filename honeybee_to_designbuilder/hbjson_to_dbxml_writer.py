@@ -20,8 +20,8 @@ from small_honeybee import load_and_validate, Model, Room, Face, Aperture, Door,
 
 
 empty_object_id = ObjectIDs(
-    handle = 0,
-    buildingHandle = 0,
+    handle = -1,
+    buildingHandle = -1,
     buildingBlockHandle = 1,
     zoneHandle = -1,
     surfaceIndex = -1,
@@ -110,7 +110,6 @@ def convert_face_to_surface(face: Face, vertices: list[str]) -> Surface:
 
 def convert_room_to_building_block(room: Room) -> BuildingBlock:
     """Convert a Honeybee Room to a DesignBuilder BuildingBlock."""
-    import itertools
     all_points = {}
     for face in room.faces:
         for point in face.geometry.boundary:
