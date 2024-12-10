@@ -1,4 +1,4 @@
-from pydantic import field_validator
+from pydantic import field_validator, field_serializer
 from typing import Union, Any, List
 from designbuilder_schema.base import BaseModel
 import pandas as pd
@@ -43,10 +43,10 @@ class Table(BaseModel):
     numberOfFields: int
     Category: Union[str, List, None] = None
     FieldName: List[str]
-    Row: List[Any] = None
+    Row: List[List[Any]] = None
 
     @field_validator("Row", mode="before")
-    def parsed_list(cls, value):
+    def parse_rows(cls, value):
         def parse_row(row: str) -> list:
             parts = row.split(" #")
             return [parts[0].lstrip("#")] + parts[1:]
@@ -57,6 +57,13 @@ class Table(BaseModel):
             return [parse_row(value)]
         else:
             return [parse_row(row) for row in value]
+    
+    @field_serializer('Row')
+    def serialize_rows(self, row: List[Any]) -> List[str]:
+        if row is None:
+            return None
+        else:
+            return ["#" + " #".join(str(x) for x in item) for item in row]
 
     def __getitem__(self, index):
         if index >= len(self.Row):
