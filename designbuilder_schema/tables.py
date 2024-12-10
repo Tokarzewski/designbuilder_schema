@@ -100,5 +100,4 @@ class Table(BaseModel):
         def compose_row(row) -> str:
             return "#" + str(row[0]) + " #" + " #".join(str(item) for item in row[1:])
 
-        composed_row = [compose_row(row[1:]) for row in dataframe.itertuples()]
-        self.Row = composed_row
+        self.Row = [compose_row(row[1:]) for row in dataframe.itertuples()]
