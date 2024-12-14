@@ -1,5 +1,6 @@
 import json, xmltodict
 from designbuilder_schema.core import DSBJSON
+from designbuilder_schema.id import set_counter
 
 
 def load_file_to_dict(filepath: str) -> dict:
@@ -16,11 +17,11 @@ def load_file_to_dict(filepath: str) -> dict:
 
 def load_model(filepath: str) -> DSBJSON:
     """Loads DBJSON model from file and validates at the same time."""
-    dictionary = load_file_to_dict(filepath)
-    if filepath.endswith(".json"):
-        return DSBJSON.model_validate(dictionary["dsbJSON"])
-    elif filepath.endswith(".xml"):
-        return DSBJSON.model_validate(dictionary["dsbXML"])
+    dict = load_file_to_dict(filepath)
+    key = "dsbJSON" if filepath.endswith(".json") else "dsbXML"
+    site_handle = int(dict[key]["Site"]["@handle"])
+    set_counter(site_handle)
+    return DSBJSON.model_validate(dict[key])
 
 
 def save_dict(dictionary: dict, filepath: str) -> None:

@@ -4,10 +4,11 @@ core.py
 The core module of the designbuilder_schema
 """
 
-from typing import Union, Optional, List
+from typing import Union, Optional, List, Annotated
+from pydantic import field_serializer, Field
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
-from designbuilder_schema.id import ObjectIDs
+from designbuilder_schema.id import ObjectIDs, current_handle
 from designbuilder_schema.geometry import Point3D, Vertices, Line
 from designbuilder_schema.tables import Tables
 from designbuilder_schema.attributes import NameAttributes, KeyAttributes
@@ -23,12 +24,16 @@ class DSBJSON(BaseModel):
 
 
 class Site(BaseModel):
-    handle: int
     count: int
+    handle: int
     Attributes: "NameAttributes"
     Tables: Optional["Tables"]
     AssemblyLibrary: Optional["AssemblyLibrary"]
     Buildings: Optional["Buildings"]
+
+    @field_serializer("handle")
+    def serialize_handle(self, _) -> int:
+        return current_handle()
 
 
 class AssemblyLibrary(BaseModel):
@@ -57,7 +62,7 @@ class ComponentBlock(BaseModel):
 class Body(BaseModel):
     volume: float
     extrusionHeight: float
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     Vertices: "Vertices"
     Surfaces: "Surfaces"
     VoidPerimeterList: Optional["VoidPerimeterList"]
@@ -76,7 +81,7 @@ class Surface(BaseModel):
     defaultOpenings: str
     adjacentPartitionHandle: int
     thickness: float
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     VertexIndices: str  # vertex indexes of parent body
     HoleIndices: Optional[str]
     Openings: Optional["Openings"]
@@ -102,7 +107,7 @@ class Adjacencies(BaseModel):
 class Adjacency(BaseModel):
     type: str
     adjacencyDistance: float
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     AdjacencyPolygonList: "AdjacencyPolygonList"
 
 
@@ -119,7 +124,7 @@ class Building(BaseModel):
     currentComponentBlockHandle: int
     currentAssemblyInstanceHandle: int
     currentPlaneHandle: int
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     BuildingBlocks: Optional["BuildingBlocks"]
     ComponentBlocks: Optional["ComponentBlocks"]
     AssemblyInstances: Optional["AssemblyInstances"]
@@ -142,7 +147,7 @@ class BuildingBlock(BaseModel):
     roofOverlap: float
     roofType: str
     wallSlope: float
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     ComponentBlocks: Optional["ComponentBlocks"]
     CFDFans: Optional["CFDFans"]
     AssemblyInstances: Optional["AssemblyInstances"]
@@ -165,7 +170,7 @@ class InternalPartition(BaseModel):
     height: float
     area: float
     floatingPartition: bool
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     StartPoint: "Point3D"
     EndPoint: "Point3D"
 
@@ -203,7 +208,7 @@ class BaseProfileBody(BaseModel):
 
 class Polygon(BaseModel):
     auxiliaryType: str
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     Vertices: Optional["Vertices"]
     PolygonHoles: Optional["PolygonHoles"]
 
@@ -213,7 +218,7 @@ class PolygonHoles(BaseModel):
 
 
 class PolygonHole(BaseModel):
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     Vertices: "Vertices"
 
 
@@ -265,7 +270,7 @@ class AssemblyInstance(BaseModel):
     assemblyHandle: int
     reflected: int
     active: int
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     AssemblyInstanceTransformationMatrix: "AssemblyInstanceTransformationMatrix"
     Attributes: Optional["KeyAttributes"]
 

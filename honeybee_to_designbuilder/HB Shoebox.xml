@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dsbXML name="HB Shoebox" date="2024-12-03" version="8.0.0.057" objects="all">
-	<Site handle="1" count="1">
+<dsbXML name="HB Shoebox" date="2024-12-14" version="8.0.0.057" objects="all">
+	<Site count="1" handle="13">
 		<Attributes>
 			<Attribute name="Version">8.0.0.057</Attribute>
 		</Attributes>
@@ -8,10 +8,10 @@
 		<AssemblyLibrary></AssemblyLibrary>
 		<Buildings numberOfBuildings="1">
 			<Building currentComponentBlockHandle="1" currentAssemblyInstanceHandle="1" currentPlaneHandle="1">
-				<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+				<ObjectIDs handle="12" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 				<BuildingBlocks>
 					<BuildingBlock type="Plan extruusion" height="3.0" roofSlope="0.0" roofOverlap="0.0" roofType="Flat" wallSlope="0.0">
-						<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+						<ObjectIDs handle="11" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 						<ComponentBlocks></ComponentBlocks>
 						<CFDFans></CFDFans>
 						<AssemblyInstances></AssemblyInstances>
@@ -21,7 +21,7 @@
 						<Zones>
 							<Zone parentZoneHandle="" inheritedZoneHandle="" planExtrusion="" innerSurfaceMode="">
 								<Body volume="0.0" extrusionHeight="3.0">
-									<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+									<ObjectIDs handle="10" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 									<Vertices>
 										<Point3D>0.0; 0.0; 3.0</Point3D>
 										<Point3D>0.0; 0.0; 0.0</Point3D>
@@ -34,13 +34,13 @@
 									</Vertices>
 									<Surfaces>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="0" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>0; 1; 2; 3</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>1.4644660940672622; 0.0; 2.5606601717798214</Point3D>
 															<Point3D>1.4644660940672622; 0.0; 0.4393398282201786</Point3D>
@@ -57,13 +57,13 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="2" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>3; 2; 4; 5</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="3" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>10.0; 1.4644660940672622; 2.5606601717798214</Point3D>
 															<Point3D>10.0; 1.4644660940672622; 0.4393398282201786</Point3D>
@@ -80,13 +80,13 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="4" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>5; 4; 6; 7</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="5" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>8.535533905932738; 10.0; 2.5606601717798214</Point3D>
 															<Point3D>8.535533905932738; 10.0; 0.4393398282201786</Point3D>
@@ -103,13 +103,13 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="6" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>7; 6; 1; 0</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="7" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>0.0; 8.535533905932738; 2.5606601717798214</Point3D>
 															<Point3D>0.0; 8.535533905932738; 0.4393398282201786</Point3D>
@@ -126,7 +126,7 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Floor" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="8" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>4; 2; 1; 6</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings></Openings>
@@ -134,7 +134,7 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Flat roof" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="9" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>7; 0; 3; 5</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings></Openings>
@@ -162,7 +162,7 @@
 						</Zones>
 						<ProfileBody elementSlope="30.0" roofOverlap="0.0">
 							<Body volume="0.0" extrusionHeight="3.0">
-								<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+								<ObjectIDs handle="10" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 								<Vertices>
 									<Point3D>0.0; 0.0; 3.0</Point3D>
 									<Point3D>0.0; 0.0; 0.0</Point3D>
@@ -175,13 +175,13 @@
 								</Vertices>
 								<Surfaces>
 									<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-										<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+										<ObjectIDs handle="0" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 										<VertexIndices>0; 1; 2; 3</VertexIndices>
 										<HoleIndices></HoleIndices>
 										<Openings>
 											<Opening type="Window">
 												<Polygon auxiliaryType="">
-													<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+													<ObjectIDs handle="1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 													<Vertices>
 														<Point3D>1.4644660940672622; 0.0; 2.5606601717798214</Point3D>
 														<Point3D>1.4644660940672622; 0.0; 0.4393398282201786</Point3D>
@@ -198,13 +198,13 @@
 										<Attributes></Attributes>
 									</Surface>
 									<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-										<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+										<ObjectIDs handle="2" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 										<VertexIndices>3; 2; 4; 5</VertexIndices>
 										<HoleIndices></HoleIndices>
 										<Openings>
 											<Opening type="Window">
 												<Polygon auxiliaryType="">
-													<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+													<ObjectIDs handle="3" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 													<Vertices>
 														<Point3D>10.0; 1.4644660940672622; 2.5606601717798214</Point3D>
 														<Point3D>10.0; 1.4644660940672622; 0.4393398282201786</Point3D>
@@ -221,13 +221,13 @@
 										<Attributes></Attributes>
 									</Surface>
 									<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-										<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+										<ObjectIDs handle="4" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 										<VertexIndices>5; 4; 6; 7</VertexIndices>
 										<HoleIndices></HoleIndices>
 										<Openings>
 											<Opening type="Window">
 												<Polygon auxiliaryType="">
-													<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+													<ObjectIDs handle="5" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 													<Vertices>
 														<Point3D>8.535533905932738; 10.0; 2.5606601717798214</Point3D>
 														<Point3D>8.535533905932738; 10.0; 0.4393398282201786</Point3D>
@@ -244,13 +244,13 @@
 										<Attributes></Attributes>
 									</Surface>
 									<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-										<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+										<ObjectIDs handle="6" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 										<VertexIndices>7; 6; 1; 0</VertexIndices>
 										<HoleIndices></HoleIndices>
 										<Openings>
 											<Opening type="Window">
 												<Polygon auxiliaryType="">
-													<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+													<ObjectIDs handle="7" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 													<Vertices>
 														<Point3D>0.0; 8.535533905932738; 2.5606601717798214</Point3D>
 														<Point3D>0.0; 8.535533905932738; 0.4393398282201786</Point3D>
@@ -267,7 +267,7 @@
 										<Attributes></Attributes>
 									</Surface>
 									<Surface type="Floor" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-										<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+										<ObjectIDs handle="8" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 										<VertexIndices>4; 2; 1; 6</VertexIndices>
 										<HoleIndices></HoleIndices>
 										<Openings></Openings>
@@ -275,7 +275,7 @@
 										<Attributes></Attributes>
 									</Surface>
 									<Surface type="Flat roof" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-										<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+										<ObjectIDs handle="9" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 										<VertexIndices>7; 0; 3; 5</VertexIndices>
 										<HoleIndices></HoleIndices>
 										<Openings></Openings>
@@ -293,7 +293,7 @@
 						<BaseProfileBody>
 							<ProfileBody elementSlope="30.0" roofOverlap="0.0">
 								<Body volume="0.0" extrusionHeight="3.0">
-									<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+									<ObjectIDs handle="10" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 									<Vertices>
 										<Point3D>0.0; 0.0; 3.0</Point3D>
 										<Point3D>0.0; 0.0; 0.0</Point3D>
@@ -306,13 +306,13 @@
 									</Vertices>
 									<Surfaces>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="0" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>0; 1; 2; 3</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>1.4644660940672622; 0.0; 2.5606601717798214</Point3D>
 															<Point3D>1.4644660940672622; 0.0; 0.4393398282201786</Point3D>
@@ -329,13 +329,13 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="2" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>3; 2; 4; 5</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="3" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>10.0; 1.4644660940672622; 2.5606601717798214</Point3D>
 															<Point3D>10.0; 1.4644660940672622; 0.4393398282201786</Point3D>
@@ -352,13 +352,13 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="4" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>5; 4; 6; 7</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="5" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>8.535533905932738; 10.0; 2.5606601717798214</Point3D>
 															<Point3D>8.535533905932738; 10.0; 0.4393398282201786</Point3D>
@@ -375,13 +375,13 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Wall" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="6" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>7; 6; 1; 0</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings>
 												<Opening type="Window">
 													<Polygon auxiliaryType="">
-														<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+														<ObjectIDs handle="7" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 														<Vertices>
 															<Point3D>0.0; 8.535533905932738; 2.5606601717798214</Point3D>
 															<Point3D>0.0; 8.535533905932738; 0.4393398282201786</Point3D>
@@ -398,7 +398,7 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Floor" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="8" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>4; 2; 1; 6</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings></Openings>
@@ -406,7 +406,7 @@
 											<Attributes></Attributes>
 										</Surface>
 										<Surface type="Flat roof" area="0.0" alpha="0.0" phi="0.0" defaultOpenings="" adjacentPartitionHandle="0" thickness="0.3">
-											<ObjectIDs handle="0" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+											<ObjectIDs handle="9" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
 											<VertexIndices>7; 0; 3; 5</VertexIndices>
 											<HoleIndices></HoleIndices>
 											<Openings></Openings>
