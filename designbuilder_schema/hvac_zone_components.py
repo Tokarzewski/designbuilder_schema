@@ -1,5 +1,5 @@
 from pydantic import field_validator
-from typing import List
+from typing import List, Literal
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import Point3D
 from designbuilder_schema.hvac_components import (
@@ -9,14 +9,48 @@ from designbuilder_schema.hvac_components import (
 )
 
 
-class ZoneExtract(HVACComponent):
+class ZoneElementList(BaseModel):
+    HVACZoneComponent: List
+
+    @field_validator("HVACZoneComponent", mode="before")
+    def recast_components(cls, components):
+        mapping = {
+            "Zone extract": ZoneExtract,
+            "Zone convective electric baseboard": ZoneConvectiveElectricBaseboard,
+            "Zone ADU single duct CAV no reheat": ZoneADUSingleDuctCAVNoReheat,
+            "Zone ADU single duct VAV reheat": ZoneADUSingleDuctVAVReheat,
+        }
+        return [
+            mapping.get(component["@type"], HVACComponent)(**component)
+            for component in components
+        ]
+
+
+class UnitElementList(BaseModel):
+    HVACComponent: List
+
+    @field_validator("HVACComponent", mode="before")
+    def recast_components(cls, components):
+        mapping = {
+            "Zone ADU louvre": ZoneADULouvre,
+            "Generic heating coil": GenericHeatingCoil,
+        }
+        return [
+            mapping.get(component["@type"], HVACComponent)(**component)
+            for component in components
+        ]
+
+
+class ZoneExtract(NoTypeHVACComponent):
+    type: Literal["Zone extract"]
     Width: float
     Height: float
     Origin: "Point3D"
     ExtractGrille: "ExtractGrille"
 
 
-class ZoneADUSingleDuctCAVNoReheat(HVACComponent):
+class ZoneADUSingleDuctCAVNoReheat(NoTypeHVACComponent):
+    type: Literal["Zone ADU single duct CAV no reheat"]
     Width: float
     Height: float
     MixingBoxWidth: float
@@ -24,12 +58,21 @@ class ZoneADUSingleDuctCAVNoReheat(HVACComponent):
     UnitElementList: None
 
 
-class ZoneADUSingleDuctVAVReheat(HVACComponent):
+class ZoneADUSingleDuctVAVReheat(NoTypeHVACComponent):
+    type: Literal["Zone ADU single duct VAV reheat"]
     Width: float
     Height: float
     MixingBoxWidth: float
     SupplyDiffuser: "SupplyDiffuser"
     UnitElementList: "UnitElementList"
+
+
+class ZoneConvectiveElectricBaseboard(NoTypeHVACComponent):
+    type: Literal["Zone convective electric baseboard"]
+
+
+class ZoneADULouvre(NoTypeHVACComponent):
+    type: Literal["Zone ADU louvre"]
 
 
 class ExtractGrille(NoTypeHVACComponent):
@@ -38,28 +81,3 @@ class ExtractGrille(NoTypeHVACComponent):
 
 class SupplyDiffuser(NoTypeHVACComponent):
     pass
-
-
-class ZoneConvectiveElectricBaseboard(HVACComponent):
-    pass
-
-
-class ZoneADULouvre(HVACComponent):
-    pass
-
-
-class UnitElementList(BaseModel):
-    HVACComponent: List
-
-    @field_validator("HVACComponent", mode="before")
-    def recast_components(cls, components):
-        recasted = []
-        for component in components:
-            match component.get("@type"):
-                case "Zone ADU louvre":
-                    recasted.append(ZoneADULouvre(**component))
-                case "Generic heating coil":
-                    recasted.append(GenericHeatingCoil(**component))
-                case _:
-                    recasted.append(HVACComponent(**component))
-        return recasted

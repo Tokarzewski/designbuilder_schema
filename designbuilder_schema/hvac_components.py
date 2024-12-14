@@ -1,4 +1,5 @@
-from typing import Union, Optional
+from pydantic import field_validator, Field
+from typing import Union, Optional, Literal, List, Annotated
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.attributes import NameAttributes, ZoneComponentAttributeList
@@ -8,6 +9,31 @@ from designbuilder_schema.geometry import (
     LineArray,
     SegmentList,
 )
+
+
+class HVACComponents(BaseModel):
+    HVACComponent: List
+
+    @field_validator("HVACComponent", mode="before")
+    def recast_components(cls, components):
+        mapping = {
+            "Sub-loop node": SubLoopNode,
+            "Zone mixer": ZoneMixer,
+            "Zone splitter": ZoneSplitter,
+            "Splitter": Splitter,
+            "Mixer": Mixer,
+            "Setpoint manager": SetpointManager,
+            "Air handling unit": AirHandlingUnit,
+            "Pump": Pump,
+            "Boiler": Boiler,
+            "Cooling tower": CoolingTower,
+            "Chiller": Chiller,
+            "Generic heating coil": GenericHeatingCoil,
+        }
+        return [
+            mapping.get(component["@type"], HVACComponent)(**component)
+            for component in components
+        ]
 
 
 class NoTypeHVACComponent(BaseModel):
@@ -49,42 +75,48 @@ class HVACComponent(NoTypeHVACComponent):
     type: str
 
 
-class SubLoopNode(HVACComponent):
+class SubLoopNode(NoTypeHVACComponent):
+    type: Literal["Sub-loop node"]
     NumberOfFlowConnections: int
     FlowConnections: "FlowConnections"
     HVACSubLoopNodeConnection: "HVACSubLoopNodeConnection"
     Origin: "Point3D"
 
 
-class ZoneMixer(HVACComponent):
+class ZoneMixer(NoTypeHVACComponent):
+    type: Literal["Zone mixer"]
     LoopFlowDirection: int
     Origin: "Point3D"
     HVACConnectorNode: "HVACConnectorNode"
     BranchConnectionList: "BranchConnectionList"
 
 
-class ZoneSplitter(HVACComponent):
+class ZoneSplitter(NoTypeHVACComponent):
+    type: Literal["Zone splitter"]
     LoopFlowDirection: int
     Origin: "Point3D"
     HVACConnectorNode: "HVACConnectorNode"
     BranchConnectionList: "BranchConnectionList"
 
 
-class Mixer(HVACComponent):
+class Splitter(NoTypeHVACComponent):
+    type: Literal["Splitter"]
     LoopFlowDirection: int
     Origin: "Point3D"
     HVACConnectorNode: "HVACConnectorNode"
     BranchConnectionList: "BranchConnectionList"
 
 
-class Splitter(HVACComponent):
+class Mixer(NoTypeHVACComponent):
+    type: Literal["Mixer"]
     LoopFlowDirection: int
     Origin: "Point3D"
     HVACConnectorNode: "HVACConnectorNode"
     BranchConnectionList: "BranchConnectionList"
 
 
-class SetpointManager(HVACComponent):
+class SetpointManager(NoTypeHVACComponent):
+    type: Literal["Setpoint manager"]
     Origin: "Point3D"
     ControlPoint: "Point3D"
     UpStreamNode: "Point3D"
@@ -92,7 +124,8 @@ class SetpointManager(HVACComponent):
     SegmentList: "SegmentList"
 
 
-class AirHandlingUnit(HVACComponent):
+class AirHandlingUnit(NoTypeHVACComponent):
+    type: Literal["Air handling unit"]
     Width: float
     Height: float
     FanType: int
@@ -110,16 +143,23 @@ class AirHandlingUnit(HVACComponent):
     LineArray: "LineArray"
 
 
-class Pump(HVACComponent): ...
+class Pump(NoTypeHVACComponent):
+    type: Literal["Pump"]
+    ...
 
 
-class Boiler(HVACComponent): ...
+class Boiler(NoTypeHVACComponent):
+    type: Literal["Boiler"]
+    ...
 
 
-class CoolingTower(HVACComponent): ...
+class CoolingTower(NoTypeHVACComponent):
+    type: Literal["Cooling tower"]
+    ...
 
 
-class Chiller(HVACComponent):
+class Chiller(NoTypeHVACComponent):
+    type: Literal["Chiller"]
     WaterCooledCondenser: "WaterCooledCondenser"
     ChillerHRHeatExchanger: "ChillerHRHeatExchanger"
     AbsorptionChillerUnit: "AbsorptionChillerUnit"
@@ -160,7 +200,7 @@ class IntakeUnitComponentList(BaseModel):
 
 
 class HVACConnectorNode(BaseModel):
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     Name: str
     Active: int
 
@@ -170,7 +210,7 @@ class BranchConnectionList(BaseModel):
 
 
 class HVACSubLoopNodeConnection(BaseModel):
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     Connected: int
     Coordinate: "Point3D"
     Attributes: "NameAttributes"
@@ -211,5 +251,6 @@ class AirHandlingUnitHVACComponent(HVACComponent):
     pass
 
 
-class GenericHeatingCoil(HVACComponent):
+class GenericHeatingCoil(NoTypeHVACComponent):
+    type: Literal["Generic heating coil"]
     pass
