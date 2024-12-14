@@ -1,12 +1,12 @@
 {
     "dsbJSON": {
         "@name": "MadeByPydantic",
-        "@date": "2024-12-07",
+        "@date": "2024-12-14",
         "@version": "8.0.0.057",
         "@objects": "all",
         "Site": {
-            "@handle": 1,
             "@count": 1,
+            "@handle": 0,
             "Attributes": {
                 "Attribute": [
                     {

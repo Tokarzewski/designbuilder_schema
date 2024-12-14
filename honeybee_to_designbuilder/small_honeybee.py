@@ -4,7 +4,7 @@ from typing import List, Union, Optional, Dict, Any
 
 class Point3D(BaseModel):
     coordinates: List[float]
-    
+
     @field_validator("coordinates")
     def validate_coords(cls, v: List[float]) -> List[float]:
         if len(v) != 3:
@@ -14,14 +14,15 @@ class Point3D(BaseModel):
     @property
     def x(self) -> float:
         return self.coordinates[0]
-    
+
     @property
     def y(self) -> float:
         return self.coordinates[1]
-    
+
     @property
     def z(self) -> float:
         return self.coordinates[2]
+
 
 class Face3D(BaseModel):
     type: str
@@ -40,12 +41,14 @@ class Face3D(BaseModel):
             return [[Point3D(coordinates=coords) for coords in hole] for hole in v]
         return v
 
+
 class BoundaryCondition(BaseModel):
     type: str
     boundary_condition_objects: Optional[List[str]] = None
     sun_exposure: Optional[bool] = None
     wind_exposure: Optional[bool] = None
     view_factor: Optional[Dict[str, Any]] = None
+
 
 class EnergyMaterial(BaseModel):
     roughness: str
@@ -59,11 +62,13 @@ class EnergyMaterial(BaseModel):
     visible_absorptance: float
     identifier: str
 
+
 class EnergyWindowMaterialGas(BaseModel):
     gas_type: str
     type: str
     thickness: float
     identifier: str
+
 
 class EnergyWindowMaterialGlazing(BaseModel):
     type: str
@@ -82,10 +87,12 @@ class EnergyWindowMaterialGlazing(BaseModel):
     solar_diffusing: bool
     identifier: str
 
+
 class Construction(BaseModel):
     type: str
     materials: List[str]
     identifier: str
+
 
 class ShadeConstruction(BaseModel):
     type: str
@@ -94,11 +101,13 @@ class ShadeConstruction(BaseModel):
     is_specular: bool
     identifier: str
 
+
 class AirBoundaryConstructionAbridged(BaseModel):
     type: str
     air_mixing_per_area: float
     air_mixing_schedule: str
     identifier: str
+
 
 class ConstructionSetAbridged(BaseModel):
     type: str
@@ -111,10 +120,12 @@ class ConstructionSetAbridged(BaseModel):
     air_boundary_construction: str
     identifier: str
 
+
 class Properties(BaseModel):
     type: str
     energy: Optional[Dict[str, Any]] = None
     radiance: Optional[Dict[str, Any]] = None
+
 
 class Aperture(BaseModel):
     type: str
@@ -124,12 +135,14 @@ class Aperture(BaseModel):
     identifier: str
     user_data: Optional[Dict[str, Any]] = None
 
+
 class Door(BaseModel):
     type: str
     geometry: "Face3D"
     boundary_condition: "BoundaryCondition"
     properties: "Properties"
     identifier: str
+
 
 class Face(BaseModel):
     type: str
@@ -140,6 +153,7 @@ class Face(BaseModel):
     doors: Optional[List["Door"]] = None
     identifier: str
 
+
 class Room(BaseModel):
     type: str
     faces: List["Face"]
@@ -148,6 +162,7 @@ class Room(BaseModel):
     display_name: str
     user_data: Optional[Dict[str, Any]] = None
 
+
 class Shade(BaseModel):
     type: str
     geometry: "Face3D"
@@ -155,10 +170,12 @@ class Shade(BaseModel):
     is_detached: bool
     identifier: str
 
+
 class ModelProperties(BaseModel):
     type: str
     energy: Dict[str, Any]
     radiance: Dict[str, Any]
+
 
 class Model(BaseModel):
     units: str
@@ -166,27 +183,29 @@ class Model(BaseModel):
     version: str
     properties: "ModelProperties"
     rooms: List["Room"]
-    #orphaned_faces: List[Union["Face", str]]
-    #orphaned_shades: List[Union["Shade", str]]
-    #orphaned_apertures: List[Union["Aperture", str]]
-    #orphaned_doors: List[Union["Door", str]]
+    # orphaned_faces: List[Union["Face", str]]
+    # orphaned_shades: List[Union["Shade", str]]
+    # orphaned_apertures: List[Union["Aperture", str]]
+    # orphaned_doors: List[Union["Door", str]]
     tolerance: float
     angle_tolerance: float
     identifier: str
     display_name: str
 
+
 def load_and_validate(file_path: str) -> Model:
     """Load and validate JSON file against ModelData schema."""
     import json
-    
+
     try:
-        with open(file_path, 'r') as f:
+        with open(file_path, "r") as f:
             data = json.load(f)
         return Model(**data)
     except json.JSONDecodeError as e:
         raise ValueError(f"Invalid JSON format: {e}")
     except Exception as e:
         raise ValueError(f"Validation error: {e}")
+
 
 if __name__ == "__main__":
     try:

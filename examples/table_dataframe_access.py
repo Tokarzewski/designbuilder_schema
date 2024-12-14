@@ -1,13 +1,13 @@
 from designbuilder_schema.utils import load_model
 from designbuilder_schema.tables import *
 
-dbjson_filepath = r"C:\GitHub\designbuilder_schema\samples\models\Shoebox10x10-All.xml"
+filepath = r"samples\models\Shoebox10x10.xml"
 
-db_json = load_model(dbjson_filepath)
+model = load_model(filepath)
 
-site = db_json.Site
+site = model.Site
 tables = site.Tables
-glazing_table = Tables.get_table_by_name(tables, "Glazing") # type: Glazing
+glazing_table = Tables.get_table_by_name(tables, "Glazing")  # type: Glazing
 
 print(glazing_table.Id[0])
 

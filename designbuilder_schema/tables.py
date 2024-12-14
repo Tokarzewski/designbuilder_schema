@@ -57,8 +57,8 @@ class Table(BaseModel):
             return [parse_row(value)]
         else:
             return [parse_row(row) for row in value]
-    
-    @field_serializer('Row')
+
+    @field_serializer("Row")
     def serialize_rows(self, row: List[Any]) -> List[str]:
         if row is None:
             return None

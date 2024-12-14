@@ -1,10 +1,10 @@
 from designbuilder_schema.utils import load_model
 
 
-dbjson_filepath = r".\samples\models\DetailedHVAC.xml"
-db_json = load_model(dbjson_filepath)
+filepath = r".\samples\models\DetailedHVAC.xml"
+model = load_model(filepath)
 
-site = db_json.Site
+site = model.Site
 building = site.Buildings.Building
 hvac_network = building.HVACNetwork
 hvac_loops = hvac_network.HVACLoops.HVACLoop

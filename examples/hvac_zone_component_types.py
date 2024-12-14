@@ -4,6 +4,7 @@ from designbuilder_schema.utils import load_model
 def report_set(hc):
     return f"{hc.__class__.__name__} | {hc.type} | {hc.ComponentType}"
 
+
 filepath = r".\samples\models\DetailedHVAC.xml"
 model = load_model(filepath)
 
@@ -30,6 +31,6 @@ for zone_group in zone_groups:
 
                 for sub_hc in sub_hcs:
                     hzc_set.add(report_set(sub_hc))
-    
+
 for item in hzc_set:
     print(item)

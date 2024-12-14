@@ -71,7 +71,6 @@ class Vertices(BaseModel):
         return iter(self.Point3D)
 
 
-
 class Range(BaseModel):
     """Used only in ImageRectangle to represent rectangle relative position.
     Org - top left corner.

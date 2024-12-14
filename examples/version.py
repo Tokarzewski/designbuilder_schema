@@ -1,9 +1,9 @@
 from designbuilder_schema.utils import load_model
 
 filepath = r"C:\GitHub\designbuilder_schema\samples\models\DetailedHVAC.json"
-dsb_json = load_model(filepath)
-print(dsb_json.version)
+model = load_model(filepath)
+print(model.version)
 
 filepath = r"C:\GitHub\designbuilder_schema\samples\models\DetailedHVAC.xml"
-dsb_xml = load_model(filepath)
-print(dsb_xml.version)
+model = load_model(filepath)
+print(model.version)

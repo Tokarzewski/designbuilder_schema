@@ -18,7 +18,7 @@ site = Site(
     Buildings=None,
 )
 
-db_json = DSBJSON(
+model = DSBJSON(
     name="MadeByPydantic",
     date=datetime.date.today().isoformat(),
     version=version,
@@ -26,5 +26,5 @@ db_json = DSBJSON(
     Site=site,
 )
 
-save_model(db_json, "examples/MadeByPydantic.xml")
-save_model(db_json, "examples/MadeByPydantic.json")
+save_model(model, "examples/SmallestDSB.xml")
+save_model(model, "examples/SmallestDSB.json")

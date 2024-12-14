@@ -11,7 +11,7 @@ vertices = building_blocks.BuildingBlock.Zones.Zone.Body.Vertices
 first_point = vertices[0]
 print(first_point)
 
-first_point.coords = [10,0,0]
+first_point.coords = [10, 0, 0]
 print(first_point)
 
 first_point.z = 20
