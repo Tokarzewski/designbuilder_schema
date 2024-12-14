@@ -18,7 +18,7 @@ def load_file_to_dict(filepath: str) -> dict:
 def load_model(filepath: str) -> DSBJSON:
     """Loads DBJSON model from file and validates at the same time."""
     dict = load_file_to_dict(filepath)
-    key = "dsbJSON" if filepath.endswith(".json") else "dsbXML"
+    key = "dsbXML" if filepath.endswith(".xml") else "dsbJSON"
     site_handle = int(dict[key]["Site"]["@handle"])
     set_counter(site_handle)
     return DSBJSON.model_validate(dict[key])
