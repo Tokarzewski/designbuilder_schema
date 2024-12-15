@@ -1,5 +1,5 @@
 # designbuilder_schema
-Python library built on top of Pydantic for reading DBXML files from DesignBuilder software.
+Python package for DesignBuilder XML files with read / edit / write functionality.
 
 # requirements
 
