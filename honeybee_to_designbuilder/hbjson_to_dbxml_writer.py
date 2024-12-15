@@ -198,7 +198,7 @@ def hb_to_dsb(hb_model: Model) -> DSBJSON:
             ]
         ),
     )
-    version = "8.0.0.057"
+    version = "8.0.0.058"
     version_site_attribute = NameAttribute(name="Version", text=version)
     site_attributes = NameAttributes(Attribute=[version_site_attribute])
 

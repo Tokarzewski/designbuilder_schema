@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dsbXML name="HB Shoebox" date="2024-12-14" version="8.0.0.057" objects="all">
+<dsbXML name="HB Shoebox" date="2024-12-15" version="8.0.0.058" objects="all">
 	<Site count="1" handle="13">
 		<Attributes>
-			<Attribute name="Version">8.0.0.057</Attribute>
+			<Attribute name="Version">8.0.0.058</Attribute>
 		</Attributes>
 		<Tables></Tables>
 		<AssemblyLibrary></AssemblyLibrary>

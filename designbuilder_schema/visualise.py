@@ -39,7 +39,9 @@ def openings(body: Body) -> List[List[float]]:
             else:
                 opening_list.append(openings)
 
-    return [[Point3D(Point3D=v).coords for v in o.Polygon.Vertices] for o in opening_list]
+    return [
+        [Point3D(Point3D=v).coords for v in o.Polygon.Vertices] for o in opening_list
+    ]
 
 
 def zone_geometry(zone: Zone):
