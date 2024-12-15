@@ -23,13 +23,32 @@ class HVACComponents(BaseModel):
             "Splitter": Splitter,
             "Mixer": Mixer,
             "Setpoint manager": SetpointManager,
-            "Air handling unit": AirHandlingUnit,
             "Pump": Pump,
             "Boiler": Boiler,
-            "Cooling tower": CoolingTower,
+            "Generator": Generator,
+            "Heat pump heating": HeatPumpHeating,
+            "Water heater heat pump": WaterHeaterHeatPump,
             "Chiller": Chiller,
+            "Heat pump cooling": HeatPumpCooling,
+            "Cooling tower": CoolingTower,
+            "Fluid cooler": FluidCooler,
+            "Chilled water storage": ChilledWaterStorage,
+            "Ice thermal storage": IceThermalStorage,
+            "Water heater": WaterHeater,
+            "Domestic water connections": DomesticWaterConnections,
+            "Fluid-to-fluid heat exchanger": FluidToFluidHeatExchanger,
+            "Ground heat exchanger": GroundHeatExchanger,
+            "Air handling unit": AirHandlingUnit,
+            "Unitary system": UnitarySystem,
+            "Unitary heat pump air-to-air": UnitaryHeatPumpAirToAir,
+            "Unitary heat pump water-to-air": UnitaryHeatPumpWaterToAir,
+            "Tempering valve": TemperingValve,
+            "Solar collector": SolarCollector,
             "Generic heating coil": GenericHeatingCoil,
+            "Water cooling coil": WaterCoolingCoil,
         }
+        if not isinstance(components, list):
+            components = [components]
         return [
             mapping.get(component["@type"], HVACComponent)(**component)
             for component in components
@@ -38,7 +57,7 @@ class HVACComponents(BaseModel):
 
 class NoTypeHVACComponent(BaseModel):
     ImageRectangle: "ImageRectangle"
-    ConnectingPlantLoopHandle: int
+    ConnectingPlantLoopHandle: Union[int, list[int]]
     ConnectingAirLoopHandle: int
     LoopType: int
     SubLoopType: int
@@ -249,6 +268,74 @@ class HeatRecoveryDevice(NoTypeHVACComponent):
 
 class AirHandlingUnitHVACComponent(HVACComponent):
     pass
+
+
+class Generator(NoTypeHVACComponent):
+    type: Literal["Generator"]
+
+
+class HeatPumpHeating(NoTypeHVACComponent):
+    type: Literal["Heat pump heating"]
+
+
+class HeatPumpCooling(NoTypeHVACComponent):
+    type: Literal["Heat pump cooling"]
+
+
+class FluidCooler(NoTypeHVACComponent):
+    type: Literal["Fluid cooler"]
+
+
+class ChilledWaterStorage(NoTypeHVACComponent):
+    type: Literal["Chilled water storage"]
+
+
+class IceThermalStorage(NoTypeHVACComponent):
+    type: Literal["Ice thermal storage"]
+
+
+class WaterHeater(NoTypeHVACComponent):
+    type: Literal["Water heater"]
+
+
+class DomesticWaterConnections(NoTypeHVACComponent):
+    type: Literal["Domestic water connections"]
+
+
+class FluidToFluidHeatExchanger(NoTypeHVACComponent):
+    type: Literal["Fluid-to-fluid heat exchanger"]
+
+
+class GroundHeatExchanger(NoTypeHVACComponent):
+    type: Literal["Ground heat exchanger"]
+
+
+class UnitarySystem(NoTypeHVACComponent):
+    type: Literal["Unitary system"]
+
+
+class UnitaryHeatPumpAirToAir(NoTypeHVACComponent):
+    type: Literal["Unitary heat pump air-to-air"]
+
+
+class TemperingValve(NoTypeHVACComponent):
+    type: Literal["Tempering valve"]
+
+
+class SolarCollector(NoTypeHVACComponent):
+    type: Literal["Solar collector"]
+
+
+class WaterHeaterHeatPump(NoTypeHVACComponent):
+    type: Literal["Water heater heat pump"]
+
+
+class UnitaryHeatPumpWaterToAir(NoTypeHVACComponent):
+    type: Literal["Unitary heat pump water-to-air"]
+
+
+class WaterCoolingCoil(NoTypeHVACComponent):
+    type: Literal["Water cooling coil"]
 
 
 class GenericHeatingCoil(NoTypeHVACComponent):

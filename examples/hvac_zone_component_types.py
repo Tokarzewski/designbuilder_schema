@@ -5,7 +5,7 @@ def report_set(hc):
     return f"{hc.__class__.__name__} | {hc.type} | {hc.ComponentType}"
 
 
-filepath = r".\samples\models\DetailedHVAC.xml"
+filepath = r".\samples\models\DetailedHVAC2.xml"
 model = load_model(filepath)
 
 building = model.Site.Buildings.Building
@@ -23,14 +23,14 @@ for zone_group in zone_groups:
     for hc in zone_components:
         hzc_set.add(report_set(hc))
 
-        if hasattr(hc, "UnitElementList"):
+        """if hasattr(hc, "UnitElementList"):
             if hasattr(hc.UnitElementList, "HVACComponent"):
                 sub_hcs = hc.UnitElementList.HVACComponent
                 if not isinstance(sub_hcs, list):
                     sub_hcs = [sub_hcs]
 
                 for sub_hc in sub_hcs:
-                    hzc_set.add(report_set(sub_hc))
+                    hzc_set.add(report_set(sub_hc))"""
 
 for item in hzc_set:
     print(item)
