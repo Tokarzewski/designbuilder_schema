@@ -154,7 +154,7 @@ class BuildingBlock(BaseModel):
     ProfileOutlines: Optional["ProfileOutlines"]
     InternalPartitions: Optional["InternalPartitions"]
     VoidBodies: Optional["VoidBodies"]
-    Zones: "Zones"
+    Zones: Optional["Zones"]
     ProfileBody: Optional["ProfileBody"]
     Perimeter: Optional["Perimeter"]
     BaseProfileBody: Optional["BaseProfileBody"]
