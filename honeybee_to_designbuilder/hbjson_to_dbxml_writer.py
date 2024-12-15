@@ -232,9 +232,3 @@ if __name__ == "__main__":
 
     db_filepath = r"honeybee_to_designbuilder\HB Shoebox.xml"
     save_model(db_model, db_filepath)
-
-
-# define proper handles to building, buildingblock, zone, surface.
-# all handles should be unique
-# <Zone parentZoneHandle="10" inheritedZoneHandle="10" planExtrusion="True" innerSurfaceMode="Deflation">
-# BaseProfileBody, ProfileBody are the BuildingBlock shapes, make sure to use different handles

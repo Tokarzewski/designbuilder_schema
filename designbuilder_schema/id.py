@@ -2,22 +2,23 @@ from designbuilder_schema.base import BaseModel
 from pydantic import Field
 
 
-_counter = 0
+_site_counter = 0
+# _assembly_counter = 0
 
 
-def current_handle() -> int:
-    return _counter
+def current_site_handle() -> int:
+    return _site_counter
 
 
-def generate_handle() -> int:
-    global _counter
-    _counter += 1
-    return _counter - 1
+def generate_site_handle() -> int:
+    global _site_counter
+    _site_counter += 1
+    return _site_counter - 1
 
 
-def set_counter(value: int) -> None:
-    global _counter
-    _counter = value
+def set_site_counter(value: int) -> None:
+    global _site_counter
+    _site_counter = value
 
 
 class ObjectIDs(BaseModel):
@@ -29,12 +30,9 @@ class ObjectIDs(BaseModel):
     4. each ObjectID is given new handle on creation
     """
 
-    handle: int = Field(default_factory=generate_handle)
+    handle: int = Field(default_factory=generate_site_handle)
     buildingHandle: int = -1
     buildingBlockHandle: int = -1
     zoneHandle: int = -1
     surfaceIndex: int = -1
     openingIndex: int = -1
-
-    # make sure that all ObjectIDs instances have:
-    # 1. update parent handles with @field_serialize

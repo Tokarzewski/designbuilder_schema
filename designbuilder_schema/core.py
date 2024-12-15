@@ -8,7 +8,7 @@ from typing import Union, Optional, List, Annotated
 from pydantic import field_serializer, Field
 from designbuilder_schema.hvac_network import HVACNetwork
 from designbuilder_schema.base import BaseModel
-from designbuilder_schema.id import ObjectIDs, current_handle
+from designbuilder_schema.id import ObjectIDs, current_site_handle
 from designbuilder_schema.geometry import Point3D, Vertices, Line
 from designbuilder_schema.tables import Tables
 from designbuilder_schema.attributes import NameAttributes, KeyAttributes
@@ -33,7 +33,7 @@ class Site(BaseModel):
 
     @field_serializer("handle")
     def serialize_handle(self, _) -> int:
-        return current_handle()
+        return current_site_handle()
 
 
 class AssemblyLibrary(BaseModel):
