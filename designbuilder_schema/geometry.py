@@ -6,8 +6,8 @@ The geometry module of the designbuilder_schema
 
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.id import ObjectIDs
-from typing import List, Union
-from pydantic import field_validator
+from typing import List, Union, Annotated
+from pydantic import field_validator, Field
 
 
 class Point3D(BaseModel):
@@ -63,7 +63,6 @@ class Vertices(BaseModel):
                 self.Point3D[index] = value.Point3D
             elif isinstance(value, str):
                 self.Point3D[index] = value
-            self.Point3D[index] = value
         except IndexError as e:
             raise ValueError(f"Invalid index {index} for Vertices.Point3D") from e
 
@@ -81,13 +80,13 @@ class Range(BaseModel):
 
 
 class Line(BaseModel):
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     Begin: "Point3D"
     End: "Point3D"
 
 
 class ImageRectangle(BaseModel):
-    ObjectIDs: "ObjectIDs"
+    ObjectIDs: Annotated["ObjectIDs", Field(default_factory=ObjectIDs)]
     ImageTextureIndex: int
     MaskTextureIndex: int
     SelectedImageTextureIndex: int

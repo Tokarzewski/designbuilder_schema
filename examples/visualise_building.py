@@ -6,5 +6,4 @@ add_visualisation_extention()
 
 model = load_model(r"samples\models\Tutorial Model.xml")
 building = model.Site.Buildings.Building
-
 building.visualise()

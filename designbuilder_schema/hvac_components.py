@@ -253,4 +253,3 @@ class AirHandlingUnitHVACComponent(HVACComponent):
 
 class GenericHeatingCoil(NoTypeHVACComponent):
     type: Literal["Generic heating coil"]
-    pass
