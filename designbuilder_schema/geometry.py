@@ -7,18 +7,11 @@ The geometry module of the designbuilder_schema
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.id import ObjectIDs
 from typing import List, Union, Annotated
-from pydantic import field_validator, Field
+from pydantic import Field
 
 
 class Point3D(BaseModel):
     Point3D: str
-
-    @field_validator("Point3D")
-    def parse_point3d(cls, field: str) -> str:
-        coordinates = field.split(";")
-        if len(coordinates) != 3:
-            raise ValueError("Point3D str must have 3 floats separated by ;")
-        return field
 
     @property
     def x(self) -> float:
