@@ -5,7 +5,7 @@ def report_set(hc):
     return f"{hc.__class__.__name__} | {hc.type} | {hc.ComponentType}"
 
 
-filepath = r".\samples\models\DetailedHVAC2.xml"
+filepath = r".\samples\models\DetailedHVAC.xml"
 model = load_model(filepath)
 
 building = model.Site.Buildings.Building

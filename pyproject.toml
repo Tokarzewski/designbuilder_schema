@@ -1,7 +1,7 @@
 [project]
 name = "designbuilder_schema"
-version = "0.4"
-description = "Python package for processing DesignBuilder's DBXML files"
+version = "0.5"
+description = "Python package for DesignBuilder XML files with read / edit / write functionality."
 authors = [
     { name = "Bartlomiej Tokarzewski", email = "bartlomiej.tokarzewski@gmail.com" },
 ]
