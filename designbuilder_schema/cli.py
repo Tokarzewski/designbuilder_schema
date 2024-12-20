@@ -7,7 +7,7 @@ The command line interface of the designbuilder_schema
 import json
 from pathlib import Path
 from fire import Fire
-from designbuilder_schema.utils import load_file_to_dict, load_model
+from designbuilder_schema.utils import load_file_to_dict, load_model, add_prefixes
 from xmltodict import unparse
 
 
@@ -15,9 +15,9 @@ def get_version(filepath: str) -> str:
     """Return the schema version."""
     dictionary = load_file_to_dict(filepath)
     if "dsbJSON" in str(dictionary.keys()):
-        return dictionary["dsbJSON"]["@version"]
+        return dictionary["dsbJSON"]["version"]
     elif "dsbXML" in str(dictionary.keys()):
-        return dictionary["dsbXML"]["@version"]
+        return dictionary["dsbXML"]["version"]
     else:
         print("Can't find dsbJSON or dsbXML in: ", dictionary.keys())
 
@@ -35,8 +35,9 @@ def xml_to_json(xml_filepath: str):
 def json_to_xml(json_filepath: str):
     """Convert JSON file to XML file."""
     dictionary = load_file_to_dict(json_filepath)
-    dictionary["dsbXML"] = dictionary.pop("dsbJSON")
     xml_filepath = Path(json_filepath).with_suffix(".xml")
+
+    dictionary["dsbXML"] = add_prefixes(dictionary.pop("dsbJSON"))
 
     with open(xml_filepath, "w") as f:
         xml_data = unparse(dictionary, full_document=True, pretty=True)

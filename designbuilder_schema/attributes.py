@@ -1,7 +1,5 @@
 from designbuilder_schema.base import BaseModel
-from typing import List, Union
-from pydantic import Field
-
+from typing import List, Union, Any, Optional
 
 class NameAttributes(BaseModel):
     """Site and HVAC Attibutes"""
@@ -19,14 +17,14 @@ class NameAttribute(BaseModel):
     """Site and HVAC Attibute"""
 
     name: str = None
-    text: str = Field(alias="#text", default=None)
+    text: Any = None
 
 
 class KeyAttribute(BaseModel):
     """Non-Site and Non-HVAC Attibute"""
 
     key: str = None
-    text: str = Field(alias="#text", default=None)
+    text: Any = None
 
 
 class HVACAttributeList(BaseModel):
