@@ -168,7 +168,7 @@ def convert_room_to_building_block(room: Room) -> BuildingBlock:
     )
 
 
-def hb_to_dsb(hb_model: Model) -> DSBJSON:
+def hb_to_dsb(hb_model: Model) -> DSB:
     """Convert a Honeybee Model to a DesignBuilder Schema."""
     # Convert to metric units if necessary
     """if hb_model.units != 'Meters':
@@ -213,7 +213,7 @@ def hb_to_dsb(hb_model: Model) -> DSBJSON:
     )
 
     # Create DesignBuilder model
-    model = DSBJSON(
+    model = DSB(
         name=hb_model.display_name,
         date=datetime.date.today().isoformat(),
         version=version,

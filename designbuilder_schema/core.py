@@ -6,7 +6,7 @@ The core module of the designbuilder_schema
 
 from typing import Union, Optional, List, Annotated
 from pydantic import field_serializer, Field
-from designbuilder_schema.hvac_network import HVACNetwork
+from designbuilder_schema.hvac.network import HVACNetwork
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.id import ObjectIDs, current_site_handle
 from designbuilder_schema.geometry import Point3D, Vertices, Line
@@ -15,7 +15,7 @@ from designbuilder_schema.attributes import NameAttributes, KeyAttributes
 import datetime
 
 
-class DSBJSON(BaseModel):
+class DSB(BaseModel):
     name: str
     date: datetime.date
     version: str

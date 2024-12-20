@@ -1,6 +1,27 @@
 import json, xmltodict
-from designbuilder_schema.core import DSBJSON
+from designbuilder_schema.core import DSB
 from designbuilder_schema.id import set_site_counter
+
+
+def remove_prefixes(_, key, value):
+    if key[0] in "@#":
+        return key[1:], value
+    else:
+        return key, value
+
+
+def add_prefixes(data_dict):
+    if isinstance(data_dict, list):
+        return [add_prefixes(l) for l in data_dict]
+    elif isinstance(data_dict, dict):
+        return {
+            ("#text" if key == "text" else "@" + key if key[0].islower() else key): (
+                add_prefixes(val) if isinstance(val, (dict, list)) else val
+            )
+            for key, val in data_dict.items()
+        }
+    else:
+        return data_dict
 
 
 def load_file_to_dict(filepath: str) -> dict:
@@ -10,18 +31,18 @@ def load_file_to_dict(filepath: str) -> dict:
         if filepath.endswith(".json"):
             return json.loads(file_content)
         elif filepath.endswith(".xml"):
-            return xmltodict.parse(file_content)
+            return xmltodict.parse(file_content, postprocessor=remove_prefixes)
         else:
             raise ValueError("Unsupported file format")
 
 
-def load_model(filepath: str) -> DSBJSON:
+def load_model(filepath: str) -> DSB:
     """Loads DBJSON model from file and validates at the same time."""
     dict = load_file_to_dict(filepath)
     key = "dsbXML" if filepath.endswith(".xml") else "dsbJSON"
-    site_handle = int(dict[key]["Site"]["@handle"])
+    site_handle = int(dict[key]["Site"]["handle"])
     set_site_counter(site_handle)
-    return DSBJSON.model_validate(dict[key])
+    return DSB.model_validate(dict[key])
 
 
 def save_dict(dictionary: dict, filepath: str) -> None:
@@ -38,6 +59,6 @@ def save_dict(dictionary: dict, filepath: str) -> None:
         f.write(data)
 
 
-def save_model(dsb_json: DSBJSON, filepath: str) -> None:
-    dsb_json = dsb_json.model_dump(mode="json", by_alias=True)
-    save_dict({"dsbJSON": dsb_json}, filepath)
+def save_model(model: DSB, filepath: str) -> None:
+    model = model.model_dump(mode="json", by_alias=True)
+    save_dict({"dsbJSON": model}, filepath)

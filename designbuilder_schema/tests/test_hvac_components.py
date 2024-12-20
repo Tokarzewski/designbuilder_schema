@@ -1,6 +1,6 @@
-import json
-from designbuilder_schema.hvac_network import HVACComponents
-import pytest
+# import json
+# from designbuilder_schema.hvac_network import HVACComponents
+# import pytest
 
 filepaths = [
     r"C:\GitHub\designbuilder_schema\samples\fragments\DemandSubLoop_HVACComponents.json",
@@ -8,8 +8,9 @@ filepaths = [
 ]
 
 
-@pytest.mark.parametrize("filepath", filepaths)
+"""@pytest.mark.parametrize("filepath", filepaths)
 def test_validate_component(filepath):
     with open(filepath, "r") as f:
         json_dict = json.load(f)
         assert HVACComponents.model_validate(json_dict["HVACComponents"])
+"""

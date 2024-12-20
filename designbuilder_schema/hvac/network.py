@@ -9,8 +9,8 @@ from pydantic import Field
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import Line, SegmentList, Point3D
 from designbuilder_schema.id import ObjectIDs
-from designbuilder_schema.hvac_components import HVACComponents, NoTypeHVACComponent
-from designbuilder_schema.hvac_zone_components import ZoneElementList
+from designbuilder_schema.hvac.components import HVACComponents, NoTypeHVACComponent
+from designbuilder_schema.hvac.zone_components import ZoneElementList
 from designbuilder_schema.attributes import NameAttributes
 
 

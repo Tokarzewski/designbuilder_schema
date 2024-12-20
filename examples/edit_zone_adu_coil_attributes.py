@@ -1,5 +1,5 @@
 from designbuilder_schema.utils import load_model, save_model
-from designbuilder_schema.hvac_components import GenericHeatingCoil
+from designbuilder_schema.hvac.components import GenericHeatingCoil
 import time
 
 start_time = time.time()  # TIME

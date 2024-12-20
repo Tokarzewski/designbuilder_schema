@@ -50,7 +50,7 @@ class HVACComponents(BaseModel):
         if not isinstance(components, list):
             components = [components]
         return [
-            mapping.get(component["@type"], HVACComponent)(**component)
+            mapping.get(component["type"], HVACComponent)(**component)
             for component in components
         ]
 

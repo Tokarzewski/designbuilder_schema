@@ -2,8 +2,8 @@ from pydantic import field_validator
 from typing import List, Literal, Optional
 from designbuilder_schema.base import BaseModel
 from designbuilder_schema.geometry import Point3D
-from designbuilder_schema.hvac_unit_components import UnitElementList
-from designbuilder_schema.hvac_components import NoTypeHVACComponent, HVACComponent
+from designbuilder_schema.hvac.unit_components import UnitElementList
+from designbuilder_schema.hvac.components import NoTypeHVACComponent, HVACComponent
 
 
 class ZoneElementList(BaseModel):
@@ -37,7 +37,7 @@ class ZoneElementList(BaseModel):
         if not isinstance(components, list):
             components = [components]
         return [
-            mapping.get(component["@type"], HVACComponent)(**component)
+            mapping.get(component["type"], HVACComponent)(**component)
             for component in components
         ]
 

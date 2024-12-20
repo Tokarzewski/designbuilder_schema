@@ -1,4 +1,4 @@
-from designbuilder_schema.core import DSBJSON, Site
+from designbuilder_schema.core import DSB, Site
 from designbuilder_schema.attributes import NameAttributes, NameAttribute
 from designbuilder_schema.utils import save_model
 import datetime
@@ -18,7 +18,7 @@ site = Site(
     Buildings=None,
 )
 
-model = DSBJSON(
+model = DSB(
     name="MadeByPydantic",
     date=datetime.date.today().isoformat(),
     version=version,

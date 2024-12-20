@@ -1,7 +1,7 @@
 from pydantic import field_validator
 from typing import List, Literal
 from designbuilder_schema.base import BaseModel
-from designbuilder_schema.hvac_components import (
+from designbuilder_schema.hvac.components import (
     NoTypeHVACComponent,
     HVACComponent,
     GenericHeatingCoil,
@@ -30,7 +30,7 @@ class UnitElementList(BaseModel):
         if not isinstance(components, list):
             components = [components]
         return [
-            mapping.get(component["@type"], HVACComponent)(**component)
+            mapping.get(component["type"], HVACComponent)(**component)
             for component in components
         ]
 
