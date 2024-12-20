@@ -1,5 +1,5 @@
 from pydantic import field_validator, field_serializer
-from typing import Union, Any, List
+from typing import Any, List, Optional
 from designbuilder_schema.base import BaseModel
 import pandas as pd
 
@@ -41,9 +41,17 @@ class TableItem(BaseModel):
 class Table(BaseModel):
     name: str
     numberOfFields: int
-    Category: Union[str, List, None] = None
+    Category: Optional[List[str]] = None
     FieldName: List[str]
-    Row: List[List[Any]] = None
+    Row: Optional[List[List[str]]] = None
+
+    @field_validator("Category", mode="before")
+    def parse_category(cls, value: Optional[str | List]) -> Optional[List[str]]:
+        if value is None:
+            return None
+        if isinstance(value, str):
+            return [value]
+        return value
 
     @field_validator("Row", mode="before")
     def parse_rows(cls, value):
@@ -52,7 +60,7 @@ class Table(BaseModel):
             return [parts[0].lstrip("#")] + parts[1:]
 
         if value is None:
-            return [None]
+            return None
         elif isinstance(value, str):
             return [parse_row(value)]
         else:

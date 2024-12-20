@@ -1,6 +1,6 @@
 from designbuilder_schema.utils import load_model
 
-filepath = r"C:\GitHub\designbuilder_schema\samples\models\DetailedHVAC.xml"
+filepath = r"samples\models\Shoebox10x10.json"
 model = load_model(filepath)
 
 site = model.Site

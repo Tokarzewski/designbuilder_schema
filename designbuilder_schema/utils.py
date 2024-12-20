@@ -24,7 +24,7 @@ def add_prefixes(data_dict):
         return data_dict
 
 
-def load_file_to_dict(filepath: str) -> dict:
+def file_to_dict(filepath: str) -> dict:
     """Load a file as a dictionary"""
     with open(filepath, "r") as f:
         file_content = f.read()
@@ -38,22 +38,29 @@ def load_file_to_dict(filepath: str) -> dict:
 
 def load_model(filepath: str) -> DSB:
     """Loads DBJSON model from file and validates at the same time."""
-    dict = load_file_to_dict(filepath)
-    key = "dsbXML" if filepath.endswith(".xml") else "dsbJSON"
-    site_handle = int(dict[key]["Site"]["handle"])
+    dict = file_to_dict(filepath)
+    root_key = next(iter(dict))
+    site_handle = int(dict[root_key]["Site"]["handle"])
     set_site_counter(site_handle)
-    return DSB.model_validate(dict[key])
+    return DSB.model_validate(dict[root_key])
 
 
-def save_dict(dictionary: dict, filepath: str) -> None:
+def dict_to_file(dictionary: dict, filepath: str) -> None:
     """Save dictionary to either JSON or XML file format."""
-    if filepath.endswith(".json"):
-        data = json.dumps(dictionary, indent=4)
-    elif filepath.endswith(".xml"):
-        dictionary = {"dsbXML": dictionary["dsbJSON"]}
-        data = xmltodict.unparse(dictionary, full_document=True, pretty=True)
-    else:
+    if not (filepath.endswith(".json") or filepath.endswith(".xml")):
         raise ValueError(f"Unsupported file format: {filepath}")
+
+    root_key = next(iter(dictionary))
+    file_format = "JSON" if filepath.endswith(".json") else "XML"
+    new_key = f"dsb{file_format}"
+    pop = dictionary.pop(root_key)
+
+    if file_format == "JSON":
+        dictionary[new_key] = pop
+        data = json.dumps(dictionary, indent=4)
+    else:
+        dictionary[new_key] = add_prefixes(pop)
+        data = xmltodict.unparse(dictionary, full_document=True, pretty=True)
 
     with open(filepath, "w") as f:
         f.write(data)
@@ -61,4 +68,4 @@ def save_dict(dictionary: dict, filepath: str) -> None:
 
 def save_model(model: DSB, filepath: str) -> None:
     model = model.model_dump(mode="json", by_alias=True)
-    save_dict({"dsbJSON": model}, filepath)
+    dict_to_file({"dsbXML": model}, filepath)
