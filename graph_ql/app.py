@@ -4,13 +4,6 @@ from core import DSBType, SiteType
 from designbuilder_schema.utils import load_model
 
 
-## TODO Queries: 
-# name and U-values for all constructions
-# list all surfaces
-# all surface assigned constructions
-# name and U-values of all assigned constructions  
-# surface area, (object ID handle), construction name
-
 @strawberry.type
 class Query:
 
