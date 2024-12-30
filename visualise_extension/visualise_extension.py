@@ -130,7 +130,7 @@ def vis_building(building: Building):
     display_zones([zone_geometry(zone) for zone in _zones])
 
 
-def add_visualisation_extention():
+def add_extention():
     """Extend classes with the visualise methods"""
     Building.visualise = vis_building
     # BuildingBlock.visualise = vis_building_block

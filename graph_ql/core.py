@@ -4,8 +4,8 @@ from designbuilder_schema.core import DSB, Site
 from typing import Optional
 from strawberry import auto
 
-from .attributes import NameAttributesType
-from .tables import TablesType
+from attributes import NameAttributesType
+from tables import TablesType
 
 
 @strawberry_type(model=Site)

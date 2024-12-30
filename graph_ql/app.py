@@ -1,6 +1,6 @@
 import fastapi, strawberry
 import strawberry.fastapi
-from .core import DSBType, SiteType
+from core import DSBType, SiteType
 from designbuilder_schema.utils import load_model
 
 

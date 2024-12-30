@@ -1,7 +1,6 @@
 from pydantic import field_validator, field_serializer
 from typing import Any, List, Optional
 from designbuilder_schema.base import BaseModel
-import pandas as pd
 
 
 class Tables(BaseModel):
@@ -100,12 +99,3 @@ class Table(BaseModel):
             raise AttributeError(
                 f"'{self.__class__.__name__}' object has no attribute '{name}'"
             )
-
-    def to_dataframe(self) -> pd.DataFrame:
-        return pd.DataFrame(self.Row, columns=self.FieldName)
-
-    def from_dataframe(self, dataframe: pd.DataFrame) -> None:
-        def compose_row(row) -> str:
-            return "#" + str(row[0]) + " #" + " #".join(str(item) for item in row[1:])
-
-        self.Row = [compose_row(row[1:]) for row in dataframe.itertuples()]

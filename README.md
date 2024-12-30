@@ -3,7 +3,6 @@ Python package for DesignBuilder XML files with read / edit / write functionalit
 
 # requirements
 
-- pandas
 - pydantic
 - fire
 - xmltodict
