@@ -1,4 +1,4 @@
-query MyQuery($filepath: String!) {
+query ModelVersion($filepath: String!) {
   dsb(filepath: $filepath) {
     version
   }
