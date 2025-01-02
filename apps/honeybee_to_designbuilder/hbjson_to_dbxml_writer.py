@@ -225,10 +225,10 @@ def hb_to_dsb(hb_model: Model) -> DSB:
 
 
 if __name__ == "__main__":
-    hb_filepath = r"honeybee_to_designbuilder\HB Shoebox.json"
+    hb_filepath = r"apps\honeybee_to_designbuilder\HB Shoebox.json"
     hb_model = load_and_validate(hb_filepath)
 
     db_model = hb_to_dsb(hb_model)
 
-    db_filepath = r"honeybee_to_designbuilder\HB Shoebox.xml"
+    db_filepath = r"apps\honeybee_to_designbuilder\HB Shoebox.xml"
     save_model(db_model, db_filepath)

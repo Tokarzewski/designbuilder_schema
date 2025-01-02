@@ -1,0 +1,5 @@
+query MyQuery($filepath: String!) {
+  dsb(filepath: $filepath) {
+    version
+  }
+}

@@ -26,5 +26,5 @@ app.include_router(graphql_app, prefix="/graphql")
 
 if __name__ == "__main__":
     import uvicorn
-
+    # http://localhost:8000/graphql
     uvicorn.run(app)
