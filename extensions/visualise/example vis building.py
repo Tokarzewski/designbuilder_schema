@@ -1,4 +1,4 @@
-from visualise_extension import add_extention
+from building import add_extention
 from designbuilder_schema.utils import load_model
 
 
