@@ -1,6 +1,6 @@
 import fastapi, strawberry
 import strawberry.fastapi
-from core import DSBType, SiteType
+from core import DSBType
 from designbuilder_schema.utils import load_model
 
 
@@ -9,13 +9,8 @@ class Query:
 
     @strawberry.field
     def dsb(self, filepath: str) -> DSBType:
-        model = load_model(filepath)
-        return DSBType.from_pydantic(model)
-
-    @strawberry.field
-    def site(self, filepath: str) -> SiteType:
-        site = load_model(filepath).Site
-        return SiteType.from_pydantic(site)
+        _dsb = load_model(filepath)
+        return DSBType.from_pydantic(_dsb)
 
 
 schema = strawberry.Schema(query=Query)

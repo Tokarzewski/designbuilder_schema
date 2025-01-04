@@ -1,6 +1,6 @@
 from designbuilder_schema.utils import load_model
 from designbuilder_schema.tables import *
-from table_extension import add_extension
+from dataframe_extension import add_extension
 
 
 filepath = r"samples\models\Shoebox10x10.xml"
