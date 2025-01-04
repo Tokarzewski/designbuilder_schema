@@ -4,9 +4,9 @@ hvac_network.py
 The hvac network module of the designbuilder_schema
 """
 
-from typing import Union, Optional, List, Annotated
+from typing import Union, Optional, Annotated
 from pydantic import Field
-from designbuilder_schema.base import BaseModel
+from designbuilder_schema.base import BaseModel, AlwaysList
 from designbuilder_schema.geometry import Line, SegmentList, Point3D
 from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.hvac.components import HVACComponents, NoTypeHVACComponent
@@ -22,11 +22,11 @@ class HVACNetwork(BaseModel):
 
 
 class HVACLoops(BaseModel):
-    HVACLoop: Union["HVACLoop", List["HVACLoop"]]
+    HVACLoop: AlwaysList["HVACLoop"]
 
 
 class HVACZoneGroups(BaseModel):
-    HVACZoneGroup: Union["HVACZoneGroup", List["HVACZoneGroup"]]
+    HVACZoneGroup: AlwaysList["HVACZoneGroup"]
 
 
 class HVACLoop(BaseModel):
@@ -43,11 +43,11 @@ class HVACLoop(BaseModel):
 
 
 class PlantOperationSchemes(BaseModel):
-    PlantOperationScheme: Union["PlantOperationScheme", list["PlantOperationScheme"]]
+    PlantOperationScheme: AlwaysList["PlantOperationScheme"]
 
 
 class PlantOperationScheme(BaseModel):
-    PlantOperationRanges: Union["PlantOperationRanges", list["PlantOperationRanges"]]
+    PlantOperationRanges: AlwaysList["PlantOperationRanges"]
     Attributes: "NameAttributes"
 
 
@@ -94,7 +94,7 @@ class BuildingZoneHandle(BaseModel):
 
 
 class HVACConnections(BaseModel):
-    HVACConnection: Union["HVACConnection", list["HVACConnection"]]
+    HVACConnection: AlwaysList["HVACConnection"]
 
 
 class HVACConnection(BaseModel):
@@ -108,7 +108,7 @@ class HVACConnection(BaseModel):
 
 
 class ElementList(BaseModel):
-    HVACConnectionElement: Union["HVACConnectionElement", list["HVACConnectionElement"]]
+    HVACConnectionElement: AlwaysList["HVACConnectionElement"]
 
 
 class HVACConnectionElement(BaseModel):

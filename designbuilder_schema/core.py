@@ -4,10 +4,10 @@ core.py
 The core module of the designbuilder_schema
 """
 
-from typing import Union, Optional, List, Annotated
+from typing import Optional, List, Annotated
 from pydantic import field_serializer, Field
 from designbuilder_schema.hvac.network import HVACNetwork
-from designbuilder_schema.base import BaseModel
+from designbuilder_schema.base import BaseModel, AlwaysList
 from designbuilder_schema.id import ObjectIDs, current_site_handle
 from designbuilder_schema.geometry import Point3D, Vertices, Line
 from designbuilder_schema.tables import Tables
@@ -38,7 +38,15 @@ class Site(BaseModel):
 
 class AssemblyLibrary(BaseModel):
     assemblyHandle: int
-    Assembly: Union["Assembly", List["Assembly"]]
+    Assembly: AlwaysList["Assembly"]
+
+
+"""@field_validator('Assembly', mode='before')
+    def ensure_list(cls, v):
+        if isinstance(v, list):
+            return v
+        return [v]
+"""
 
 
 class Assembly(BaseModel):
@@ -51,7 +59,7 @@ class Assembly(BaseModel):
 
 
 class ComponentBlocks(BaseModel):
-    ComponentBlock: Union["ComponentBlock", List["ComponentBlock"]]
+    ComponentBlock: AlwaysList["ComponentBlock"]
 
 
 class ComponentBlock(BaseModel):
@@ -90,7 +98,7 @@ class Surface(BaseModel):
 
 
 class Openings(BaseModel):
-    Opening: Union[List["Opening"], "Opening"]
+    Opening: AlwaysList["Opening"]
 
 
 class Opening(BaseModel):
@@ -101,7 +109,7 @@ class Opening(BaseModel):
 
 
 class Adjacencies(BaseModel):
-    Adjacency: Union["Adjacency", List["Adjacency"]]
+    Adjacency: AlwaysList["Adjacency"]
 
 
 class Adjacency(BaseModel):
@@ -112,12 +120,12 @@ class Adjacency(BaseModel):
 
 
 class AdjacencyPolygonList(BaseModel):
-    Polygon: Union["Polygon", List["Polygon"]]
+    Polygon: AlwaysList["Polygon"]
 
 
 class Buildings(BaseModel):
     numberOfBuildings: int
-    Building: Union["Building", List["Building"]]
+    Building: AlwaysList["Building"]
 
 
 class Building(BaseModel):
@@ -137,7 +145,7 @@ class Building(BaseModel):
 
 
 class BuildingBlocks(BaseModel):
-    BuildingBlock: Union["BuildingBlock", List["BuildingBlock"]]
+    BuildingBlock: AlwaysList["BuildingBlock"]
 
 
 class BuildingBlock(BaseModel):
@@ -162,7 +170,7 @@ class BuildingBlock(BaseModel):
 
 
 class InternalPartitions(BaseModel):
-    InternalPartition: Union["InternalPartition", List["InternalPartition"]]
+    InternalPartition: AlwaysList["InternalPartition"]
 
 
 class InternalPartition(BaseModel):
@@ -176,7 +184,7 @@ class InternalPartition(BaseModel):
 
 
 class Zones(BaseModel):
-    Zone: Union["Zone", List["Zone"]]
+    Zone: AlwaysList["Zone"]
 
 
 class Zone(BaseModel):
@@ -214,7 +222,7 @@ class Polygon(BaseModel):
 
 
 class PolygonHoles(BaseModel):
-    PolygonHole: Union["PolygonHole", List["PolygonHole"]]
+    PolygonHole: AlwaysList["PolygonHole"]
 
 
 class PolygonHole(BaseModel):
@@ -241,7 +249,7 @@ class BookmarkBuildings(BaseModel):
 
 
 class ConstructionLines(BaseModel):
-    ConstructionLine: Union["ConstructionLine", List["ConstructionLine"], None]
+    ConstructionLine: AlwaysList["ConstructionLine"]
 
 
 class ConstructionLine(BaseModel):
@@ -250,11 +258,11 @@ class ConstructionLine(BaseModel):
 
 
 class CPlanes(BaseModel):
-    Polygon: Union["Polygon", List["Polygon"]]
+    Polygon: AlwaysList["Polygon"]
 
 
 class Planes(BaseModel):
-    Plane: Union["Plane", List["Plane"]]
+    Plane: AlwaysList["Plane"]
 
 
 class Plane(BaseModel):
@@ -263,7 +271,7 @@ class Plane(BaseModel):
 
 
 class AssemblyInstances(BaseModel):
-    AssemblyInstance: Union["AssemblyInstance", List["AssemblyInstance"], None]
+    AssemblyInstance: AlwaysList["AssemblyInstance"]
 
 
 class AssemblyInstance(BaseModel):
@@ -284,7 +292,7 @@ class Matrix(BaseModel):
 
 
 class ProfileOutlines(BaseModel):
-    ProfileOutline: Union["ProfileOutline", List["ProfileOutline"], None]
+    ProfileOutline: AlwaysList["ProfileOutline"]
 
 
 class ProfileOutline(BaseModel):
@@ -292,7 +300,7 @@ class ProfileOutline(BaseModel):
 
 
 class VoidBodies(BaseModel):
-    VoidBody: Union["VoidBody", List["VoidBody"]]
+    VoidBody: AlwaysList["VoidBody"]
 
 
 class VoidBody(BaseModel):
@@ -300,11 +308,11 @@ class VoidBody(BaseModel):
 
 
 class VoidPerimeterList(BaseModel):
-    Polygon: Union["Polygon", List["Polygon"]]
+    Polygon: AlwaysList["Polygon"]
 
 
 class CFDFans(BaseModel):
-    CFDFan: Union["CFDFan", List["CFDFan"]]
+    CFDFan: AlwaysList["CFDFan"]
 
 
 class CFDFan(BaseModel):

@@ -1,4 +1,5 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, BeforeValidator
+from typing import Annotated, TypeVar, List
 
 
 class BaseModel(BaseModel):
@@ -7,3 +8,15 @@ class BaseModel(BaseModel):
         validate_assignment=True,
         str_strip_whitespace=True,
     )
+
+
+T = TypeVar("T")
+
+
+def ensure_list(v):
+    if isinstance(v, list):
+        return v
+    return [v]
+
+
+AlwaysList = Annotated[List[T], BeforeValidator(ensure_list)]

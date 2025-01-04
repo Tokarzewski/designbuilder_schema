@@ -1,6 +1,6 @@
 from pydantic import field_validator, Field
-from typing import Union, Optional, Literal, List, Annotated
-from designbuilder_schema.base import BaseModel
+from typing import Optional, Literal, List, Annotated
+from designbuilder_schema.base import BaseModel, AlwaysList
 from designbuilder_schema.id import ObjectIDs
 from designbuilder_schema.attributes import NameAttributes, ZoneComponentAttributeList
 from designbuilder_schema.geometry import (
@@ -57,7 +57,7 @@ class HVACComponents(BaseModel):
 
 class NoTypeHVACComponent(BaseModel):
     ImageRectangle: "ImageRectangle"
-    ConnectingPlantLoopHandle: Union[int, list[int]]
+    ConnectingPlantLoopHandle: AlwaysList[int]
     ConnectingAirLoopHandle: int
     LoopType: int
     SubLoopType: int
@@ -201,21 +201,15 @@ class AbsorptionChillerGeneratorHeatExchanger(NoTypeHVACComponent):
 
 
 class FlowConnections(BaseModel):
-    HVACSubLoopNodeConnection: Union[
-        "HVACSubLoopNodeConnection", list["HVACSubLoopNodeConnection"]
-    ]
+    HVACSubLoopNodeConnection: AlwaysList["HVACSubLoopNodeConnection"]
 
 
 class ExhaustUnitComponentList(BaseModel):
-    AirHandlingUnitHVACComponent: Union[
-        "AirHandlingUnitHVACComponent", list["AirHandlingUnitHVACComponent"]
-    ]
+    AirHandlingUnitHVACComponent: AlwaysList["AirHandlingUnitHVACComponent"]
 
 
 class IntakeUnitComponentList(BaseModel):
-    AirHandlingUnitHVACComponent: Union[
-        "AirHandlingUnitHVACComponent", list["AirHandlingUnitHVACComponent"]
-    ]
+    AirHandlingUnitHVACComponent: AlwaysList["AirHandlingUnitHVACComponent"]
 
 
 class HVACConnectorNode(BaseModel):
