@@ -15,7 +15,7 @@ Homepage = "https://github.com/tokarzewski/designbuilder_schema"
 "Bug Tracker" = "https://github.com/tokarzewski/designbuilder_schema/issues"
 
 [tool.setuptools]
-packages = ["designbuilder_schema"]
+packages = ["designbuilder_schema", "designbuilder_schema.hvac"]
 
 [project.optional-dependencies]
 dev = ["pytest", "black", "mypy", "xmlschema"]
