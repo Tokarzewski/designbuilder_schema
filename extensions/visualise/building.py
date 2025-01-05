@@ -117,11 +117,11 @@ def display_zones(zones_geometry: list):
 def vis_building(building: Building):
     """Show matplotlib plot for all zones in building."""
     zones = [
-        zone 
+        zone
         for block in building.BuildingBlocks.BuildingBlock
         for zone in block.Zones.Zone
     ]
-    
+
     display_zones([zone_geometry(zone) for zone in zones])
 
 

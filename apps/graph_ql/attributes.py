@@ -10,7 +10,7 @@ class NameAttributeType:
 
 @strawberry_type(model=NameAttributes)
 class NameAttributesType:
-    Attribute: List[NameAttributeType]
+    Attribute: list[NameAttributeType]
 
 
 @strawberry_type(model=KeyAttribute, all_fields=True)
