@@ -86,12 +86,12 @@ class NoTypeHVACComponent(BaseModel):
     WaterOutConnectionCoordinate: "Point3D"
     AirInConnectionCoordinate: "Point3D"
     AirOutConnectionCoordinate: "Point3D"
-    Attributes: Optional["NameAttributes"]
     ZoneComponentAttributeList: Optional["ZoneComponentAttributeList"]
 
 
 class HVACComponent(NoTypeHVACComponent):
     type: str
+    Attributes: "NameAttributes"
 
 
 class SubLoopNode(NoTypeHVACComponent):
