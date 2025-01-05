@@ -12,5 +12,5 @@
 2. Metrics - python
 3. Tables - pandas
 4. Plots - plotly
-6. Dashboard - streamlit
+6. Dashboard - streamlit, dash
 7. Reports - ?
