@@ -1,8 +1,8 @@
 from designbuilder_schema.utils import load_model
+from designbuilder_schema.hvac.components import HVACComponent
 
-
-def report_set(hc):
-    return f"{hc.__class__.__name__} | {hc.type} | {hc.ComponentType}"
+def report_set(hc: HVACComponent):
+    return f"{hc.__class__.__name__} | {hc.type} | {hc.ComponentType} | {hc.ImageRectangle.ImageTextureIndex}"
 
 
 filepath = r".\samples\models\DetailedHVAC.xml"
