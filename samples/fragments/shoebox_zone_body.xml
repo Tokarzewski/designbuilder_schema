@@ -1,0 +1,283 @@
+<Body volume="350.0000000000" extrusionHeight="3.5000">
+    <ObjectIDs handle="10" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+    <Vertices>
+        <Point3D>10.0000000000000000; 0.0000000000000004; 0.0000000000000001</Point3D>
+        <Point3D>10.0000000000000000; 9.9999999999999982; 0.0000000000000001</Point3D>
+        <Point3D>0.0000000000000004; 10.0000000000000000; 0.0000000000000001</Point3D>
+        <Point3D>0.0000000000000000; 0.0000000000000004; 0.0000000000000001</Point3D>
+        <Point3D>10.0000000000000000; 0.0000000000000004; 3.5000000000000027</Point3D>
+        <Point3D>10.0000000000000000; 9.9999999999999982; 3.5000000000000027</Point3D>
+        <Point3D>0.0000000000000004; 10.0000000000000000; 3.5000000000000027</Point3D>
+        <Point3D>0.0000000000000000; 0.0000000000000004; 3.5000000000000027</Point3D>
+    </Vertices>
+    <Surfaces>
+    <Surface type= "Floor" area="100.000000000000" alpha="0.00000000000000000000" phi="-1.57079632679489655800" defaultOpenings="True" adjacentPartitionHandle="-1" thickness="0.000000">
+        <ObjectIDs handle="11" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+        <VertexIndices>3; 2; 1; 0; </VertexIndices>
+        <HoleIndices></HoleIndices>
+        <Openings></Openings>
+        <Adjacencies>
+            <Adjacency type="Floor" adjacencyDistance="0.000000">
+                <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+                <AdjacencyPolygonList>
+                    <Polygon auxiliaryType="-1">
+                        <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="10" surfaceIndex="0" openingIndex="-1"></ObjectIDs>
+                        <Vertices>
+                                <Point3D>0.0000000000000000; 0.0000000000000004; -0.0000000000000011</Point3D>
+                                <Point3D>0.0000000000000004; 10.0000000000000000; 0.0000000000000013</Point3D>
+                                <Point3D>10.0000000000000000; 9.9999999999999982; 0.0000000000000013</Point3D>
+                                <Point3D>10.0000000000000000; 0.0000000000000004; -0.0000000000000011</Point3D>
+                        </Vertices>
+                        <PolygonHoles></PolygonHoles>
+                    </Polygon>
+                </AdjacencyPolygonList>
+            </Adjacency>
+        </Adjacencies>
+        <Attributes>
+            <Attribute key="WindAngle315">-.5</Attribute>
+            <Attribute key="Title">Ground floor - 100.000 m2 (Ground)</Attribute>
+            <Attribute key="WindAngle90">-.6</Attribute>
+            <Attribute key="WindAngle135">-.5</Attribute>
+            <Attribute key="WindAngle225">-.5</Attribute>
+            <Attribute key="WindAngle180">-.5</Attribute>
+            <Attribute key="WindAngle0"> .3</Attribute>
+            <Attribute key="WindAngle45">-.5</Attribute>
+            <Attribute key="WindAngle270">-.6</Attribute>
+        </Attributes>
+    </Surface>
+    <Surface type= "Flat roof" area="100.000000000000" alpha="3.14159265358979311600" phi="1.57079632679489655800" defaultOpenings="True" adjacentPartitionHandle="-1" thickness="0.000000">
+        <ObjectIDs handle="12" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+        <VertexIndices>4; 5; 6; 7; </VertexIndices>
+        <HoleIndices></HoleIndices>
+        <Openings></Openings>
+        <Adjacencies>
+            <Adjacency type="Flat roof" adjacencyDistance="0.000000">
+                <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+                <AdjacencyPolygonList>
+                    <Polygon auxiliaryType="-1">
+                        <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="10" surfaceIndex="1" openingIndex="-1"></ObjectIDs>
+                        <Vertices>
+                                <Point3D>10.0000000000000000; 0.0000000000000004; 3.5000000000000036</Point3D>
+                                <Point3D>10.0000000000000000; 9.9999999999999982; 3.5000000000000022</Point3D>
+                                <Point3D>0.0000000000000004; 10.0000000000000000; 3.5000000000000022</Point3D>
+                                <Point3D>0.0000000000000000; 0.0000000000000004; 3.5000000000000036</Point3D>
+                        </Vertices>
+                        <PolygonHoles></PolygonHoles>
+                    </Polygon>
+                </AdjacencyPolygonList>
+            </Adjacency>
+        </Adjacencies>
+        <Attributes>
+            <Attribute key="WindAngle315">-.5</Attribute>
+            <Attribute key="Title">Roof - 100.000 m2</Attribute>
+            <Attribute key="WindAngle90">-.4</Attribute>
+            <Attribute key="WindAngle135">-.5</Attribute>
+            <Attribute key="WindAngle225">-.5</Attribute>
+            <Attribute key="WindAngle180">-.6</Attribute>
+            <Attribute key="WindAngle0">-.6</Attribute>
+            <Attribute key="WindAngle45">-.5</Attribute>
+            <Attribute key="WindAngle270">-.4</Attribute>
+        </Attributes>
+    </Surface>
+    <Surface type= "Wall" area="35.000000000000" alpha="1.57079632679489655800" phi="0.00000000000000000000" defaultOpenings="True" adjacentPartitionHandle="-1" thickness="0.292200">
+        <ObjectIDs handle="13" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+        <VertexIndices>0; 1; 5; 4; </VertexIndices>
+        <HoleIndices></HoleIndices>
+        <Openings>
+            <Opening type="Window">
+                <Polygon auxiliaryType="-1">
+                    <ObjectIDs handle="-1" buildingHandle="0" buildingBlockHandle="1" zoneHandle="10" surfaceIndex="2" openingIndex="-1"></ObjectIDs>
+                    <Vertices>
+                            <Point3D>10.0000000000000000; 1.7045400000000006; 0.8000000000000018</Point3D>
+                            <Point3D>9.9999999999999982; 8.2954600000000003; 0.8000000000000018</Point3D>
+                            <Point3D>9.9999999999999982; 8.2954600000000003; 2.3000000000000020</Point3D>
+                            <Point3D>10.0000000000000000; 1.7045400000000006; 2.3000000000000020</Point3D>
+                    </Vertices>
+                    <PolygonHoles></PolygonHoles>
+                </Polygon>
+                <Attributes></Attributes>
+                <SegmentList></SegmentList>
+            </Opening>
+        </Openings>
+        <Adjacencies>
+            <Adjacency type="Wall" adjacencyDistance="0.000000">
+                <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+                <AdjacencyPolygonList>
+                    <Polygon auxiliaryType="-1">
+                        <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="10" surfaceIndex="2" openingIndex="-1"></ObjectIDs>
+                        <Vertices>
+                                <Point3D>10.0000000000000000; 0.0000000000000004; 0.0000000000000001</Point3D>
+                                <Point3D>10.0000000000000000; 9.9999999999999982; 0.0000000000000001</Point3D>
+                                <Point3D>9.9999999999999982; 9.9999999999999982; 3.5000000000000027</Point3D>
+                                <Point3D>10.0000000000000000; 0.0000000000000004; 3.5000000000000027</Point3D>
+                        </Vertices>
+                        <PolygonHoles></PolygonHoles>
+                    </Polygon>
+                </AdjacencyPolygonList>
+            </Adjacency>
+        </Adjacencies>
+        <Attributes>
+            <Attribute key="WindAngle315"> .1</Attribute>
+            <Attribute key="Title">Wall - 35.000 m2 - 90.0�</Attribute>
+            <Attribute key="WindAngle90">-.3</Attribute>
+            <Attribute key="WindAngle135">-.35</Attribute>
+            <Attribute key="WindAngle225">-.35</Attribute>
+            <Attribute key="WindAngle180">-.2</Attribute>
+            <Attribute key="WindAngle0"> .4</Attribute>
+            <Attribute key="WindAngle45"> .1</Attribute>
+            <Attribute key="WindAngle270">-.3</Attribute>
+        </Attributes>
+    </Surface>
+    <Surface type= "Wall" area="35.000000000000" alpha="0.00000000000000020301" phi="0.00000000000000000000" defaultOpenings="True" adjacentPartitionHandle="-1" thickness="0.292200">
+        <ObjectIDs handle="14" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+        <VertexIndices>1; 2; 6; 5; </VertexIndices>
+        <HoleIndices></HoleIndices>
+        <Openings>
+            <Opening type="Window">
+                <Polygon auxiliaryType="-1">
+                    <ObjectIDs handle="-1" buildingHandle="0" buildingBlockHandle="1" zoneHandle="10" surfaceIndex="3" openingIndex="-1"></ObjectIDs>
+                    <Vertices>
+                            <Point3D>8.2954600000000021; 9.9999999999999982; 0.8000000000000018</Point3D>
+                            <Point3D>1.7045400000000028; 9.9999999999999964; 0.8000000000000018</Point3D>
+                            <Point3D>1.7045400000000028; 9.9999999999999964; 2.3000000000000020</Point3D>
+                            <Point3D>8.2954600000000021; 9.9999999999999982; 2.3000000000000020</Point3D>
+                    </Vertices>
+                    <PolygonHoles></PolygonHoles>
+                </Polygon>
+                <Attributes></Attributes>
+                <SegmentList></SegmentList>
+            </Opening>
+        </Openings>
+        <Adjacencies>
+            <Adjacency type="Wall" adjacencyDistance="0.000000">
+                <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+                <AdjacencyPolygonList>
+                    <Polygon auxiliaryType="-1">
+                        <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="10" surfaceIndex="3" openingIndex="-1"></ObjectIDs>
+                        <Vertices>
+                                <Point3D>10.0000000000000000; 9.9999999999999982; 0.0000000000000001</Point3D>
+                                <Point3D>0.0000000000000004; 10.0000000000000000; 0.0000000000000001</Point3D>
+                                <Point3D>0.0000000000000004; 10.0000000000000000; 3.5000000000000027</Point3D>
+                                <Point3D>10.0000000000000000; 9.9999999999999964; 3.5000000000000027</Point3D>
+                        </Vertices>
+                        <PolygonHoles></PolygonHoles>
+                    </Polygon>
+                </AdjacencyPolygonList>
+            </Adjacency>
+        </Adjacencies>
+        <Attributes>
+            <Attribute key="WindAngle315"> .1</Attribute>
+            <Attribute key="Title">Wall - 35.000 m2 - 0.0�</Attribute>
+            <Attribute key="WindAngle90">-.3</Attribute>
+            <Attribute key="WindAngle135">-.35</Attribute>
+            <Attribute key="WindAngle225">-.35</Attribute>
+            <Attribute key="WindAngle180">-.2</Attribute>
+            <Attribute key="WindAngle0"> .4</Attribute>
+            <Attribute key="WindAngle45"> .1</Attribute>
+            <Attribute key="WindAngle270">-.3</Attribute>
+        </Attributes>
+    </Surface>
+    <Surface type= "Wall" area="35.000000000000" alpha="4.71238898038468967400" phi="0.00000000000000000000" defaultOpenings="True" adjacentPartitionHandle="-1" thickness="0.292200">
+        <ObjectIDs handle="15" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+        <VertexIndices>2; 3; 7; 6; </VertexIndices>
+        <HoleIndices></HoleIndices>
+        <Openings>
+            <Opening type="Window">
+                <Polygon auxiliaryType="-1">
+                    <ObjectIDs handle="-1" buildingHandle="0" buildingBlockHandle="1" zoneHandle="10" surfaceIndex="4" openingIndex="-1"></ObjectIDs>
+                    <Vertices>
+                            <Point3D>0.0000000000000014; 8.2954600000000003; 0.8000000000000000</Point3D>
+                            <Point3D>0.0000000000000018; 1.7045400000000006; 0.8000000000000000</Point3D>
+                            <Point3D>0.0000000000000015; 1.7045400000000006; 2.2999999999999998</Point3D>
+                            <Point3D>0.0000000000000011; 8.2954600000000003; 2.2999999999999998</Point3D>
+                    </Vertices>
+                    <PolygonHoles></PolygonHoles>
+                </Polygon>
+                <Attributes></Attributes>
+                <SegmentList></SegmentList>
+            </Opening>
+        </Openings>
+        <Adjacencies>
+            <Adjacency type="Wall" adjacencyDistance="0.000000">
+                <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+                <AdjacencyPolygonList>
+                    <Polygon auxiliaryType="-1">
+                        <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="10" surfaceIndex="4" openingIndex="-1"></ObjectIDs>
+                        <Vertices>
+                                <Point3D>-0.0000000000000010; 10.0000000000000000; 0.0000000000000001</Point3D>
+                                <Point3D>0.0000000000000008; 0.0000000000000004; 0.0000000000000001</Point3D>
+                                <Point3D>0.0000000000000015; 0.0000000000000004; 3.5000000000000027</Point3D>
+                                <Point3D>-0.0000000000000004; 10.0000000000000000; 3.5000000000000027</Point3D>
+                        </Vertices>
+                        <PolygonHoles></PolygonHoles>
+                    </Polygon>
+                </AdjacencyPolygonList>
+            </Adjacency>
+        </Adjacencies>
+        <Attributes>
+            <Attribute key="WindAngle315"> .1</Attribute>
+            <Attribute key="Title">Wall - 35.000 m2 - 270.0�</Attribute>
+            <Attribute key="WindAngle90">-.3</Attribute>
+            <Attribute key="WindAngle135">-.35</Attribute>
+            <Attribute key="WindAngle225">-.35</Attribute>
+            <Attribute key="WindAngle180">-.2</Attribute>
+            <Attribute key="WindAngle0"> .4</Attribute>
+            <Attribute key="WindAngle45"> .1</Attribute>
+            <Attribute key="WindAngle270">-.3</Attribute>
+        </Attributes>
+    </Surface>
+    <Surface type= "Wall" area="35.000000000000" alpha="3.14159265358979311600" phi="0.00000000000000000000" defaultOpenings="True" adjacentPartitionHandle="-1" thickness="0.292200">
+        <ObjectIDs handle="16" buildingHandle="0" buildingBlockHandle="1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+        <VertexIndices>3; 0; 4; 7; </VertexIndices>
+        <HoleIndices></HoleIndices>
+        <Openings>
+            <Opening type="Window">
+                <Polygon auxiliaryType="-1">
+                    <ObjectIDs handle="-1" buildingHandle="0" buildingBlockHandle="1" zoneHandle="10" surfaceIndex="5" openingIndex="-1"></ObjectIDs>
+                    <Vertices>
+                            <Point3D>1.7045400000000002; 0.0000000000000009; 0.8000000000000000</Point3D>
+                            <Point3D>8.2954600000000003; 0.0000000000000017; 0.8000000000000000</Point3D>
+                            <Point3D>8.2954600000000003; 0.0000000000000014; 2.2999999999999998</Point3D>
+                            <Point3D>1.7045400000000002; 0.0000000000000006; 2.2999999999999998</Point3D>
+                    </Vertices>
+                    <PolygonHoles></PolygonHoles>
+                </Polygon>
+                <Attributes></Attributes>
+                <SegmentList></SegmentList>
+            </Opening>
+        </Openings>
+        <Adjacencies>
+            <Adjacency type="Wall" adjacencyDistance="0.000000">
+                <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="-1" surfaceIndex="-1" openingIndex="-1"></ObjectIDs>
+                <AdjacencyPolygonList>
+                    <Polygon auxiliaryType="-1">
+                        <ObjectIDs handle="-1" buildingHandle="-1" buildingBlockHandle="-1" zoneHandle="10" surfaceIndex="5" openingIndex="-1"></ObjectIDs>
+                        <Vertices>
+                                <Point3D>0.0000000000000000; -0.0000000000000005; 0.0000000000000001</Point3D>
+                                <Point3D>10.0000000000000000; 0.0000000000000007; 0.0000000000000001</Point3D>
+                                <Point3D>10.0000000000000000; 0.0000000000000014; 3.5000000000000027</Point3D>
+                                <Point3D>0.0000000000000000; 0.0000000000000002; 3.5000000000000027</Point3D>
+                        </Vertices>
+                        <PolygonHoles></PolygonHoles>
+                    </Polygon>
+                </AdjacencyPolygonList>
+            </Adjacency>
+        </Adjacencies>
+        <Attributes>
+            <Attribute key="WindAngle315"> .1</Attribute>
+            <Attribute key="Title">Wall - 35.000 m2 - 180.0�</Attribute>
+            <Attribute key="WindAngle90">-.3</Attribute>
+            <Attribute key="WindAngle135">-.35</Attribute>
+            <Attribute key="WindAngle225">-.35</Attribute>
+            <Attribute key="WindAngle180">-.2</Attribute>
+            <Attribute key="WindAngle0"> .4</Attribute>
+            <Attribute key="WindAngle45"> .1</Attribute>
+            <Attribute key="WindAngle270">-.3</Attribute>
+        </Attributes>
+    </Surface>
+    </Surfaces>
+    <VoidPerimeterList></VoidPerimeterList>
+    <Attributes>
+        <Attribute key="Title">Zone 1</Attribute>
+    </Attributes>
+</Body>
