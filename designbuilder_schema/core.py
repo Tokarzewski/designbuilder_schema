@@ -41,14 +41,6 @@ class AssemblyLibrary(BaseModel):
     Assembly: AlwaysList["Assembly"]
 
 
-"""@field_validator('Assembly', mode='before')
-    def ensure_list(cls, v):
-        if isinstance(v, list):
-            return v
-        return [v]
-"""
-
-
 class Assembly(BaseModel):
     assemblyHandle: int
     componentBlockHandle: int
