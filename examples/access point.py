@@ -4,9 +4,10 @@ filepath = r"samples\models\Shoebox10x10.xml"
 model = load_model(filepath)
 
 site = model.Site
-building = site.Buildings.Building
-building_blocks = building.BuildingBlocks
-vertices = building_blocks.BuildingBlock.Zones.Zone.Body.Vertices
+first_building = site.Buildings.Building[0]
+first_building_blocks = first_building.BuildingBlocks.BuildingBlock[0]
+first_zone = first_building_blocks.Zones.Zone[0]
+vertices = first_zone.Body.Vertices
 
 first_point = vertices[0]
 print(first_point)

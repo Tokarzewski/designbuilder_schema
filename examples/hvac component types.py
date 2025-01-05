@@ -8,7 +8,7 @@ def report_set(hc):
 filepath = r".\samples\models\DetailedHVAC.xml"
 model = load_model(filepath)
 
-building = model.Site.Buildings.Building
+building = model.Site.Buildings.Building[0]
 hvac_network = building.HVACNetwork
 hvac_loops = hvac_network.HVACLoops.HVACLoop
 

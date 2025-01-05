@@ -58,7 +58,7 @@ def building_block_geometry(building_block: BuildingBlock):
     return {"faces": faces(body), "openings": openings(body)}
 
 
-def display_zones(zones):
+def display_zones(zones_geometry: list):
     """Display all zone faces and openings with random colours."""
     # Create 3D figure
     fig = plt.figure(figsize=(12, 12))
@@ -66,13 +66,13 @@ def display_zones(zones):
 
     # Generate distinct colors for each zone
     base_colors = ["lightgray", "lightgreen", "lightpink", "lightyellow", "lightblue"]
-    colors = base_colors * (len(zones) // len(base_colors) + 1)
+    colors = base_colors * (len(zones_geometry) // len(base_colors) + 1)
 
     # Track bounds for axis scaling
     x_coords, y_coords, z_coords = [], [], []
 
     # Plot each zone
-    for zone_idx, zone in enumerate(zones):
+    for zone_idx, zone in enumerate(zones_geometry):
 
         faces = zone["faces"]
         if faces:
@@ -109,25 +109,20 @@ def display_zones(zones):
     ax.set_zlim(min_range, max_range)
 
     # Add title
-    plt.title(f"Visualization of {len(zones)} Zones")
+    plt.title(f"Visualization of {len(zones_geometry)} Zones")
 
     plt.show()
 
 
 def vis_building(building: Building):
     """Show matplotlib plot for all zones in building."""
-    building_blocks = building.BuildingBlocks.BuildingBlock
-    _zones = []
-
-    building_blocks = (
-        building_blocks if isinstance(building_blocks, list) else [building_blocks]
-    )
-
-    for block in building_blocks:
-        zones = block.Zones.Zone
-        _zones.extend(zones if isinstance(zones, list) else [zones])
-
-    display_zones([zone_geometry(zone) for zone in _zones])
+    zones = [
+        zone 
+        for block in building.BuildingBlocks.BuildingBlock
+        for zone in block.Zones.Zone
+    ]
+    
+    display_zones([zone_geometry(zone) for zone in zones])
 
 
 def add_extention():

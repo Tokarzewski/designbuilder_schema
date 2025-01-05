@@ -1,5 +1,5 @@
-from designbuilder_schema.base import BaseModel
-from typing import List, Union, Optional
+from designbuilder_schema.base import BaseModel, AlwaysList
+from typing import Optional
 
 
 class NameAttribute(BaseModel):
@@ -19,13 +19,13 @@ class KeyAttribute(BaseModel):
 class NameAttributes(BaseModel):
     """Site and HVAC Attibutes"""
 
-    Attribute: Union["NameAttribute", List["NameAttribute"]]
+    Attribute: AlwaysList["NameAttribute"]
 
 
 class KeyAttributes(BaseModel):
     """Non-Site and Non-HVAC Attibute"""
 
-    Attribute: Union["KeyAttribute", List["KeyAttribute"]]
+    Attribute: AlwaysList["KeyAttribute"]
 
 
 class HVACAttributeList(BaseModel):
@@ -34,4 +34,4 @@ class HVACAttributeList(BaseModel):
 
 
 class ZoneComponentAttributeList(BaseModel):
-    HVACAttributeList: Union["HVACAttributeList", list["HVACAttributeList"]]
+    HVACAttributeList: AlwaysList["HVACAttributeList"]

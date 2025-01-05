@@ -4,7 +4,7 @@ hvac_network.py
 The hvac network module of the designbuilder_schema
 """
 
-from typing import Union, Optional, Annotated
+from typing import Optional, Annotated
 from pydantic import Field
 from designbuilder_schema.base import BaseModel, AlwaysList
 from designbuilder_schema.geometry import Line, SegmentList, Point3D
@@ -90,7 +90,7 @@ class HVACZoneGroup(NoTypeHVACComponent):
 
 
 class BuildingZoneHandle(BaseModel):
-    BuildingZoneHandle: Union[str, list[str]]
+    BuildingZoneHandle: AlwaysList[str]
 
 
 class HVACConnections(BaseModel):

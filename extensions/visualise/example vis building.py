@@ -3,7 +3,7 @@ from designbuilder_schema.utils import load_model
 
 
 model = load_model(r"samples\models\Tutorial Model.xml")
-building = model.Site.Buildings.Building
+building = model.Site.Buildings.Building[0]
 
 add_extention()
 building.visualise()

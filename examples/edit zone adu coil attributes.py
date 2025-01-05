@@ -7,8 +7,8 @@ filepath = r".\samples\models\Large10x10x10x8.xml"
 model = load_model(filepath)
 loading_time = time.time()  # TIME
 
-building = model.Site.Buildings.Building
-hvac_zone_group = building.HVACNetwork.HVACZoneGroups.HVACZoneGroup
+building = model.Site.Buildings.Building[0]
+hvac_zone_group = building.HVACNetwork.HVACZoneGroups.HVACZoneGroup[0]
 hvac_zone_components = hvac_zone_group.ZoneElementList.HVACZoneComponent
 
 adu = hvac_zone_components[1]
