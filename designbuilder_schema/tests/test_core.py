@@ -13,15 +13,18 @@ def get_filepaths(directory, extension=".xml"):
 
 # Get model filepaths from models folder
 models_folder = r".\samples\models"
-json_filepaths = get_filepaths(models_folder, extension=".json")
+
 xml_filepaths = get_filepaths(models_folder, extension=".xml")
-
-
-"""@pytest.mark.parametrize("filepath", json_filepaths)
-def test_validate_dsbjson(filepath):
-    assert load_model(filepath)"""
 
 
 @pytest.mark.parametrize("filepath", xml_filepaths)
 def test_validate_dsbxml(filepath):
     assert load_model(filepath)
+
+
+"""
+json_filepaths = get_filepaths(models_folder, extension=".json")
+
+@pytest.mark.parametrize("filepath", json_filepaths)
+def test_validate_dsbjson(filepath):
+    assert load_model(filepath)"""

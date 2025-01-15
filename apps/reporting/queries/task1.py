@@ -12,14 +12,13 @@ model = load_model(filepath)
 
 building = model.Site.Buildings.Building[0]
 
-zones = [zone
-        for block in building.BuildingBlocks.BuildingBlock
-        for zone in block.Zones.Zone
-        ]
+zones = [
+    zone for block in building.BuildingBlocks.BuildingBlock for zone in block.Zones.Zone
+]
 
 surfaces = [zone.Body.Surfaces.Surface for zone in zones]
 
-print(surfaces[zone_index:=0][surface_index:=0])
+print(surfaces[zone_index := 0][surface_index := 0])
 
 # surfaces generally do not store constructions...
 # surface only stores construction if defined at surface level
