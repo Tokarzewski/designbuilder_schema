@@ -16,7 +16,7 @@ def get_filepaths(directory, extension=".xml"):
     return filepaths
 
 
-# Get model filepaths from models folder
+# Get model filepaths from folder
 debug_folder = r".\samples\debug"
 xml_filepaths = get_filepaths(debug_folder, extension=".xml")
 
