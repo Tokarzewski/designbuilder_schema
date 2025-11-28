@@ -1,4 +1,5 @@
 import os, pytest
+from pathlib import Path
 from designbuilder_schema.utils import load_model
 
 
@@ -12,9 +13,12 @@ def get_filepaths(directory, extension=".xml"):
 
 
 # Get model filepaths from models folder
-models_folder = r".\samples\models"
+# Use Path to find samples folder relative to repository root
+test_dir = Path(__file__).parent
+repo_root = test_dir.parent.parent
+models_folder = repo_root / "samples" / "models"
 
-xml_filepaths = get_filepaths(models_folder, extension=".xml")
+xml_filepaths = get_filepaths(str(models_folder), extension=".xml")
 
 
 @pytest.mark.parametrize("filepath", xml_filepaths)
